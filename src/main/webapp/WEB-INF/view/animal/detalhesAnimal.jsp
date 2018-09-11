@@ -48,6 +48,12 @@
 										class="table table-responsive" id="detalhesProprietario">
                                         <tbody>
 
+									<a href="<c:url value="/prontuario/prontuarioDoAnimal/${animal.animalId}"></c:url>">
+		                                <i class="fa fa-stethoscope fa-2x" aria-hidden="true"></i>
+		                            </a>  
+
+
+
                                             <tr>
                                             <th>Foto Animal</th>
                                             <td>

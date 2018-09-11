@@ -23,7 +23,7 @@ import com.vetweb.service.EmailService;
 @Transactional
 @EnableScheduling
 public class Scheduler {
-	
+	/*
 	@Autowired
 	private ProprietarioDAO proprietarioDAO;
 	
@@ -76,6 +76,6 @@ public class Scheduler {
     	mensagemRetorno.append("O RETORNO DO ATENDIMENTO "
     				+ atendimento.getTipoDeAtendimento().getNome() + " FEITO EM " + atendimento.getData() + " E HOJE. FAVOR COMPARECER A CLINICA. ");
     	emailService.enviar(pessoaDestinatario, mensagemRetorno.toString(), "RETORNO DE ATENDIMENTO");
-    }
+    }*/
     
 }

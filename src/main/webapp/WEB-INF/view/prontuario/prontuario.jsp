@@ -11,11 +11,8 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <vetweb:layout title="Prontuário ${prontuario.animal.nome}">
-
     <jsp:attribute name="jsHead">
-    
         <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=2i80p03koooieys6i5h5yz1n9d4uaxrwt1iaoy9938bmcahs"></script>
-                  
         <script>tinymce.init({ selector:'#preenchimentoModeloAtendimento' });</script>
                 
         <script>
@@ -47,12 +44,8 @@
                });
             });
         </script>
-                
     </jsp:attribute>
-    
-    <jsp:attribute name="script">
-    	<script src="<c:url value="/resources/js/app/ajaxService.js"></c:url>" type="text/javascript"></script>
-    </jsp:attribute>
+ 
     
     <jsp:body>
     

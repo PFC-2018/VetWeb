@@ -73,6 +73,15 @@
                             </div>
                         </div>
                     </div>
+                    
+                    <div class="card bg-primary">
+                            <div class="card-body">
+                                <div class="weather-widget">
+                                    <div id="weather-one" class="weather-one"><i class="wi wi-yahoo-26"></i><h2> 28°</h2><div class="city">Mogi das Cruzes</div><div class="currently">Sol</div><div class="celcious">28º</div></div>
+                                </div>
+                            </div>
+                        </div>
+                    
                 </div>
                 <!-- FIM CORPO DA PÁGINA  -->
                 
