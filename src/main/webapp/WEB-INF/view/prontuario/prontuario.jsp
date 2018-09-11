@@ -1,9 +1,3 @@
-<%-- 
-    Document   : prontuario
-    Created on : 21/03/2018, 21:14:53
-    Author     : renan.rodrigues
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>

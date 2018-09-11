@@ -1,8 +1,3 @@
-<%-- 
-    Document   : cadastroVacina
-    Created on : 22/04/2018, 22:22:21
-    Author     : renan.rodrigues
---%>
 <%@ taglib prefix="vetweb" tagdir="/WEB-INF/tags"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>

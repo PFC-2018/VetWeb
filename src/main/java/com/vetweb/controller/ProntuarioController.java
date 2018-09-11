@@ -1,5 +1,4 @@
 package com.vetweb.controller;
-//@author renan.rodrigues@metasix.com.br
 
 import java.time.Duration;
 import java.time.LocalDateTime;
