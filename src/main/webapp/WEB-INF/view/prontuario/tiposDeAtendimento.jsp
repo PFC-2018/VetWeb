@@ -58,11 +58,11 @@
                     <div class="col-12">
                         <div class="card">          
                             <div class="card-body">
-                                <h4 class="card-title">Cadastre novos exames</h4>
+                                <h4 class="card-title">Cadastre novos Atendimentos</h4>
                                 
                                 <button type="button"
 								class="btn btn-success btn-flat btn-addon m-b-10 m-l-5"
-								onclick="location.href='<c:url value="/exames/form"> </c:url>'">
+								onclick="location.href='<c:url value="/prontuario/cadastroTipoAtendimento"> </c:url>'">
                                 <i class="ti-save"></i> Cadastrar</button>
                                 <div class="table-responsive m-t-40">
                                     <table id="exames"

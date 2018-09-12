@@ -36,7 +36,7 @@
                 <div class="col-8">
                     <div class="card">
                         <div class="card-title">
-                            <h1>Cadastro de Exames</h1>
+                            <h1>Cadastro de Tipos de Atendimento</h1>
                         </div>
         <form:form servletRelativeAction="/prontuario/addTipoAtendimento" method="POST" modelAttribute="tipoDeAtendimento">
                    
