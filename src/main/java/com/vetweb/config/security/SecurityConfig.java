@@ -50,7 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated() 
                 .and().formLogin().loginPage("/login")
                 .permitAll()
-                .defaultSuccessUrl("/")
+                .defaultSuccessUrl("/index.jsp")
                 .failureUrl("/fail")
                 .and().csrf()
                 .and().exceptionHandling().accessDeniedPage("/WEB-INF/view/exception/403.jsp")

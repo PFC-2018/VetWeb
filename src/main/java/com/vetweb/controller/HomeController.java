@@ -40,7 +40,7 @@ public class HomeController {
     
     @RequestMapping("/login")
     public String login(){
-        return "login/login";
+        return "/";
     }
     
     @RequestMapping("/fail")
