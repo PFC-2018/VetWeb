@@ -83,7 +83,34 @@
                                 <div class="table-responsive m-t-40">
                                     
                                     <h3 class="card-title">Linha do tempo</h3>
-
+							
+							
+							
+							<c:forEach items="${historico}" var="elementoHistorico">
+							<tr>
+								<td>
+									<c:if test="${elementoHistorico.tipo == 'ATENDIMENTO'}">
+										<button data-toggle="modal" data-target="#modalAtendimento" onclick="ajaxService.editarAtendimento(${elementoHistorico.ocorrenciaId})">
+											<i class="fa fa-file-text-o fa-lg"></i>
+										</button>									
+										<a href="<c:url value="/prontuario/removerAtendimentoDoProntuario/${prontuario.prontuarioId}/${elementoHistorico.ocorrenciaId}"></c:url>">
+											<button>
+												<i class="fa fa-trash-o fa-2x"></i>
+											</button>
+										</a>
+									</c:if>
+									
+									${elementoHistorico.tipo}
+								</td>
+								<td>${elementoHistorico.descricao}</td>
+								<td>${elementoHistorico.data}</td>
+							</tr>
+						</c:forEach>
+							
+							
+							
+							
+							
                                     <div class="tab-content">
                                         <div class="tab-pane active" id="home" role="tabpanel">
                                             <div class="card-body">

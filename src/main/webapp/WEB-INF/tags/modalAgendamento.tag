@@ -67,8 +67,8 @@
 	                   </tbody>
 	                   
 	                   <div class="modal-footer">
-	                       <input type="reset" value="reset" class="btn btn-primary"   />
-	                       <input type="submit" value="submit" class="btn btn-primary"   />
+	                       <button type="submit" class="btn btn-success btn-flat btn-addon m-b-10 m-l-5"><i class="ti-save"></i> Cadastrar</button>
+                       	<button type="reset" class="btn btn-inverse btn-flat btn-addon m-b-10 m-l-5"><i class="ti-save"></i> Limpar</button>
 	                   </div>
 					</form:form>
              </div>

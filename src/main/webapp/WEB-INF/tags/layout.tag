@@ -273,7 +273,8 @@
 								class="fa fa-file-pdf-o"></i><span class="hide-menu">Relatórios<span
 									class="label label-rouded label-light-warning pull-right">2</span></span></a>
 							<ul aria-expanded="false" class="collapse">
-							<li><a href="<c:url value="/relatorios"></c:url>">Relatórios A - teste</a></li>
+								<li><a href="<c:url value="/relatorios"></c:url>">Relatórios
+										A - teste</a></li>
 								<li><a href="<c:url value="#"></c:url>">Relatório B</a></li>
 							</ul></li>
 
@@ -300,9 +301,9 @@
 							href="<c:url value="${urlClinica}"></c:url>"
 							aria-expanded="false"><i class="fa fa-institution"></i><span
 								class="hide-menu">Clínica</span></a>
-						<li><a class="has-default" href="<c:url value="/logout"></c:url>"
-							aria-expanded="false"><i class="fa fa-power-off"></i><span
-								class="hide-menu">Sair</span></a></li>
+						<li><a class="has-default"
+							href="<c:url value="/logout"></c:url>" aria-expanded="false"><i
+								class="fa fa-power-off"></i><span class="hide-menu">Sair</span></a></li>
 					</ul>
 				</nav>
 				<!-- FIM Sidebar navigation - MENU-->
@@ -332,6 +333,7 @@
 	<script
 		src="<c:url value="/resources/js/lib/bootstrap/js/bootstrap.min.js"></c:url>"
 		type="text/javascript"></script>
+		
 	<!-- slimscrollbar scrollbar JavaScript -->
 	<script
 		src="<c:url value="/resources/js/jquery.slimscroll.js"></c:url>"
@@ -411,6 +413,14 @@
 
 	<script src="<c:url value="/resources/js/app/ajaxService.js"></c:url>"
 		type="text/javascript"></script>
+
+	<script src="<c:url value="/resources/js/custom.js"></c:url>"
+		type="text/javascript"></script>
+
+	<script
+		src="<c:url value="/resources/js/jquery/jquery.maskedinput.js"></c:url>"
+		type="text/javascript"></script>
+
 
 	<jsp:invoke fragment="jsFooter"></jsp:invoke>
 </body>

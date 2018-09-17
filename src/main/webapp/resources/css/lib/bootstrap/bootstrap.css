@@ -5338,6 +5338,37 @@ tbody.collapse.show {
   border-color: #1b1e21;
 }
 
+/*!
+Alterado
+ */
+.closeEdit {
+  float: right;
+  font-size: 21px;
+  font-weight: bold;
+  line-height: 1;
+  color: #000;
+  text-shadow: 0 1px 0 #fff;
+  filter: alpha(opacity=20);
+  opacity: .2;
+}
+.closeEdit:hover,
+.closeEdit:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+  filter: alpha(opacity=50);
+  opacity: .5;
+}
+button.closeEdit {
+  -webkit-appearance: none;
+  padding: 0;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+}
+
+
+
 .close {
   float: right;
   font-size: 1.5rem;
