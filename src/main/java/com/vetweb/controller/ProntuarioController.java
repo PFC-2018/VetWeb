@@ -166,7 +166,7 @@ public class ProntuarioController {
     @RequestMapping(value = "/prontuarioDoAnimal/{animalId}", method = RequestMethod.GET)
     public ModelAndView prontuarioDoAnimal(@PathVariable("animalId") final Long animalId, @ModelAttribute("atendimento") OcorrenciaAtendimento atendimento,
     		@ModelAttribute("prontuarioPatologia") Patologia patologia, @ModelAttribute("prontuarioVacina") Vacina vacina) {
-        ModelAndView modelAndView = new ModelAndView("prontuario/prontuario2");
+        ModelAndView modelAndView = new ModelAndView("prontuario/prontuario");
         Prontuario prontuario = prontuarioDAO.buscarProntuarioPorAnimal(animalId);
 		modelAndView.addObject("prontuario", prontuario);
 		modelAndView.addObject("tiposDeAtendimento", atendimentoDAO.buscarTiposDeAtendimento());
