@@ -15,8 +15,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- Favicon icon -->
-<link rel="icon" type="image/png" sizes="16x16"
-	href="<c:url value="/resources/images/favicon.png"></c:url>">
+	<link rel="shortcut icon" type="image/x-icon" href="<c:url value="/resources/images/img-vetweb/favicon.ico"></c:url>">
 
 <link
 	href="<c:url value="/resources/css/lib/chartist/chartist.min.css"></c:url>"

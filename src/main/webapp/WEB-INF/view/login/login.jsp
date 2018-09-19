@@ -9,7 +9,7 @@
         <!-- Tell the browser to be responsive to screen width -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Favicon icon -->
-        <link rel="icon" type="image/png" sizes="16x16" href="<c:url value="/resources/images/favicon.png"></c:url>" >
+        <link rel="shortcut icon" type="image/x-icon" href="<c:url value="/resources/images/img-vetweb/favicon.ico"></c:url>">
             <title>Login</title>
             <!-- Bootstrap Core CSS -->
             <link href="<c:url value="/resources/css/lib/bootstrap/bootstrap.css"></c:url>" rel="stylesheet" type="text/css"/>

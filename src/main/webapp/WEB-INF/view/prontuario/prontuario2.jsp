@@ -86,76 +86,97 @@
 							
 							
 							
-							<c:forEach items="${historico}" var="elementoHistorico">
-							<tr>
-								<td>
-									<c:if test="${elementoHistorico.tipo == 'ATENDIMENTO'}">
-										<button data-toggle="modal" data-target="#modalAtendimento" onclick="ajaxService.editarAtendimento(${elementoHistorico.ocorrenciaId})">
-											<i class="fa fa-file-text-o fa-lg"></i>
-										</button>									
-										<a href="<c:url value="/prontuario/removerAtendimentoDoProntuario/${prontuario.prontuarioId}/${elementoHistorico.ocorrenciaId}"></c:url>">
-											<button>
-												<i class="fa fa-trash-o fa-2x"></i>
-											</button>
-										</a>
-									</c:if>
-									
-									${elementoHistorico.tipo}
-								</td>
-								<td>${elementoHistorico.descricao}</td>
-								<td>${elementoHistorico.data}</td>
-							</tr>
-						</c:forEach>
-							
-							
-							
-							
-							
                                     <div class="tab-content">
                                         <div class="tab-pane active" id="home" role="tabpanel">
-                                            <div class="card-body">
+                                        
+											<div class="card-body">
                                                 <div class="profiletimeline">
+
+
+														<c:forEach items="${historico}" var="elementoHistorico">
+														
+														<c:if test="${elementoHistorico.tipo == 'ATENDIMENTO'}">
+					                                                    <div class="sl-item">
+					                                                        <div class="sl-left"> <img src="<c:url value="/resources/images/img-vetweb/p_medkit.png"></c:url>" class="img-circle"> </div>
+					                                                        <div class="sl-right">
+					                                                            <div><a href="#" class="link">${elementoHistorico.tipo}</a> <span class="sl-date">${elementoHistorico.data}</span>
+					                                                                <p><a href="#">${elementoHistorico.descricao}</a></p>
+					                                                            </div>
+					                                                            <button data-toggle="modal" data-target="#modalAtendimento" onclick="ajaxService.editarAtendimento(${elementoHistorico.ocorrenciaId})"
+                                                                         class="btn btn-success btn-flat btn-addon m-b-10 m-l-5"><i class="ti-save"></i> Editar</button>
+                                        								
+                                        								<a href="<c:url value="/prontuario/removerAtendimentoDoProntuario/${prontuario.prontuarioId}/${elementoHistorico.ocorrenciaId}"></c:url>">
+																		  	<button class="btn btn-inverse btn-flat btn-addon m-b-10 m-l-5"><i class="ti-save"></i> Excluir</button>
+																		</a>
+					                                                        </div>
+					                                                    </div>
+					                                                    <hr>
+                                                    </c:if>
+                                                    
+                                                    <c:if test="${elementoHistorico.tipo == 'VACINA'}">
                                                     <div class="sl-item">
-                                                        <div class="sl-left"> <img src="<c:url value="/resources/images/users/avatar-1.jpg"></c:url>" alt="user" class="img-circle"> </div>
+                                                        <div class="sl-left"> <img src="<c:url value="/resources/images/img-vetweb/p_eyedropper.png"></c:url>" alt="user" class="img-circle"> </div>
                                                         <div class="sl-right">
-                                                            <div><a href="#" class="link">NOME TO ATENDIMENTO 1</a> <span class="sl-date">5 minutes ago</span>
-                                                                <p>assign a new task <a href="#"> Observações gerais se quiser</a></p>
-                                                                <div class="row">
-                                                                    <div class="col-lg-3 col-md-6 m-b-20"><img src="<c:url value="/resources/images/big/img1.jpg"></c:url>" class="img-responsive radius"></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <hr>
-                                                    <div class="sl-item">
-                                                        <div class="sl-left"> <img src="<c:url value="/resources/images/users/avatar-2.jpg"></c:url>" alt="user" class="img-circle"> </div>
-                                                        <div class="sl-right">
-                                                            <div> <a href="#" class="link">NOME TO ATENDIMENTO 2</a> <span class="sl-date">7 minutes ago</span>
+                                                            <div> <a href="#" class="link">${elementoHistorico.tipo}</a> <span class="sl-date">${elementoHistorico.data}</span>
                                                                 <div class="m-t-20 row">
-                                                                    <div class="col-md-3 col-xs-12"><img src="<c:url value="/resources/images/big/img1.jpg"></c:url>" alt="user" class="img-responsive radius"></div>
                                                                     <div class="col-md-9 col-xs-12">
-                                                                        <p> Aqui podemos colocar algumas escritas de teste</a></div>
+                                                                        <p>${elementoHistorico.descricao}</a></div>
                                                                 </div>
+                                                                <button data-toggle="modal" data-target="#modalVacina" onclick="ajaxService.editarVacina(${elementoHistorico.ocorrenciaId})"
+                                                                         class="btn btn-success btn-flat btn-addon m-b-10 m-l-5"><i class="ti-save"></i> Editar</button>
+                                        								
+                                        								<a href="<c:url value="/prontuario/removerVacinaDoProntuario/${prontuario.prontuarioId}/${elementoHistorico.ocorrenciaId}?inclusaoOcorrenciaVacina=${elementoHistorico.data}"></c:url>">
+																		  	<button class="btn btn-inverse btn-flat btn-addon m-b-10 m-l-5"><i class="ti-save"></i> Excluir</button>
+																		</a>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <hr>
+                                                    </c:if>
+                                                    
+                                                    <c:if test="${elementoHistorico.tipo == 'PATOLOGIA'}">
                                                     <div class="sl-item">
-                                                        <div class="sl-left"> <img src="<c:url value="/resources/images/users/avatar-4.jpg"></c:url>" alt="user" class="img-circle"> </div>
+                                                        <div class="sl-left"> <img src="<c:url value="/resources/images/img-vetweb/p_plus-square.png"></c:url>" alt="user" class="img-circle"> </div>
                                                         <div class="sl-right">
-                                                            <div><a href="#" class="link">NOME TO ATENDIMENTO 3</a> <span class="sl-date">15 minutes ago</span>
+                                                            <div><a href="#" class="link">${elementoHistorico.tipo}</a> <span class="sl-date">${elementoHistorico.data}</span>
                                                                 <blockquote class="m-t-10">
-                                                                    Aqui temos um texto para colocar também
+                                                                    ${elementoHistorico.descricao}
                                                                 </blockquote>
                                                             </div>
+                                                            <button data-toggle="modal" data-target="#modalPatologia" onclick="ajaxService.editarPatologia(${elementoHistorico.ocorrenciaId})"
+                                                                         class="btn btn-success btn-flat btn-addon m-b-10 m-l-5"><i class="ti-save"></i> Editar</button>
+                                        								
+                                        								<a href="<c:url value="/prontuario/removerPatologiaDoProntuario/${prontuario.prontuarioId}/${elementoHistorico.ocorrenciaId}"></c:url>">
+																		  	<button class="btn btn-inverse btn-flat btn-addon m-b-10 m-l-5"><i class="ti-save"></i> Excluir</button>
+																		</a>
                                                         </div>
                                                     </div>
+                                                    </c:if>
+                                                    
+             
+                                                    <c:if test="${elementoHistorico.tipo == 'EXAME'}">
+                                                    <div class="sl-item">
+                                                        <div class="sl-left"> <img src="<c:url value="/resources/images/img-vetweb/p_stethoscope.png"></c:url>" alt="user" class="img-circle"> </div>
+                                                        <div class="sl-right">
+                                                            <div><a href="#" class="link">${elementoHistorico.tipo}</a> <span class="sl-date">${elementoHistorico.data}</span>
+                                                                <blockquote class="m-t-10">
+                                                                ${elementoHistorico.descricao}
+                                                                </blockquote>
+                                                            </div>
+                                                            <button data-toggle="modal" data-target="#modalExame" onclick="ajaxService.editarExame(${elementoHistorico.ocorrenciaId})"
+                                                                         class="btn btn-success btn-flat btn-addon m-b-10 m-l-5"><i class="ti-save"></i> Editar</button>
+                                        								
+                                        								<a href="<c:url value="/prontuario/removerExameDoProntuario/${prontuario.prontuarioId}/${elementoHistorico.ocorrenciaId}"></c:url>">
+																		  	<button class="btn btn-inverse btn-flat btn-addon m-b-10 m-l-5"><i class="ti-save"></i> Excluir</button>
+																		</a>
+                                                        </div>
+                                                    </div>
+                                                    </c:if>
+                                                    </c:forEach>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-
-
                             </div>
                         </div>
                     </div>
