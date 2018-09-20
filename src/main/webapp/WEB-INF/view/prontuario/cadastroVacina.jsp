@@ -35,7 +35,7 @@
                         <div class="card-title">
                             <h1>Cadastro de Vacinas</h1>
                         </div>
-        <form:form servletRelativeAction="/vacinas/submitForm"
+        <form:form servletRelativeAction="/prontuario/addVacina"
 							method="POST" modelAttribute="vacina">
 														
                     <form:hidden path="vacinaId" id="vacinaId"></form:hidden>

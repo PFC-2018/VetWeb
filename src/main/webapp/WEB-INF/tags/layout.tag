@@ -267,15 +267,9 @@
 							href="<c:url value="/agendamento"></c:url>" aria-expanded="false"><i
 								class="fa fa-calendar"></i><span class="hide-menu">Agendamento</span></a></li>
 
-						<li class="nav-label">Relatórios</li>
-						<li><a class="has-arrow" href="#" aria-expanded="false"><i
-								class="fa fa-file-pdf-o"></i><span class="hide-menu">Relatórios<span
-									class="label label-rouded label-light-warning pull-right">2</span></span></a>
-							<ul aria-expanded="false" class="collapse">
-								<li><a href="<c:url value="/relatorios"></c:url>">Relatórios
-										A - teste</a></li>
-								<li><a href="<c:url value="#"></c:url>">Relatório B</a></li>
-							</ul></li>
+						<li><a class="has-default"
+							href="<c:url value="/relatorios"></c:url>" aria-expanded="false"><i
+								class="fa fa-bar-chart"></i><span class="hide-menu">Relatórios</span></a></li>							
 
 						<li class="nav-label">Cadastros</li>
 						<li><a class="has-arrow" href="#" aria-expanded="false"><i
