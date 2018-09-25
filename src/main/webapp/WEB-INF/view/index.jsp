@@ -1,7 +1,31 @@
 <%@ taglib prefix="vetweb" tagdir="/WEB-INF/tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %><!--    Importação JSTL -->
 <vetweb:layout title="Painel de Controle">
-
+	
+	<jsp:attribute name="jsFooter">
+    <script
+		src="<c:url value="/resources/js/lib/calendar-2/moment.latest.min.js"></c:url>"
+		type="text/javascript"></script>
+		
+		
+					<script
+		src="<c:url value="/resources/js/lib/calendar-2/semantic.ui.min.js"></c:url>"
+		type="text/javascript"></script>
+		
+		
+					<script
+		src="<c:url value="/resources/js/lib/calendar-2/prism.min.js"></c:url>"
+		type="text/javascript"></script>
+		
+					<script
+		src="<c:url value="/resources/js/lib/calendar-2/pignose.calendar.min.js"></c:url>"
+		type="text/javascript"></script>
+		
+				<script
+		src="<c:url value="/resources/js/lib/calendar-2/pignose.init.js"></c:url>"
+		type="text/javascript"></script>     
+    </jsp:attribute>
+    
     <jsp:body>
         <div class="page-wrapper">
             <!-- INICIO MENU DE CONSULTA DE NAVEGAÇÃO -->
@@ -74,14 +98,6 @@
                         </div>
                     </div>
                     
-                    <div class="card bg-primary">
-                            <div class="card-body">
-                                <div class="weather-widget">
-                                    <div id="weather-one" class="weather-one"><i class="wi wi-yahoo-26"></i><h2> 28°</h2><div class="city">Mogi das Cruzes</div><div class="currently">Sol</div><div class="celcious">28º</div></div>
-                                </div>
-                            </div>
-                        </div>
-                    
                 </div>
                 <!-- FIM CORPO DA PÁGINA  -->
                 
@@ -103,7 +119,13 @@
                         </div>
                     </div>
                     <!-- column -->
-
+				<div class="col-lg-6">
+							<div class="card">
+								<div class="card-body">
+									<div class="year-calendar"><div class="pignose-calendar pignose-calendar-blue pignose-calendar-default"><div class="pignose-calendar-top">													<a href="#" class="pignose-calendar-top-nav pignose-calendar-top-prev">														<span class="icon-arrow-left pignose-calendar-top-icon"></span>													</a>													<div class="pignose-calendar-top-date">														<span class="pignose-calendar-top-month">September</span>														<span class="pignose-calendar-top-year">2018</span>													</div>													<a href="#" class="pignose-calendar-top-nav pignose-calendar-top-next">														<span class="icon-arrow-right pignose-calendar-top-icon"></span>													</a>												</div>												<div class="pignose-calendar-header"><div class="pignose-calendar-week pignose-calendar-week-sun">SUN</div><div class="pignose-calendar-week pignose-calendar-week-mon">MON</div><div class="pignose-calendar-week pignose-calendar-week-tue">TUE</div><div class="pignose-calendar-week pignose-calendar-week-wed">WED</div><div class="pignose-calendar-week pignose-calendar-week-thu">THU</div><div class="pignose-calendar-week pignose-calendar-week-fri">FRI</div><div class="pignose-calendar-week pignose-calendar-week-sat">SAT</div></div>												<div class="pignose-calendar-body"><div class="pignose-calendar-row"><div class="pignose-calendar-unit pignose-calendar-unit-sun"></div><div class="pignose-calendar-unit pignose-calendar-unit-mon"></div><div class="pignose-calendar-unit pignose-calendar-unit-tue"></div><div class="pignose-calendar-unit pignose-calendar-unit-wed"></div><div class="pignose-calendar-unit pignose-calendar-unit-thu"></div><div class="pignose-calendar-unit pignose-calendar-unit-fri"></div><div class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-sat" data-date="2018-09-01"><a href="#">1</a></div></div><div class="pignose-calendar-row"><div class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-sun" data-date="2018-09-02"><a href="#">2</a></div><div class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-mon" data-date="2018-09-03"><a href="#">3</a></div><div class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-tue" data-date="2018-09-04"><a href="#">4</a></div><div class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-wed" data-date="2018-09-05"><a href="#">5</a></div><div class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-thu" data-date="2018-09-06"><a href="#">6</a></div><div class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-fri" data-date="2018-09-07"><a href="#">7</a></div><div class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-sat" data-date="2018-09-08"><a href="#">8</a></div></div><div class="pignose-calendar-row"><div class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-sun" data-date="2018-09-09"><a href="#">9</a></div><div class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-mon" data-date="2018-09-10"><a href="#">10</a></div><div class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-tue" data-date="2018-09-11"><a href="#">11</a></div><div class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-wed" data-date="2018-09-12"><a href="#">12</a></div><div class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-thu" data-date="2018-09-13"><a href="#">13</a></div><div class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-fri" data-date="2018-09-14"><a href="#">14</a></div><div class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-sat" data-date="2018-09-15"><a href="#">15</a></div></div><div class="pignose-calendar-row"><div class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-sun" data-date="2018-09-16"><a href="#">16</a></div><div class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-mon" data-date="2018-09-17"><a href="#">17</a></div><div class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-tue" data-date="2018-09-18"><a href="#">18</a></div><div class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-wed" data-date="2018-09-19"><a href="#">19</a></div><div class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-thu" data-date="2018-09-20"><a href="#">20</a></div><div class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-fri" data-date="2018-09-21"><a href="#">21</a></div><div class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-sat" data-date="2018-09-22"><a href="#">22</a></div></div><div class="pignose-calendar-row"><div class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-sun" data-date="2018-09-23"><a href="#">23</a></div><div class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-mon pignose-calendar-unit-active pignose-calendar-unit-first-active" data-date="2018-09-24"><a href="#">24</a></div><div class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-tue" data-date="2018-09-25"><a href="#">25</a></div><div class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-wed" data-date="2018-09-26"><a href="#">26</a></div><div class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-thu" data-date="2018-09-27"><a href="#">27</a></div><div class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-fri" data-date="2018-09-28"><a href="#">28</a></div><div class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-sat" data-date="2018-09-29"><a href="#">29</a></div><div class="pignose-calendar-unit pignose-calendar-unit-date pignose-calendar-unit-sun" data-date="2018-09-30"><a href="#">30</a></div></div></div>											</div></div>
+								</div>
+							</div>
+						</div>
             </div>
         </div>
     </jsp:body>

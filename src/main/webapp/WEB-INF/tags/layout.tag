@@ -32,6 +32,14 @@
 	href="<c:url value="/resources/css/lib/sweetalert/sweetalert.css"></c:url>"
 	rel="stylesheet" type="text/css" />
 
+<link
+	href="<c:url value="/resources/css/lib/calendar2/semantic.ui.min.css"></c:url>"
+	rel="stylesheet" type="text/css" />
+
+<link
+	href="<c:url value="/resources/css/lib/calendar2/pignose.calendar.min.css"></c:url>"
+	rel="stylesheet" type="text/css" />
+
 <!-- Bootstrap Core CSS -->
 <link
 	href="<c:url value="/resources/css/lib/bootstrap/bootstrap.css"></c:url>"
@@ -314,7 +322,8 @@
 		<jsp:doBody></jsp:doBody>
 		<!-- FIM CORPO DA PÁGINA  -->
 		<!-- INICIO RODAPE -->
-		<footer class="footer">&copy; 2018 - Desenvolvido pela AMR Tecnologia.</footer>
+		<footer class="footer">&copy; 2018 - Desenvolvido pela AMR
+			Tecnologia.</footer>
 		<!-- FIM RODAPE -->
 	</div>
 
