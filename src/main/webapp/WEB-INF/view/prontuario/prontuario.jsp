@@ -4,40 +4,12 @@
 <%@ taglib prefix="vetweb" tagdir="/WEB-INF/tags"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
-<vetweb:layout title="Prontuario do Animal2">
-	<jsp:attribute name="jsHead">
+<vetweb:layout title="Prontuario do Animal">
+	<jsp:attribute name="jsFooter">
     <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=2i80p03koooieys6i5h5yz1n9d4uaxrwt1iaoy9938bmcahs"></script>
-        <script>tinymce.init({ selector:'#preenchimentoModeloAtendimento' });</script>
-        <script>
-            $(document).ready(function(){
-               $('#historicos').dataTable({
-                    language: {
-                        "sEmptyTable": "Nenhum registro encontrado",
-                        "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
-                        "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
-                        "sInfoFiltered": "(Filtrados de _MAX_ registros)",
-                        "sInfoPostFix": "",
-                        "sInfoThousands": ".",
-                        "sLengthMenu": "_MENU_ resultados por página",
-                        "sLoadingRecords": "Carregando...",
-                        "sProcessing": "Processando...",
-                        "sZeroRecords": "Nenhum registro encontrado",
-                        "sSearch": "Pesquisar",
-                        "oPaginate": {
-                            "sNext": "Próximo",
-                            "sPrevious": "Anterior",
-                            "sFirst": "Primeiro",
-                            "sLast": "Último"
-                        },
-                        "oAria": {
-                            "sSortAscending": ": Ordenar colunas de forma ascendente",
-                            "sSortDescending": ": Ordenar colunas de forma descendente"
-                        }
-                    }                  
-               });
-            });
-        </script>       
+        <script>tinymce.init({ selector:'#preenchimentoModeloAtendimento' });</script>      
     </jsp:attribute>
+    
 	<jsp:body>
         <div class="page-wrapper">
             <!-- INICIO MENU DE CONSULTA DE NAVEGAÇÃO -->
@@ -83,8 +55,6 @@
                                 <div class="table-responsive m-t-40">
                                     
                                     <h3 class="card-title">Linha do tempo</h3>
-							
-							
 							
                                     <div class="tab-content">
                                         <div class="tab-pane active" id="home" role="tabpanel">

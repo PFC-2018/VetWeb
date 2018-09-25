@@ -15,7 +15,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- Favicon icon -->
-	<link rel="shortcut icon" type="image/x-icon" href="<c:url value="/resources/images/img-vetweb/favicon.ico"></c:url>">
+<link rel="shortcut icon" type="image/x-icon"
+	href="<c:url value="/resources/images/img-vetweb/favicon.ico"></c:url>">
 
 <link
 	href="<c:url value="/resources/css/lib/chartist/chartist.min.css"></c:url>"
@@ -25,6 +26,10 @@
 	rel="stylesheet" type="text/css" />
 <link
 	href="<c:url value="/resources/css/lib/owl.theme.default.min.css"></c:url>"
+	rel="stylesheet" type="text/css" />
+
+<link
+	href="<c:url value="/resources/css/lib/sweetalert/sweetalert.css"></c:url>"
 	rel="stylesheet" type="text/css" />
 
 <!-- Bootstrap Core CSS -->
@@ -269,7 +274,7 @@
 
 						<li><a class="has-default"
 							href="<c:url value="/relatorios"></c:url>" aria-expanded="false"><i
-								class="fa fa-bar-chart"></i><span class="hide-menu">Relatórios</span></a></li>							
+								class="fa fa-bar-chart"></i><span class="hide-menu">Relatórios</span></a></li>
 
 						<li class="nav-label">Cadastros</li>
 						<li><a class="has-arrow" href="#" aria-expanded="false"><i
@@ -309,8 +314,7 @@
 		<jsp:doBody></jsp:doBody>
 		<!-- FIM CORPO DA PÁGINA  -->
 		<!-- INICIO RODAPE -->
-		<footer class="footer">&copy; 2018 - Desenvolvido pela AMR
-			Tecnologia.</footer>
+		<footer class="footer">&copy; 2018 - Desenvolvido pela AMR Tecnologia.</footer>
 		<!-- FIM RODAPE -->
 	</div>
 
@@ -326,7 +330,7 @@
 	<script
 		src="<c:url value="/resources/js/lib/bootstrap/js/bootstrap.min.js"></c:url>"
 		type="text/javascript"></script>
-		
+
 	<!-- slimscrollbar scrollbar JavaScript -->
 	<script
 		src="<c:url value="/resources/js/jquery.slimscroll.js"></c:url>"
@@ -338,8 +342,6 @@
 	<script
 		src="<c:url value="/resources/js/lib/sticky-kit-master/dist/sticky-kit.min.js"></c:url>"
 		type="text/javascript"></script>
-
-
 	<script
 		src="<c:url value="/resources/js/lib/datamap/d3.min.js"></c:url>"
 		type="text/javascript"></script>
@@ -365,7 +367,6 @@
 	<script
 		src="<c:url value="/resources/js/lib/owl-carousel/owl.carousel-init.js"></c:url>"
 		type="text/javascript"></script>
-
 
 	<script
 		src="<c:url value="/resources/js/lib/chartist/chartist.min.js"></c:url>"
@@ -404,9 +405,6 @@
 		src="<c:url value="/resources/js/fullcalendar/pt-br.js"></c:url>"
 		type="text/javascript"></script>
 
-	<script src="<c:url value="/resources/js/app/ajaxService.js"></c:url>"
-		type="text/javascript"></script>
-
 	<script src="<c:url value="/resources/js/custom.js"></c:url>"
 		type="text/javascript"></script>
 
@@ -414,6 +412,13 @@
 		src="<c:url value="/resources/js/jquery/jquery.maskedinput.js"></c:url>"
 		type="text/javascript"></script>
 
+	<script
+		src="<c:url value="/resources/js/lib/sweetalert/sweetalert.min.js"></c:url>"
+		type="text/javascript"></script>
+
+	<script
+		src="<c:url value="/resources/js/lib/sweetalert/sweetalert.init.js"></c:url>"
+		type="text/javascript"></script>
 
 	<jsp:invoke fragment="jsFooter"></jsp:invoke>
 </body>

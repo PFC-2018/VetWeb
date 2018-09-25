@@ -5,7 +5,7 @@
 <vetweb:layout title="Cadastro de Animal">
     <jsp:attribute name="jsFooter">
         <script>
-            $(document).ready(ajaxService.buscaRacasPorEspecie());
+            $(document).ready(ajaxService.buscarRacasPorEspecie());
         </script>
     </jsp:attribute>
 
@@ -58,6 +58,7 @@
                                             <form:input class="form-control input-default col-sm-3" type="file" path="imagem" id="imagemFile" name="imagemFile" htmlEscape="true"></form:input>
                                             <form:errors path="imagem" cssClass="errors"></form:errors>
                                     </div>
+                                    
                                     <div class="form-group">
                                             <label for="nome">Nome do animal:</label>
                                             <form:input class="form-control input-default col-sm-3" path="nome" id="nome" htmlEscape="true"></form:input>
@@ -96,7 +97,7 @@
 
                                         <div class="form-group">
                                             <label for="especies">Especies:</label>
-                                            <select class="form-control input-default col-sm-3" id="especies" onchange="ajaxService.buscaRacasPorEspecie()">
+                                            <select class="form-control input-default col-sm-3" id="especies" onchange="ajaxService.buscarRacasPorEspecie()">
                                                 <c:forEach items="${especies}" var="especie">
                                                     <option>${especie}</option>
                                                 </c:forEach>
