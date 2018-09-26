@@ -36,7 +36,7 @@
                     <div class="col-12">
                         <div class="card">          
                             <div class="card-body">
-                                <h2 class="card-title">Prontuário do Animal XXXX</h2>
+                                <h2 class="card-title">Prontuário do Animal ${prontuario.animal.nome}</h2>
                                 <div class="col-md-12">
                                     <button type="button" data-toggle="modal" data-target="#modalAtendimento" onclick="ajaxService.buscarModeloPorTipoDeAtendimento()" class="btn btn-info">
                                         <i class="fa fa-medkit fa-5x" aria-hidden="true"></i>
