@@ -34,7 +34,7 @@
                                 <div class="login-content card">
                                     <div class="login-form">
                                         <h1 align="center">Login</h1>
-                                        <form:form servletRelativeAction="login" role="login">
+                                        <form:form servletRelativeAction="login" role="login"> 
                                             <div class="form-group">
                                                 <label>Usuário</label>
                                                 <input type="text" name="username" id="username" class="form-control" placeholder="usuário">

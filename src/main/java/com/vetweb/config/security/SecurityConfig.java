@@ -31,6 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         passwordEncoder.setEncodeHashAsBase64(true);
 		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
         auth.inMemoryAuthentication().withUser("renanfr").password("renanfr").roles("admin");
+        auth.inMemoryAuthentication().withUser("mu").password("mu").roles("admin");
         auth.inMemoryAuthentication().withUser("usuario").password("usuario").roles("usuario");
     }
     
@@ -50,7 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated() 
                 .and().formLogin().loginPage("/login")
                 .permitAll()
-                .defaultSuccessUrl("/index.jsp")
+                .defaultSuccessUrl("/index")
                 .failureUrl("/fail")
                 .and().csrf()
                 .and().exceptionHandling().accessDeniedPage("/WEB-INF/view/exception/403.jsp")
