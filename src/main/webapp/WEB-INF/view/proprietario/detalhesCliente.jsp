@@ -23,7 +23,7 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-body p-b-0">
-                        <vetweb:animaisDoCliente proprietario="${proprietario}"> </vetweb:animaisDoCliente>
+                        
                         
                         <h4 class="card-title">Cadastro de Cliente</h4>
                         <!-- Nav tabs -->
@@ -75,6 +75,10 @@
                                                 <th>Idade</th>
                                                 <td>${idadeCliente}</td>
                                             </tr>
+                                            <tr>
+                                                <th>Animais do Cliente</th>
+                                                <td><vetweb:animaisDoCliente proprietario="${proprietario}"> </vetweb:animaisDoCliente></td>
+                                            </tr>                                            
                                         </tbody>
                                     </table>
                                 </div>
