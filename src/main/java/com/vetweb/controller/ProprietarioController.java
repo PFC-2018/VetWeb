@@ -91,6 +91,7 @@ public class ProprietarioController {
         }
         try{
             LOGGER.info("Proprietario" + proprietario);
+            proprietario.setAtivo(true);
             proprietarioDAO.salvar(proprietario);
         } catch (Exception exception){
         	LOGGER.error(exception);
