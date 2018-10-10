@@ -82,7 +82,7 @@
                            <i class="ti-save"></i>Imprimir</button>
                            <button type="reset" value="Reset"
                               class="btn btn-inverse btn-flat btn-addon m-b-10 m-l-5">
-                           <i class="ti-save"></i>Limpar</button>  
+                           <i class="ti-close"></i>Limpar</button>  
                         </form:form>
                      </div>
                   </div>

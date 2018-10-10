@@ -82,7 +82,7 @@
                                                                                                 </div>
                                                                                                 </br>
                                                                                                 <div class="col-md-9 col-xs-12">
-                                                                                                    <button data-toggle="modal" data-target="#modalAtendimento" onclick="ajaxService.editarAtendimento(${elementoHistorico.ocorrenciaId})" class="btn btn-warning btn-sm m-b-10 m-l-5"><i class="ti-settings"></i> Editar</button>
+                                                                                                    <button data-toggle="modal" data-target="#modalAtendimento" onclick="ajaxService.editarAtendimento(${elementoHistorico.ocorrenciaId})" class="btn btn-warning btn-sm m-b-10 m-l-5"><i class="ti-pencil"></i> Editar</button>
 
                                                                                                     <a href="<c:url value=" /prontuario/removerAtendimentoDoProntuario/${prontuario.prontuarioId}/${elementoHistorico.ocorrenciaId} "></c:url>">
                                                                                                         <button class="btn btn-danger btn-sm m-b-10 m-l-5"><i class="ti-close"></i> Excluir</button>
@@ -110,7 +110,7 @@
                                                                                                 </div>
                                                                                                 </br>
                                                                                                 <div class="col-md-9 col-xs-12">
-                                                                                                    <button data-toggle="modal" data-target="#modalVacina" onclick="ajaxService.editarVacina(${elementoHistorico.ocorrenciaId})" class="btn btn-warning btn-sm m-b-10 m-l-5"><i class="ti-settings"></i> Editar</button>
+                                                                                                    <button data-toggle="modal" data-target="#modalVacina" onclick="ajaxService.editarVacina(${elementoHistorico.ocorrenciaId})" class="btn btn-warning btn-sm m-b-10 m-l-5"><i class="ti-pencil"></i> Editar</button>
 
                                                                                                     <a href="<c:url value="/prontuario/removerVacinaDoProntuario/${prontuario.prontuarioId}/${elementoHistorico.ocorrenciaId}?inclusaoOcorrenciaVacina=${elementoHistorico.data} "></c:url>">
                                                                                                         <button class="btn btn-danger btn-sm m-b-10 m-l-5"><i class="ti-close"></i> Excluir</button>
@@ -138,7 +138,7 @@
                                                                                                 </div>
                                                                                                 </br>
                                                                                                 <div class="col-md-9 col-xs-12">
-                                                                                                    <button data-toggle="modal" data-target="#modalPatologia" onclick="ajaxService.editarPatologia(${elementoHistorico.ocorrenciaId})" class="btn btn-warning btn-sm m-b-10 m-l-5"><i class="ti-settings"></i> Editar</button>
+                                                                                                    <button data-toggle="modal" data-target="#modalPatologia" onclick="ajaxService.editarPatologia(${elementoHistorico.ocorrenciaId})" class="btn btn-warning btn-sm m-b-10 m-l-5"><i class="ti-pencil"></i> Editar</button>
 
                                                                                                     <a href="<c:url value="/prontuario/removerPatologiaDoProntuario/${prontuario.prontuarioId}/${elementoHistorico.ocorrenciaId} "></c:url>">
                                                                                                         <button class="btn btn-danger btn-sm m-b-10 m-l-5"><i class="ti-close"></i> Excluir</button>
@@ -165,7 +165,7 @@
                                                                                                 </div>
                                                                                                 </br>
                                                                                                 <div class="col-md-9 col-xs-12">
-                                                                                                    <button data-toggle="modal" data-target="#modalExame" onclick="ajaxService.editarExame(${elementoHistorico.ocorrenciaId})" class="btn btn-warning btn-sm m-b-10 m-l-5"><i class="ti-settings"></i> Editar</button>
+                                                                                                    <button data-toggle="modal" data-target="#modalExame" onclick="ajaxService.editarExame(${elementoHistorico.ocorrenciaId})" class="btn btn-warning btn-sm m-b-10 m-l-5"><i class="ti-pencil"></i> Editar</button>
 
                                                                                                     <a href="<c:url value="/prontuario/removerExameDoProntuario/${prontuario.prontuarioId}/${elementoHistorico.ocorrenciaId} "></c:url>">
                                                                                                         <button class="btn btn-danger btn-sm m-b-10 m-l-5"><i class="ti-close"></i> Excluir</button>

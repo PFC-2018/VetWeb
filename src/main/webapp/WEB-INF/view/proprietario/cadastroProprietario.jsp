@@ -21,7 +21,7 @@
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="<c:url value="/"></c:url>">Home</a></li>
                         <li class="breadcrumb-item"><a href="<c:url value="/clientes/listar"></c:url>">Clientes</a></li>
-                        <li class="breadcrumb-item active"><a href="<c:url value="/clientes/cadastro"> </c:url>">Cadastro de Clientes</a></li>
+                        <li class="breadcrumb-item"><a href="<c:url value="/clientes/cadastro"> </c:url>">Cadastro de Clientes</a></li>
                     </ol>
                 </div>
             </div>
@@ -31,7 +31,7 @@
 
 
             <div class="">
-                <div class="col-8">
+                <div class="col-6">
                     <div class="card">
                         <div class="card-title">
                             <h1>Cadastro de Clientes</h1>
@@ -194,7 +194,7 @@
 
                                     <div class="form-group">
                                         <label for="observacoes">Observações</label>
-                                        <form:textarea class="form-control input-default" path="observacoes" id="observacoes"></form:textarea>
+                                        <form:textarea class="form-control input-default col-12 col-md-9" path="observacoes" id="observacoes"></form:textarea>
                                         <form:errors path="observacoes" cssClass="errors"></form:errors>
                                     </div>                                        
                                         <button type="submit" class="btn btn-success btn-flat btn-addon m-b-10 m-l-5"><i class="ti-save"></i> Cadastrar</button>

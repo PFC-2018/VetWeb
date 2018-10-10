@@ -1,44 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Clientes_por_ano" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="95acdb59-5d07-4554-89dc-bd8c551d6bf5">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="clientes_devedores" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="95acdb59-5d07-4554-89dc-bd8c551d6bf5">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<subDataset name="qtd_clientes" uuid="ea137dea-652d-4ef7-b0c8-90347989a9e2">
-		<queryString language="SQL">
-			<![CDATA[SELECT COUNT(*) qtd_clientes,  date_part('year', cliente.inclusao) ano_cadastro FROM tbl_pessoa cliente GROUP BY ano_cadastro]]>
-		</queryString>
-		<field name="qtd_clientes" class="java.lang.Long"/>
-		<field name="ano_cadastro" class="java.lang.Double"/>
-		<group name="qtd_clientes">
-			<groupExpression><![CDATA[$F{qtd_clientes}]]></groupExpression>
-		</group>
-	</subDataset>
 	<queryString>
-		<![CDATA[select pessoa.nome nome_cliente, pessoa.email email_cliente, pessoa.cep cep_cliente, pessoa.celular celular_cliente, pessoa.inclusao data_cadastro,
-age(pessoa.nascimento) idade_cliente, count(animal.animalid) qtd_animais
-from tbl_pessoa pessoa
-inner join tbl_cliente cliente on cliente.pessoaid = pessoa.pessoaid
-inner join tbl_animal animal on cliente.pessoaid = animal.proprietarioid
-group by nome_cliente, email_cliente, cep_cliente, celular_cliente, data_cadastro, idade_cliente]]>
+		<![CDATA[]]>
 	</queryString>
-	<field name="nome_cliente" class="java.lang.String"/>
-	<field name="email_cliente" class="java.lang.String"/>
-	<field name="cep_cliente" class="java.lang.String"/>
-	<field name="celular_cliente" class="java.lang.String"/>
-	<field name="data_cadastro" class="java.sql.Date"/>
-	<field name="idade_cliente" class="org.postgresql.util.PGInterval"/>
-	<field name="qtd_animais" class="java.lang.Long"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="80" splitType="Stretch">
+		<band height="45" splitType="Stretch">
 			<staticText>
-				<reportElement x="114" y="18" width="100" height="20" uuid="7889a7a8-717b-45b6-9e9b-bdd803762c08"/>
+				<reportElement x="141" y="12" width="100" height="20" uuid="7889a7a8-717b-45b6-9e9b-bdd803762c08"/>
 				<text><![CDATA[RELATÓRIO TESTE]]></text>
 			</staticText>
 		</band>
 	</title>
+	<pageHeader>
+		<band height="66">
+			<staticText>
+				<reportElement x="141" y="28" width="100" height="20" uuid="61f4596e-3ccb-4f91-95a3-1eba3511f33a"/>
+				<text><![CDATA[PAGE HEADER]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
 	<summary>
 		<band height="97" splitType="Stretch">
 			<barChart>
@@ -49,13 +35,8 @@ group by nome_cliente, email_cliente, cep_cliente, celular_cliente, data_cadastr
 					<chartLegend/>
 				</chart>
 				<categoryDataset>
-					<dataset>
-						<datasetRun subDataset="qtd_clientes" uuid="f64955f2-a1aa-4da4-ad0e-8272943a5129"/>
-					</dataset>
 					<categorySeries>
 						<seriesExpression><![CDATA[""]]></seriesExpression>
-						<categoryExpression><![CDATA[$F{ano_cadastro}]]></categoryExpression>
-						<valueExpression><![CDATA[$F{qtd_clientes}]]></valueExpression>
 					</categorySeries>
 				</categoryDataset>
 				<barPlot>
