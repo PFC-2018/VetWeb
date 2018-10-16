@@ -16,6 +16,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.vetweb.dao.AtendimentoDAO;
 import com.vetweb.dao.ProntuarioDAO;
@@ -35,6 +36,7 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
 
 @Component
+@Transactional
 public class JasperService {
 	@Autowired
 	private ProprietarioDAO proprietarioDAO;
@@ -84,13 +86,16 @@ public class JasperService {
 	}
 
 	public void gerarRelatorioComObjeto(Report report, OutputStream outputStream) throws IOException {
-		// TESTEEEE
+		// TESTEEEE QUE DA CERTO
 		ClienteDevedoresVO cVO = new ClienteDevedoresVO();
 		cVO.setNome("Mu Teste");
 		List<ClienteDevedoresVO> testeRel = new ArrayList<ClienteDevedoresVO>();
 		testeRel.add(cVO);
 		// FIM DO TESTE
-
+		
+		//LISTA RETORNA SEMPRE VAZIA
+		List<ClienteDevedoresVO> testeRel2 = verificacaoClientesEmDebito();
+		
 		
 		// Gerar relatório
 		try {
@@ -105,7 +110,7 @@ public class JasperService {
 			JasperCompileManager.compileReportToFile(reportLocation);
 			JasperPrint jasperPrint = JasperFillManager.fillReport(
 					new ClassPathResource(reportName + ".jasper").getFile().getAbsolutePath(), parameterMap,
-					new JRBeanCollectionDataSource(testeRel));
+					new JRBeanCollectionDataSource(testeRel2));
 			JRExporter jrExporter = new JRPdfExporter();
 			jrExporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
 			jrExporter.setParameter(JRExporterParameter.OUTPUT_STREAM, outputStream);
@@ -123,12 +128,11 @@ public class JasperService {
 		List<ClienteDevedoresVO> cVOList = new ArrayList<ClienteDevedoresVO>();
 
 		List<Proprietario> proprietariosComDebito = proprietarioDAO.buscarClientesEmDebito();
-		proprietariosComDebito.stream().filter(prop -> prop.isAtivo()).filter(prop -> prop.getAnimais().size() > 0)
-				.peek(prop -> LOGGER.info("JasperService - Clientes Devedores " + prop.getNome())).forEach(prop -> {
-					ClienteDevedoresVO cVO = new ClienteDevedoresVO();
-					cVO.setNome(prop.getNome());
-					cVOList.add(cVO);
-				});
+		proprietariosComDebito.stream()
+				.filter(prop -> prop.isAtivo())
+				.filter(prop -> prop.getAnimais().size() > 0)
+				.peek(prop -> LOGGER.info("JasperService - Clientes Devedores " + prop.getNome()))		
+				.forEach(prop -> { ClienteDevedoresVO cVO = new ClienteDevedoresVO(); cVO.setNome(prop.getNome());cVOList.add(cVO); });	
 
 		return cVOList;
 	}
