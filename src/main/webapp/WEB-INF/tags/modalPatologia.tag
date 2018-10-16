@@ -1,3 +1,8 @@
+<%-- 
+    Document   : modal.tag
+    Created on : 31 de julho de 2018
+    Author     : renan.rodrigues@metasix.com.br
+--%>
 <%@ taglib prefix="vetweb" tagdir="/WEB-INF/tags"%>
 <%@attribute name="prontuario" required="true" type="java.lang.Object" %>
 <%@attribute name="patologias" required="true" type="java.util.List" %>
@@ -40,8 +45,8 @@
                   </tbody>
                   
                   <div class="modal-footer">
-                      <button type="submit" class="btn btn-success btn-flat btn-addon m-b-10 m-l-5"><i class="ti-save"></i> Cadastrar</button>
-                       <button type="reset" class="btn btn-inverse btn-flat btn-addon m-b-10 m-l-5"><i class="ti-save"></i> Limpar</button>
+                      <input type="reset" value="reset" class="btn btn-primary"   />
+                      <input type="submit" value="submit" class="btn btn-primary"   />
                   </div>
               </form:form>
             </div>

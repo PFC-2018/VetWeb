@@ -18,7 +18,7 @@ import static com.vetweb.model.pojo.TipoOcorrenciaProntuario.EXAME;
 public class OcorrenciaExame extends OcorrenciaProntuario implements Serializable {
 	
 	private static final long serialVersionUID = 3695573793611769516L;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "exameId", referencedColumnName = "exameId")
 	private Exame exame;
@@ -29,6 +29,13 @@ public class OcorrenciaExame extends OcorrenciaProntuario implements Serializabl
     private Prontuario prontuario;
     
     public boolean pago;
+    
+    public OcorrenciaExame() {
+	}
+
+	public OcorrenciaExame(Exame exame) {
+		this.exame = exame;
+	}
 
 	public Exame getExame() {
 		return exame;

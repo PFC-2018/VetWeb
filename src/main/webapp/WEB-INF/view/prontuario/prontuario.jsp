@@ -192,7 +192,9 @@
                                     </div>
                                     <!-- FIM CORPO DA PÁGINA  -->
                                 </div>
-
+								<div id="possuiDebitoVacina" style="display: none;">${possuiDebitoVacina}</div>
+								<div id="possuiDebitoAtendimento" style="display: none;">${possuiDebitoAtendimento}</div>
+								<div id="possuiDebitoExame" style="display: none;">${possuiDebitoExame}</div>
                                 <!-- INICIO DAS MODAIS  -->
                                 <vetweb:modalAtendimento prontuario="${prontuario}" tiposDeAtendimento="${tiposDeAtendimento}"></vetweb:modalAtendimento>
                                 <vetweb:modalPatologia prontuario="${prontuario}" patologias="${patologia}"></vetweb:modalPatologia>

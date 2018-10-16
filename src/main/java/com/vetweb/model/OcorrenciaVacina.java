@@ -1,4 +1,5 @@
 package com.vetweb.model;
+//@author renan.rodrigues@metasix.com.br
 
 import java.io.Serializable;
 
@@ -15,9 +16,8 @@ import com.vetweb.model.pojo.TipoOcorrenciaProntuario;
 @Table(name = "tbl_vacina_event")
 public class OcorrenciaVacina extends OcorrenciaProntuario implements Serializable {
 	
-	
-	private static final long serialVersionUID = -552033988596086866L;
-	
+	private static final long serialVersionUID = 3695573793611769516L;
+
 	@ManyToOne
 	@JsonManagedReference
 	@JoinColumn(name = "prontuarioId", referencedColumnName = "prontuarioId")
@@ -30,6 +30,13 @@ public class OcorrenciaVacina extends OcorrenciaProntuario implements Serializab
 	
 	private boolean pago;
 	
+	public OcorrenciaVacina() {
+	}
+	
+	public OcorrenciaVacina(Vacina vacina) {
+		this.vacina = vacina;
+	}
+
 	@Override
 	public Prontuario getProntuario() {
 		return prontuario;

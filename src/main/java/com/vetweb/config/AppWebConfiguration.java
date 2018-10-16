@@ -1,9 +1,12 @@
 package com.vetweb.config;
+// @author renan.rodrigues@metasix.com.br
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.concurrent.TimeUnit;
 
+import javax.annotation.Resource;
+import javax.jms.ConnectionFactory;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 
@@ -19,6 +22,8 @@ import org.springframework.format.datetime.standard.DateTimeFormatterRegistrar;
 import org.springframework.format.support.DefaultFormattingConversionService;
 import org.springframework.format.support.FormattingConversionService;
 import org.springframework.http.HttpStatus;
+import org.springframework.jms.annotation.EnableJms;
+import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartResolver;
@@ -35,14 +40,18 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import com.google.common.cache.CacheBuilder;
 
-@EnableWebMvc
 @Configuration
+@EnableWebMvc
 @EnableCaching
+@EnableJms
 @ComponentScan(basePackages = {"com.vetweb.controller", "com.vetweb.dao", "com.vetweb.scheduled",
     "com.vetweb.model", "com.vetweb.dao.auth", "com.vetweb.model.auth", "com.vetweb.controller.advice",
     "com.vetweb.model.error", "com.vetweb.model.pojo", "com.vetweb.service", "com.vetweb.controller.rest",
-    "com.vetweb.endpoint", "com.vetweb.client"})
+    "com.vetweb.endpoint", "com.vetweb.client", "com.vetweb.patterns", "com.vetweb.jms", "com.vetweb.model.report"})
 public class AppWebConfiguration extends WebMvcConfigurerAdapter implements WebApplicationInitializer {
+	
+	@Resource(lookup = "java:/ConnectionFactory")
+	private ConnectionFactory connectionFactory;
 	
     @Bean
     public InternalResourceViewResolver internalResourceViewResolver() {
@@ -113,6 +122,18 @@ public class AppWebConfiguration extends WebMvcConfigurerAdapter implements WebA
     	cacheManager.setCacheBuilder(cacheBuilder);
     	return cacheManager;
     			
+    }
+    
+    @Bean
+    public ConnectionFactory connectionFactory() {
+    	return connectionFactory;
+    }
+    
+    @Bean
+    public DefaultJmsListenerContainerFactory jmsListenerContainerFactory() {
+    	DefaultJmsListenerContainerFactory defaultJmsListenerContainerFactory = new DefaultJmsListenerContainerFactory();
+    	defaultJmsListenerContainerFactory.setConnectionFactory(connectionFactory);
+    	return defaultJmsListenerContainerFactory;
     }
     
 	@Override

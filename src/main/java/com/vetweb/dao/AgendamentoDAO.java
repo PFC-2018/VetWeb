@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
@@ -17,6 +18,9 @@ public class AgendamentoDAO implements IDAO<Agendamento>{
 	private EntityManager entityManager;
 
 	public void salvar(Agendamento agendamento) {
+		if (!listarTodos(agendamento.getDataHoraInicial(), agendamento.getDataHoraFinal()).isEmpty()) {
+			throw new RuntimeException("O AGENDAMENTO CONFLITA COM OUTRO EXISTENTE NO MESMO HORÁRIO.");
+		}
 		if (agendamento.getAgendamentoId() == null) {
 			entityManager.persist(agendamento);
 		} else {
@@ -44,6 +48,19 @@ public class AgendamentoDAO implements IDAO<Agendamento>{
 	public Agendamento buscarPorId(long id) {
 		return entityManager
 				.find(Agendamento.class, id);
+	}
+	
+	public Agendamento buscarPorIdOcorrencia(long id) {
+		String consulta = "SELECT agendamento FROM Agendamento agendamento "
+				+ "WHERE agendamento.ocorrencia.ocorrenciaId = :codigoOcorrencia";
+		try {
+			return entityManager
+					.createQuery(consulta, Agendamento.class)
+					.setParameter("codigoOcorrencia", id)
+					.getSingleResult();
+		} catch (NoResultException noResultException) {
+			return null;
+		}
 	}
 
 	@Override
