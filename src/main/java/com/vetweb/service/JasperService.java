@@ -38,18 +38,19 @@ import net.sf.jasperreports.engine.export.JRPdfExporter;
 public class JasperService {
 	@Autowired
 	private ProprietarioDAO proprietarioDAO;
-	
+
 	@Autowired
 	private AtendimentoDAO atendimentoDAO;
-	
+
 	@Autowired
-	private ProntuarioDAO prontuarioDAO; 
-	
+	private ProntuarioDAO prontuarioDAO;
+
 	private static final Logger LOGGER = Logger.getLogger(JasperService.class);
-	
+
 	public Connection getConnection() {
 		try {
-			return DriverManager.getConnection("jdbc:postgresql://localhost:5432/vetweb_database", "postgres", "postgres");
+			return DriverManager.getConnection("jdbc:postgresql://localhost:5432/vetweb_database", "postgres",
+					"postgres");
 		} catch (SQLException sqlException) {
 			throw new RuntimeException(sqlException);
 		}
@@ -61,14 +62,15 @@ public class JasperService {
 			String reportName = report.getType().name();
 			Map<String, Object> parameterMap = new HashMap<>();
 			if (report.getParameters() != null) {
-				parameterMap = report
-						.getParameters()
-						.stream()
+				parameterMap = report.getParameters().stream()
 						.collect(Collectors.toMap(param -> param.getKey(), param -> param.getValue()));
 			}
 			String reportLocation = new ClassPathResource(reportName + ".jrxml").getFile().getAbsolutePath();
 			JasperCompileManager.compileReportToFile(reportLocation);
-			JasperPrint jasperPrint = JasperFillManager.fillReport(new ClassPathResource(reportName + ".jasper").getFile().getAbsolutePath(), parameterMap, connection);;
+			JasperPrint jasperPrint = JasperFillManager.fillReport(
+					new ClassPathResource(reportName + ".jasper").getFile().getAbsolutePath(), parameterMap,
+					connection);
+			;
 			JRExporter jrExporter = new JRPdfExporter();
 			jrExporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
 			jrExporter.setParameter(JRExporterParameter.OUTPUT_STREAM, outputStream);
@@ -80,25 +82,30 @@ public class JasperService {
 			throw new RuntimeException(e);
 		}
 	}
-	
-	
+
 	public void gerarRelatorioComObjeto(Report report, OutputStream outputStream) throws IOException {
-		List<Proprietario> clienteInativos = verificacaoClientesEmDebito();
-				
-		//Gerar relatório
+		// TESTEEEE
+		ClienteDevedoresVO cVO = new ClienteDevedoresVO();
+		cVO.setNome("Mu Teste");
+		List<ClienteDevedoresVO> testeRel = new ArrayList<ClienteDevedoresVO>();
+		testeRel.add(cVO);
+		// FIM DO TESTE
+
+		
+		// Gerar relatório
 		try {
 			Connection connection = getConnection();
 			String reportName = report.getType().name();
 			Map<String, Object> parameterMap = new HashMap<>();
 			if (report.getParameters() != null) {
-				parameterMap = report
-						.getParameters()
-						.stream()
+				parameterMap = report.getParameters().stream()
 						.collect(Collectors.toMap(param -> param.getKey(), param -> param.getValue()));
 			}
 			String reportLocation = new ClassPathResource(reportName + ".jrxml").getFile().getAbsolutePath();
 			JasperCompileManager.compileReportToFile(reportLocation);
-			JasperPrint jasperPrint = JasperFillManager.fillReport(new ClassPathResource(reportName + ".jasper").getFile().getAbsolutePath(), parameterMap, new JRBeanCollectionDataSource(clienteInativos));
+			JasperPrint jasperPrint = JasperFillManager.fillReport(
+					new ClassPathResource(reportName + ".jasper").getFile().getAbsolutePath(), parameterMap,
+					new JRBeanCollectionDataSource(testeRel));
 			JRExporter jrExporter = new JRPdfExporter();
 			jrExporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
 			jrExporter.setParameter(JRExporterParameter.OUTPUT_STREAM, outputStream);
@@ -110,21 +117,20 @@ public class JasperService {
 			throw new RuntimeException(e);
 		}
 	}
-	
-	public List<Proprietario> verificacaoClientesEmDebito() {
+
+	public List<ClienteDevedoresVO> verificacaoClientesEmDebito() {
 		Double ttlAtendimentos = 0.0;
-		ClienteDevedoresVO cVO = new ClienteDevedoresVO();
-		List<Proprietario> proprietariosComDebito = proprietarioDAO.buscarClientesEmDebito(); 
-    	proprietariosComDebito
-    		.stream()
-    		.filter(prop -> prop.isAtivo())
-    		.filter(prop -> prop.getAnimais().size() > 0)
-    		.peek(prop -> LOGGER.info("JasperService - Clientes Devedores " + prop.getNome()))
-    		.forEach(prop ->  {
-    			cVO.setNome(prop.getNome());
-    			});
-    	
-    		return proprietariosComDebito;
-    }
+		List<ClienteDevedoresVO> cVOList = new ArrayList<ClienteDevedoresVO>();
+
+		List<Proprietario> proprietariosComDebito = proprietarioDAO.buscarClientesEmDebito();
+		proprietariosComDebito.stream().filter(prop -> prop.isAtivo()).filter(prop -> prop.getAnimais().size() > 0)
+				.peek(prop -> LOGGER.info("JasperService - Clientes Devedores " + prop.getNome())).forEach(prop -> {
+					ClienteDevedoresVO cVO = new ClienteDevedoresVO();
+					cVO.setNome(prop.getNome());
+					cVOList.add(cVO);
+				});
+
+		return cVOList;
+	}
 
 }

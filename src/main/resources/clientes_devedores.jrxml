@@ -7,34 +7,25 @@
 		<![CDATA[]]>
 	</queryString>
 	<field name="nome" class="java.lang.String"/>
-	<field name="pessoa.nome" class="java.lang.String"/>
-	<field name="observacoes" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch">
+		<band height="27" splitType="Stretch">
 			<staticText>
 				<reportElement x="0" y="3" width="555" height="20" uuid="ab2104df-3084-429d-9c22-5700a165c98c"/>
 				<textElement textAlignment="Center"/>
 				<text><![CDATA[RELÁTORIO]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="73" y="36" width="100" height="20" uuid="12da7d12-40a7-4a84-9f0a-ae7673eabb36"/>
-				<textFieldExpression><![CDATA[$F{pessoa.nome}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="185" y="36" width="100" height="20" uuid="51e141ef-ee83-42ec-ad8b-f37e77ec28e2"/>
-				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="330" y="36" width="100" height="20" uuid="454c5f7d-5abb-4f5b-8a99-d31d408daab4"/>
-				<textFieldExpression><![CDATA[$F{observacoes}]]></textFieldExpression>
-			</textField>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="53" splitType="Stretch"/>
+		<band height="53" splitType="Stretch">
+			<textField>
+				<reportElement x="31" y="11" width="100" height="20" uuid="51e141ef-ee83-42ec-ad8b-f37e77ec28e2"/>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+		</band>
 	</pageHeader>
 	<columnHeader>
 		<band height="61" splitType="Stretch"/>
