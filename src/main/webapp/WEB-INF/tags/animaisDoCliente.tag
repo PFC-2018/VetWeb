@@ -14,4 +14,4 @@
 </c:if>
 <c:if test="${proprietario.animais.size() < 0}">Sem animal cadastrado</c:if>
 
-<button type="button" class="btn btn-success btn-flat btn-addon m-b-10 m-l-5" onclick="location.href='<c:url value="/clientes/addAnimal/${proprietario.pessoaId}"></c:url>'"><i class="ti-save"></i>Adicionar Animal</button>
+<button type="button" class="btn btn-warning btn-sm m-b-10 m-l-5" onclick="location.href='<c:url value="/clientes/addAnimal/${proprietario.pessoaId}"></c:url>'"><i class="ti-plus"></i> Adicionar Animal</button>

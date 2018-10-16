@@ -49,8 +49,8 @@
                   </tbody>
                   
                   <div class="modal-footer">
-                      <input type="reset" value="reset" class="btn btn-primary"   />
-                      <input type="submit" value="submit" class="btn btn-primary" id="btnIncluirExame"  />
+                      <button type="submit" class="btn btn-success btn-flat btn-addon m-b-10 m-l-5" id="btnIncluirExame"  ><i class="ti-save"></i> Cadastrar</button>
+                       <button type="reset" class="btn btn-danger btn-flat btn-addon m-b-10 m-l-5"><i class="ti-close"></i> Limpar</button>
                   </div>
               </form:form>
             </div>

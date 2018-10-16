@@ -55,8 +55,7 @@
 
                                     <div class="form-group">
                                             <label for="imagem">Imagem do Animal</label>
-                                            <form:input class="form-control input-default col-sm-3" type="file" path="imagem" id="imagemFile" name="imagemFile" htmlEscape="true"></form:input>
-                                            <form:errors path="imagem" cssClass="errors"></form:errors>
+                                            <input type="file" name="imagemFile"/>
                                     </div>
                                     
                                     <div class="form-group">
@@ -76,7 +75,6 @@
                                             <form:radiobutton path="esteril" id="esteril" value="true"></form:radiobutton>Sim
                                             <form:radiobutton path="esteril" id="esteril" value="false"></form:radiobutton>Não
                                         </div>  
-
 
                                         <div class="form-group">
                                             <label for="status">Status:</label>

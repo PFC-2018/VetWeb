@@ -23,7 +23,7 @@ import com.vetweb.service.EmailService;
 @Transactional
 @EnableScheduling
 public class Scheduler {
-	/*
+	
 	@Autowired
 	private ProprietarioDAO proprietarioDAO;
 	
@@ -42,12 +42,13 @@ public class Scheduler {
 	
 	private static final long HORA = 3600000;
 	
-    @Scheduled(fixedDelay = MINUTO)
+    @Scheduled(fixedDelay = MINUTO/4)
     public void verificacaoClientesEmDebito() {
     	List<Proprietario> proprietariosComDebito = proprietarioDAO.buscarClientesEmDebito(); 
     	proprietariosComDebito
     		.stream()
     		.filter(prop -> prop.isAtivo())
+    		.filter(prop -> prop.getAnimais().size() > 0)
     		.peek(prop -> LOGGER.info("INATIVANDO CLIENTE " + prop.getNome()))
     		.forEach(prop ->  {prop.setAtivo(false); proprietarioDAO.salvar(prop);});
     	
@@ -58,7 +59,7 @@ public class Scheduler {
     		.forEach(prop -> {prop.setAtivo(true); proprietarioDAO.salvar(prop); });
     }
     
-    @Scheduled(fixedDelay = HORA)
+    @Scheduled(fixedDelay = MINUTO)
     public void verificacaoRetornoAtendimento() {
     	atendimentoDAO
     		.listarTodos()
@@ -76,6 +77,6 @@ public class Scheduler {
     	mensagemRetorno.append("O RETORNO DO ATENDIMENTO "
     				+ atendimento.getTipoDeAtendimento().getNome() + " FEITO EM " + atendimento.getData() + " E HOJE. FAVOR COMPARECER A CLINICA. ");
     	emailService.enviar(pessoaDestinatario, mensagemRetorno.toString(), "RETORNO DE ATENDIMENTO");
-    }*/
+    }
     
 }

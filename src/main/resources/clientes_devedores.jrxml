@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="clientes_devedores" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="95acdb59-5d07-4554-89dc-bd8c551d6bf5">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="45" splitType="Stretch">
+			<staticText>
+				<reportElement x="141" y="12" width="100" height="20" uuid="7889a7a8-717b-45b6-9e9b-bdd803762c08"/>
+				<text><![CDATA[RELATÓRIO TESTE]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="66">
+			<staticText>
+				<reportElement x="141" y="28" width="100" height="20" uuid="61f4596e-3ccb-4f91-95a3-1eba3511f33a"/>
+				<text><![CDATA[PAGE HEADER]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<summary>
+		<band height="97" splitType="Stretch">
+			<barChart>
+				<chart>
+					<reportElement x="0" y="0" width="555" height="97" uuid="375d0959-b983-47a4-8503-eecdde20afa4"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[""]]></seriesExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+		</band>
+	</summary>
+</jasperReport>

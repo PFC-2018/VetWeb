@@ -35,7 +35,6 @@ public class Proprietario extends Pessoa {
     
     private String comoNosConheceu;
     
-    @ColumnDefault("true")
     private boolean ativo;
     
     @OneToMany(mappedBy = "proprietario", fetch = FetchType.LAZY)

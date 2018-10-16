@@ -101,7 +101,7 @@
                                                     </c:when>
                                                     <c:otherwise>
                                                         <td>
-                                                            <a href="#">Cliente ${proprietario.nome} está desativado por conter débitos.</a>
+                                                            <a href="<c:url value="/clientes/detalhesCliente/${proprietario.pessoaId}"></c:url>">Cliente ${proprietario.nome} está desativado por conter débitos.</a>
                                                             <a><i
 																class="fa fa-warning"></i></a>
                                                             <a href="<c:url value="/clientes/financeiro/${proprietario.pessoaId}"></c:url>"><i
