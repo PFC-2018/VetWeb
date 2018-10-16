@@ -86,15 +86,7 @@ public class JasperService {
 	}
 
 	public void gerarRelatorioComObjeto(Report report, OutputStream outputStream) throws IOException {
-		// TESTEEEE QUE DA CERTO
-		ClienteDevedoresVO cVO = new ClienteDevedoresVO();
-		cVO.setNome("Mu Teste");
-		List<ClienteDevedoresVO> testeRel = new ArrayList<ClienteDevedoresVO>();
-		testeRel.add(cVO);
-		// FIM DO TESTE
-		
-		//LISTA RETORNA SEMPRE VAZIA
-		List<ClienteDevedoresVO> testeRel2 = verificacaoClientesEmDebito();
+		List<ClienteDevedoresVO> clientesDevedores = verificacaoClientesEmDebito();
 		
 		
 		// Gerar relatório
@@ -110,7 +102,7 @@ public class JasperService {
 			JasperCompileManager.compileReportToFile(reportLocation);
 			JasperPrint jasperPrint = JasperFillManager.fillReport(
 					new ClassPathResource(reportName + ".jasper").getFile().getAbsolutePath(), parameterMap,
-					new JRBeanCollectionDataSource(testeRel2));
+					new JRBeanCollectionDataSource(clientesDevedores));
 			JRExporter jrExporter = new JRPdfExporter();
 			jrExporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
 			jrExporter.setParameter(JRExporterParameter.OUTPUT_STREAM, outputStream);
@@ -126,11 +118,8 @@ public class JasperService {
 	public List<ClienteDevedoresVO> verificacaoClientesEmDebito() {
 		Double ttlAtendimentos = 0.0;
 		List<ClienteDevedoresVO> cVOList = new ArrayList<ClienteDevedoresVO>();
-
 		List<Proprietario> proprietariosComDebito = proprietarioDAO.buscarClientesEmDebito();
 		proprietariosComDebito.stream()
-				.filter(prop -> prop.isAtivo())
-				.filter(prop -> prop.getAnimais().size() > 0)
 				.peek(prop -> LOGGER.info("JasperService - Clientes Devedores " + prop.getNome()))		
 				.forEach(prop -> { ClienteDevedoresVO cVO = new ClienteDevedoresVO(); cVO.setNome(prop.getNome());cVOList.add(cVO); });	
 
