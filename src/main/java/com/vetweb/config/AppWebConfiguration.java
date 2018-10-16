@@ -1,5 +1,4 @@
 package com.vetweb.config;
-// @author renan.rodrigues@metasix.com.br
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

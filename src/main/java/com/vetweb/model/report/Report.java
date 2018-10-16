@@ -28,6 +28,5 @@ public abstract class Report {
 	public void setParameters(List<ReportParameter> parameters) {
 		this.parameters = parameters;
 	}
-	
 
 }
