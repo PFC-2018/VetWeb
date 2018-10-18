@@ -76,6 +76,12 @@
                                                 <td>${idadeCliente}</td>
                                             </tr>
                                             <tr>
+                                            	<th>Financeiro</th>
+                                            	<td>
+                                            		<a href="<c:url value="/clientes/financeiro/${proprietario.pessoaId}"></c:url>"><i class="fa fa-money  fa-2x"></i></a>
+                                            	</td>
+                                            </tr>
+                                            <tr>
                                                 <th>Animais do Cliente</th>
                                                 <td><vetweb:animaisDoCliente proprietario="${proprietario}"> </vetweb:animaisDoCliente></td>
                                             </tr>                                            
