@@ -174,6 +174,7 @@ public class ProprietarioDAO implements IDAO<Proprietario> {
     	
     }
 
+  //OcorrenciaVacina extends OcorrenciaProntuario(possui data)-> Possui p prontuarioId = prontuario. e possui data tb
 	public List<Proprietario> buscarClientesEmDebito(TipoOcorrenciaProntuario... tipoOcorrenciaProntuario) {
 		StringBuilder query = new StringBuilder("SELECT p FROM Proprietario p "
 			+ "JOIN p.animais a "
@@ -197,19 +198,19 @@ public class ProprietarioDAO implements IDAO<Proprietario> {
 			if (tipoOcorrenciaProntuario.length > 0) {
 				for (TipoOcorrenciaProntuario tipoOcorrencia : tipoOcorrenciaProntuario) {
 					if (tipoOcorrencia == TipoOcorrenciaProntuario.VACINA) {
-						query.append("v.pago = false ");
+						query.append("v.pago = false AND v.data < now()-INTERVAL'30 day' ");
 					}
 					if (tipoOcorrencia == TipoOcorrenciaProntuario.ATENDIMENTO) {
 						if (query.toString().contains("v.pago")) {
 							query.append("OR ");
 						}
-						query.append("a.pago = false ");
+						query.append("a.pago = false AND a.data < now()-INTERVAL'30 day' ");
 					}
 					if (tipoOcorrencia == TipoOcorrenciaProntuario.EXAME) {
 						if (query.toString().contains("e.pago")) {
 							query.append("OR ");
 						}
-						query.append("e.pago = false ");
+						query.append("e.pago = false AND e.data < now()-INTERVAL'30 day' ");
 					}
 				}
 			} else {
