@@ -36,22 +36,18 @@ public class Vacina implements Serializable {
     @JsonBackReference
     private List<OcorrenciaVacina> ocorrenciasVacina;
     
-    @Transient
-    private Protocolo protocolo;
-    
     private BigDecimal preco;
 
     public Vacina(String text) {
         this.nome = text;
     }
 
-    public Vacina(Long vacinaId, String nome, String grupo, boolean status, String laboratorio, Protocolo protocolo) {
+    public Vacina(Long vacinaId, String nome, String grupo, boolean status, String laboratorio) {
         this.vacinaId = vacinaId;
         this.nome = nome;
         this.grupo = grupo;
         this.status = status;
         this.laboratorio = laboratorio;
-        this.protocolo = protocolo;
     }
 
     public Vacina() {
@@ -96,14 +92,6 @@ public class Vacina implements Serializable {
 
     public void setLaboratorio(String laboratorio) {
         this.laboratorio = laboratorio;
-    }
-
-    public Protocolo getProtocolo() {
-        return protocolo;
-    }
-
-    public void setProtocolo(Protocolo protocolo) {
-        this.protocolo = protocolo;
     }
 
 	public BigDecimal getPreco() {
