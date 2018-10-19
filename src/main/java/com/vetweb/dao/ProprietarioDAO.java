@@ -3,6 +3,8 @@ package com.vetweb.dao;
 //@author renan.rodrigues@metasix.com.br
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -11,6 +13,7 @@ import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
 
 import org.apache.log4j.Logger;
@@ -174,8 +177,9 @@ public class ProprietarioDAO implements IDAO<Proprietario> {
     	
     }
 
-  //OcorrenciaVacina extends OcorrenciaProntuario(possui data)-> Possui p prontuarioId = prontuario. e possui data tb
 	public List<Proprietario> buscarClientesEmDebito(TipoOcorrenciaProntuario... tipoOcorrenciaProntuario) {
+		LocalDateTime dataApos30 = LocalDateTime.now();
+		
 		StringBuilder query = new StringBuilder("SELECT p FROM Proprietario p "
 			+ "JOIN p.animais a "
 			+ "JOIN a.prontuario pr ");
@@ -198,26 +202,27 @@ public class ProprietarioDAO implements IDAO<Proprietario> {
 			if (tipoOcorrenciaProntuario.length > 0) {
 				for (TipoOcorrenciaProntuario tipoOcorrencia : tipoOcorrenciaProntuario) {
 					if (tipoOcorrencia == TipoOcorrenciaProntuario.VACINA) {
-						query.append("v.pago = false AND v.data < now()-INTERVAL'30 day' ");
+						query.append("v.pago = false AND v.data < :data30 ");
 					}
 					if (tipoOcorrencia == TipoOcorrenciaProntuario.ATENDIMENTO) {
 						if (query.toString().contains("v.pago")) {
 							query.append("OR ");
 						}
-						query.append("a.pago = false AND a.data < now()-INTERVAL'30 day' ");
+						query.append("a.pago = false AND a.data < :data30 ");
 					}
 					if (tipoOcorrencia == TipoOcorrenciaProntuario.EXAME) {
 						if (query.toString().contains("e.pago")) {
 							query.append("OR ");
 						}
-						query.append("e.pago = false AND e.data < now()-INTERVAL'30 day' ");
+						query.append("e.pago = false AND e.data < :data30 ");
 					}
 				}
 			} else {
-				query.append("v.pago = false OR a.pago = false OR e.pago = false");
+				query.append("(v.pago = false OR a.pago = false OR e.pago = false) ");
+				query.append("AND (v.data < :data30 OR a.data < :data30 OR e.data < :data30)");
 			}
 		List<Proprietario> clientesComDebito = entityManager
-												.createQuery(query.toString(), Proprietario.class)
+												.createQuery(query.toString(), Proprietario.class).setParameter("data30", dataApos30.minusDays(30))
 												.getResultList();
 		return clientesComDebito;
 	}
