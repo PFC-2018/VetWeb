@@ -73,8 +73,10 @@ public class AnimalController {
             return form(animal, true);
         }
         try {
-            String caminhoImagem = arquivoService.salvarArquivo(imagemFile); 
-            animal.setImagem(caminhoImagem);
+        	if (!(animal.getAnimalId() == null  && imagemFile.getOriginalFilename() == "") || !(animal.getAnimalId() != null && imagemFile.getOriginalFilename() == "") || (animal.getAnimalId() != null && imagemFile.getOriginalFilename() != null)) {
+        		String caminhoImagem = arquivoService.salvarArquivo(imagemFile); 
+        		animal.setImagem(caminhoImagem);
+        	}
             animalDAO.salvar(animal);
             LOGGER.info(("Animal " + animal.getNome() + " inserido com sucesso na base.").toUpperCase());
         } catch (Exception exception) {
@@ -82,7 +84,7 @@ public class AnimalController {
                     exception);
         }
         LOGGER.info(("Animal " + animal + " sendo encaminhado para criação do prontuário.").toUpperCase());
-        ModelAndView modelAndView = new ModelAndView("forward:/prontuario/gerarProntuario?animalId=" + animal.getAnimalId());
+		ModelAndView modelAndView = new ModelAndView("forward:/prontuario/gerarProntuario?animalId=" + animal.getAnimalId());
         return modelAndView;
     }
     
@@ -105,6 +107,9 @@ public class AnimalController {
         ModelAndView modelAndView = new ModelAndView("animal/cadastroAnimal");
         modelAndView.addObject("animal", animalDAO.buscarPorId(animalId));
         modelAndView.addObject("proprietarios", proprietarioDAO.listarTodos());
+        modelAndView.addObject("especies", animalDAO.buscarEspecies());
+        modelAndView.addObject("racas", animalDAO.buscarRacas());
+        modelAndView.addObject("pelagens", animalDAO.buscarPelagens());
         modelAndView.addObject("desabilitaTrocaProprietario", true);
         return modelAndView;
     }

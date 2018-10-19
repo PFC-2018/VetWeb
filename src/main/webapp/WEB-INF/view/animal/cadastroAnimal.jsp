@@ -51,6 +51,8 @@
                                     <h3>Dados Pessoais</h3>
                                 </div>
                                 <form:form servletRelativeAction="/animais/cadastrar" method="POST" modelAttribute="animal" enctype="multipart/form-data">
+                                
+                                <form:hidden path="animalId" name="animalId"/>
                                     
 
                                     <div class="form-group">
@@ -105,7 +107,7 @@
 
                                         <div class="form-group">
                                             <label for="raca">Raças:</label>
-                                            <form:select class="form-control input-default col-sm-3" path="raca" items="${especies}" id="racas"></form:select>
+                                            <form:select class="form-control input-default col-sm-3" path="raca" items="${racas}" id="racas"></form:select>
                                         </div>
 
                                         <div class="form-group">

@@ -61,6 +61,13 @@ public class ProntuarioDAO implements IDAO<Prontuario>{
                 .getSingleResult();
     }
     
+    public Prontuario buscarPorIdAnimal(Long idAnimal) {
+    	return entityManager
+    			.createQuery("SELECT p FROM Prontuario p WHERE p.animal.animalId = :codigoAnimal", Prontuario.class)
+    			.setParameter("codigoAnimal", idAnimal)
+    			.getSingleResult();
+    }
+    
     public List<Vacina> buscarVacinas() {
         return entityManager
         		.createQuery("SELECT v FROM Vacina v", Vacina.class)

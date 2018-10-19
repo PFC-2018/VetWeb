@@ -169,9 +169,11 @@ public class ProntuarioController {
     public ModelAndView criarProntuarioDoAnimal(@RequestParam("animalId") Long animalId) {
 		Animal animal = animalDAO.buscarPorId(animalId);
         LOGGER.info(("SENDO CRIADO PRONTUÁRIO DO ANIMAL " + animal).toUpperCase());
-        Prontuario prontuario = new Prontuario(animal);
-        prontuarioDAO.salvar(prontuario);
-        animal.setProntuario(prontuario);
+        if (prontuarioDAO.buscarPorIdAnimal(animalId) == null) {
+        	Prontuario prontuario = new Prontuario(animal);
+        	prontuarioDAO.salvar(prontuario);
+        	animal.setProntuario(prontuario);
+        }
         ModelAndView modelAndView = new ModelAndView("redirect:/prontuario/prontuarioDoAnimal/" + animal.getAnimalId());
         return modelAndView;
     }

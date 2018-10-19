@@ -33,10 +33,15 @@
     <form:form servletRelativeAction="/animais/addPelagem" method="POST" modelAttribute="pelagem">
             <form:hidden path="pelagemId" id="pelagemId"></form:hidden>
                        
-                       <div class="form-group">
+			<div class="form-group">
                 <label for="descricao">Descrição:</label>
                     <form:input class="form-control input-default col-sm-8" path="descricao" id="descricao" maxlength="100"></form:input>
 					<form:errors path="descricao" cssClass="errors"></form:errors>
+            </div>
+			<div class="form-group">
+                <label for="cor">Cor:</label>
+                    <form:input type="color" class="form-control input-default col-sm-8" path="cor" id="cor" maxlength="100"></form:input>
+					<form:errors path="cor" cssClass="errors"></form:errors>
             </div>
             
         <button type="submit" class="btn btn-success btn-flat btn-addon m-b-10 m-l-5"><i class="ti-save"></i> Cadastrar</button>

@@ -50,6 +50,10 @@
 
 									<a href="<c:url value="/prontuario/prontuarioDoAnimal/${animal.animalId}"></c:url>">
 		                                <i class="fa fa-stethoscope fa-2x" aria-hidden="true"></i>
+		                            </a>
+		                              
+									<a href="<c:url value="/animais/atualizar/${animal.animalId}"></c:url>">
+		                                <i class="fa fa-edit fa-2x" aria-hidden="true"></i>
 		                            </a>  
 
 
