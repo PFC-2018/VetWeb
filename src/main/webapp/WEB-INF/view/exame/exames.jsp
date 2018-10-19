@@ -70,8 +70,7 @@
 									cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
-                                                <th>Descricao</th>
-                                                <th>Id do Exame</th>
+                                                <th>Descrição</th>
                                                 <th>Apresentação</th>
                                                 <th>Encerramento</th>
                                             </tr>
@@ -88,9 +87,6 @@
                             <a href="<c:url value="/exames/remover/${exame.exameId}"></c:url>">
                                 <i class="fa fa-trash-o fa-2x"></i>
                             </a>
-                        </td>
-                        <td>
-                            ${exame.exameId}
                         </td>
                         <td>
                             ${exame.apresentacao}

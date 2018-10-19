@@ -54,12 +54,12 @@
 						<form:errors path="grupo" cssClass="errors"></form:errors>
             		</div>            		
             		<div class="form-group">
-                        <label for="status">Status:</label>
-                    	<form:radiobutton path="status" id="status" value="true"/>True
-                   		<form:radiobutton path="status" id="status" value="false"/>False
+                        <label for="status">Ativo:</label>
+                    	<form:radiobutton path="status" id="status" value="true"/>Sim
+                   		<form:radiobutton path="status" id="status" value="false"/>Não
                 	</div>
                     <div class="form-group">
-                		<label for="laboratorio">Laboratorio:</label>
+                		<label for="laboratorio">Laboratório:</label>
                     	<form:input
 							class="form-control input-default col-sm-8" path="laboratorio"
 							id="laboratorio" maxlength="100"></form:input>

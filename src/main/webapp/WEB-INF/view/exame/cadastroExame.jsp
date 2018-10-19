@@ -51,7 +51,7 @@
                     <form:hidden path="exameId" id="exameId"></form:hidden>
                  
                     <div class="form-group">
-                		<label for="descricao">DescriÃ§Ã£o:</label>
+                		<label for="descricao">Descrição:</label>
                     	<form:input
 											class="form-control input-default col-sm-8" path="descricao"
 											id="descricao" maxlength="100"></form:input>

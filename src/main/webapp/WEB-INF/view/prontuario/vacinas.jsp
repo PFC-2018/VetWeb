@@ -70,7 +70,7 @@
                                                 <th>Nome</th>
                                                 <th>Grupo</th>
                                                 <th>Status</th>
-                                                <th>LaboratÃ³rio</th>
+                                                <th>Laboratório</th>
                                                 <th>Custo</th>
                                             </tr>
                                         </thead>             
