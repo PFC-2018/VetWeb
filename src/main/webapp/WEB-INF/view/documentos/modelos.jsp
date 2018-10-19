@@ -54,7 +54,7 @@
             <!-- FIM MENU DE CONSULTA DE NAVEGAÇÃO -->
     
 	    <div class="">
-                    <div class="col-12">
+                    <div class="col-8">
                         <div class="card">          
                             <div class="card-body">
                                 <h4 class="card-title">Cadastre novos modelos</h4>
@@ -63,7 +63,7 @@
 								class="btn btn-success btn-flat btn-addon m-b-10 m-l-5"
 								onclick="location.href='<c:url value="/documentos/form"> </c:url>'">
                                 <i class="ti-save"></i> Cadastrar</button>
-                                <div class="table-responsive m-t-40">
+                                <div class="table-responsive m-t-40 col-8">
 	    
         <table id="modelos" class="display nowrap table table-hover table-striped table-bordered"cellspacing="0" width="100%">
             <thead>

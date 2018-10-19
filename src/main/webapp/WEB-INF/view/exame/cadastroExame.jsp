@@ -46,9 +46,7 @@
         <form:form servletRelativeAction="/exames/submitForm"
 							method="POST" modelAttribute="exame">
             <table class="table table-responsive">
-                <caption>
-									<spring:message code="adcExame" />
-								</caption>
+
                 <tbody>
                     <form:hidden path="exameId" id="exameId"></form:hidden>
                  

@@ -67,8 +67,10 @@
             		</div>
             		<tr>
                         <th><label for="custo"><spring:message code="custo"/></label></th>
-                        <td><form:input path="preco" id="custo"></form:input></td>
+                        <td><form:input class="form-control input-default col-sm-2" path="preco" 
+                        	id="custo"></form:input></td>
                     </tr>
+                    </br>
             <button type="submit"
 								class="btn btn-success btn-flat btn-addon m-b-10 m-l-5">
 								<i class="ti-save"></i> Cadastrar</button>
