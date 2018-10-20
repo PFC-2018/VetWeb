@@ -36,21 +36,21 @@
                                     <!-- INICIO CORPO DA PÁGINA  -->
 
                                     <div class="">
-                                        <div class="col-12">
+                                        <div class="col-6">
                                             <div class="card">
                                                 <div class="card-body" style="background-color: ${prontuario.animal.pelagem.cor}">
                                                     <h2 class="card-title">Prontuário do Animal ${prontuario.animal.nome}</h2>
                                                     <div class="col-md-12">
-                                                        <button type="button" data-toggle="modal" data-target="#modalAtendimento" onclick="ajaxService.buscarModeloPorTipoDeAtendimento()" class="btn btn-info">
+                                                        <button type="button" data-toggle="modal" data-target="#modalAtendimento" onclick="ajaxService.buscarModeloPorTipoDeAtendimento()" class="btn btn-info col-2">
                                                             <i class="fa fa-medkit fa-5x" aria-hidden="true"></i>
                                                         </button>
-                                                        <button type="button" data-toggle="modal" data-target="#modalVacina" class="btn btn-warning">
+                                                        <button type="button" data-toggle="modal" data-target="#modalVacina" class="btn btn-warning col-2">
                                                             <i class="fa fa-eyedropper fa-5x"></i>
                                                         </button>
-                                                        <button type="button" data-toggle="modal" data-target="#modalPatologia" class="btn btn-danger">
+                                                        <button type="button" data-toggle="modal" data-target="#modalPatologia" class="btn btn-danger col-2">
                                                             <i class="fa  fa-plus-square fa-5x" aria-hidden="true"></i>
                                                         </button>
-                                                        <button type="button" data-toggle="modal" data-target="#modalExame" class="btn btn-secondary">
+                                                        <button type="button" data-toggle="modal" data-target="#modalExame" class="btn btn-primary col-2">
                                                             <i class="fa fa-stethoscope fa-5x" aria-hidden="true"></i>
                                                         </button>
                                                     </div>
@@ -86,7 +86,7 @@
                                                                                                     <button data-toggle="modal" data-target="#modalAtendimento" onclick="ajaxService.editarAtendimento(${elementoHistorico.ocorrenciaId})" class="btn btn-warning btn-sm m-b-10 m-l-5"><i class="ti-pencil"></i> Editar</button>
 
                                                                                                     <a href="<c:url value=" /prontuario/removerAtendimentoDoProntuario/${prontuario.prontuarioId}/${elementoHistorico.ocorrenciaId} "></c:url>">
-                                                                                                        <button class="btn btn-danger btn-sm m-b-10 m-l-5"><i class="ti-close"></i> Excluir</button>
+                                                                                                        <button class="btn btn-danger btn-sm m-b-10 m-l-5"><i class="ti-trash"></i> Excluir</button>
                                                                                                     </a>
                                                                                                 </div>
                                                                                             </div>
@@ -114,14 +114,14 @@
                                                                                                     <button data-toggle="modal" data-target="#modalVacina" onclick="ajaxService.editarVacina(${elementoHistorico.ocorrenciaId})" class="btn btn-warning btn-sm m-b-10 m-l-5"><i class="ti-pencil"></i> Editar</button>
 
                                                                                                     <a href="<c:url value="/prontuario/removerVacinaDoProntuario/${prontuario.prontuarioId}/${elementoHistorico.ocorrenciaId}?inclusaoOcorrenciaVacina=${elementoHistorico.data} "></c:url>">
-                                                                                                        <button class="btn btn-danger btn-sm m-b-10 m-l-5"><i class="ti-close"></i> Excluir</button>
+                                                                                                        <button class="btn btn-danger btn-sm m-b-10 m-l-5"><i class="ti-trash"></i> Excluir</button>
                                                                                                     </a>
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
-                                                                                <hr>
+                                                                                <hr size=”10″>
                                                                             </c:if>
 
                                                                             <c:if test="${elementoHistorico.tipo == 'PATOLOGIA'}">
@@ -142,13 +142,14 @@
                                                                                                     <button data-toggle="modal" data-target="#modalPatologia" onclick="ajaxService.editarPatologia(${elementoHistorico.ocorrenciaId})" class="btn btn-warning btn-sm m-b-10 m-l-5"><i class="ti-pencil"></i> Editar</button>
 
                                                                                                     <a href="<c:url value="/prontuario/removerPatologiaDoProntuario/${prontuario.prontuarioId}/${elementoHistorico.ocorrenciaId} "></c:url>">
-                                                                                                        <button class="btn btn-danger btn-sm m-b-10 m-l-5"><i class="ti-close"></i> Excluir</button>
+                                                                                                        <button class="btn btn-danger btn-sm m-b-10 m-l-5"><i class="ti-trash"></i> Excluir</button>
                                                                                                     </a>
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
+                                                                                <hr>
                                                                             </c:if>
 
                                                                             <c:if test="${elementoHistorico.tipo == 'EXAME'}">
@@ -169,13 +170,14 @@
                                                                                                     <button data-toggle="modal" data-target="#modalExame" onclick="ajaxService.editarExame(${elementoHistorico.ocorrenciaId})" class="btn btn-warning btn-sm m-b-10 m-l-5"><i class="ti-pencil"></i> Editar</button>
 
                                                                                                     <a href="<c:url value="/prontuario/removerExameDoProntuario/${prontuario.prontuarioId}/${elementoHistorico.ocorrenciaId} "></c:url>">
-                                                                                                        <button class="btn btn-danger btn-sm m-b-10 m-l-5"><i class="ti-close"></i> Excluir</button>
+                                                                                                        <button class="btn btn-danger btn-sm m-b-10 m-l-5"><i class="ti-trash"></i> Excluir</button>
                                                                                                     </a>
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
+                                                                                <hr>
                                                                             </c:if>
                                                                         </c:forEach>
                                                                         <!-- FIM DO FOR -->

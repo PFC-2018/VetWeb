@@ -30,6 +30,15 @@
                     <div class="card-body p-b-0">
                         
                         <h4 class="card-title">Animal ${animal.nome}</h4>
+                        <div class="p-10">
+                                        <button type="button" onclick="location.href='<c:url value="/prontuario/prontuarioDoAnimal/${animal.animalId}"></c:url>'" class="btn btn-info col-1">
+                                        	<i class="fa fa-stethoscope fa-3x" aria-hidden="true"></i>
+                                        </button>
+                                        
+                                        <button type="button" onclick="location.href='<c:url value="/animais/atualizar/${animal.animalId}"></c:url>'" class="btn btn-warning col-1">
+                                        	<i class="fa fa-edit fa-3x" aria-hidden="true"></i>
+                                        </button>
+										</div>
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs customtab"
 							role="tablist">
@@ -39,25 +48,14 @@
 										class="ti-home"></i></span> <span class="hidden-xs-down">Dados do Animal</span></a> </li>
                         </ul>
                         <!-- Tab panes -->
-
+                        
                         <div class="tab-content">
                             <div class="tab-pane active "
 								id="dadosAnimais" role="tabpanel">
-                                <div class="p-20 ">
+                                <div class="p-0">
                                     <table
 										class="table table-responsive" id="detalhesProprietario">
                                         <tbody>
-
-									<a href="<c:url value="/prontuario/prontuarioDoAnimal/${animal.animalId}"></c:url>">
-		                                <i class="fa fa-stethoscope fa-2x" aria-hidden="true"></i>
-		                            </a>
-		                              
-									<a href="<c:url value="/animais/atualizar/${animal.animalId}"></c:url>">
-		                                <i class="fa fa-edit fa-2x" aria-hidden="true"></i>
-		                            </a>  
-
-
-
                                             <tr>
                                             <th>Foto Animal</th>
                                             <td>

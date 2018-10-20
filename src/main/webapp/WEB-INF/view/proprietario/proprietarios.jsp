@@ -87,14 +87,13 @@
                                                     <c:when
 														test="${proprietario.ativo == true}">
                                                         <td>
-                                                            <a
-															href="<c:url value="/clientes/detalhesCliente/${proprietario.pessoaId}"></c:url>">${proprietario.nome}</a>     
-                                                            <a
-															href="<c:url value="/clientes/atualizar/${proprietario.pessoaId}"></c:url>"></a>     
-                                                            <a
-															href="<c:url value="/clientes/remover/${proprietario.pessoaId}"></c:url>"></a> 
-															<a href="<c:url value="/clientes/financeiro/${proprietario.pessoaId}"></c:url>"><i
-																class="fa fa-money  fa-2x"></i></a>
+															<button type="button" class="btn btn-outline-info btn-sm m-b-10 m-l-5" onclick="location.href='<c:url value="/clientes/detalhesCliente/${proprietario.pessoaId}"></c:url>'">
+																${proprietario.nome}
+															</button> 
+															
+															
+															<button type="button" class="btn btn-outline-warning btn-sm m-b-10 m-l-5" onclick="location.href='<c:url value="/clientes/financeiro/${proprietario.pessoaId}"></c:url>'">
+															<i class="ti-money"></i></button>   
                                                         </td>
                                                         <td>
                                                             <vetweb:animaisDoCliente
@@ -106,8 +105,10 @@
                                                             <a href="<c:url value="/clientes/detalhesCliente/${proprietario.pessoaId}"></c:url>">Cliente ${proprietario.nome} está desativado por conter débitos.</a>
                                                             <a><i
 																class="fa fa-warning"></i></a>
-                                                            <a href="<c:url value="/clientes/financeiro/${proprietario.pessoaId}"></c:url>"><i
-																class="fa fa-money  fa-2x"></i></a>
+                                                        </td>
+                                                        <td>
+                                                            <vetweb:animaisDoCliente
+																proprietario="${proprietario}"></vetweb:animaisDoCliente>                
                                                         </td>
                                                     </c:otherwise>
                                                 </c:choose>

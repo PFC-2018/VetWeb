@@ -26,6 +26,23 @@
                         
                         
                         <h4 class="card-title">Cadastro de Cliente</h4>
+                        
+                        <div class="p-10">
+                        <button type="button" onclick="location.href='<c:url value="/clientes/financeiro/${proprietario.pessoaId}"></c:url>'" class="btn btn-success col-1">
+                                        	<i class="fa fa-money fa-3x" aria-hidden="true"></i>
+                                        </button>
+                                        
+                                        <button type="button" onclick="location.href='<c:url value="/clientes/atualizar/${proprietario.pessoaId}"></c:url>'" class="btn btn-warning col-1">
+                                        	<i class="fa fa-pencil fa-3x" aria-hidden="true"></i>
+                                        </button>
+                                        
+                                        <button type="button" onclick="location.href='<c:url value="/clientes/remover/${proprietario.pessoaId}"></c:url>'" class="btn btn-danger col-1">
+                                        	<i class="fa fa-trash fa-3x" aria-hidden="true"></i>
+                                        </button>
+                                        
+                                        
+										</div>
+                        
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs customtab" role="tablist">
                             <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#pessoais" role="tab"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Dados Pessoais</span></a> </li>
@@ -74,12 +91,6 @@
                                             <tr>
                                                 <th>Idade</th>
                                                 <td>${idadeCliente}</td>
-                                            </tr>
-                                            <tr>
-                                            	<th>Financeiro</th>
-                                            	<td>
-                                            		<a href="<c:url value="/clientes/financeiro/${proprietario.pessoaId}"></c:url>"><i class="fa fa-money  fa-2x"></i></a>
-                                            	</td>
                                             </tr>
                                             <tr>
                                                 <th>Animais do Cliente</th>
