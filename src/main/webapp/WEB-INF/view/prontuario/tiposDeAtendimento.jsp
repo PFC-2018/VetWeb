@@ -71,8 +71,8 @@
                                         <thead>
                                             <tr>
                                                 <th>Nome</th>
-                                                <th>DuraÃ§Ã£o</th>
-                                                <th>Frequencia</th>
+                                                <th>Duração</th>
+                                                <th>Frequência</th>
                                                 <th>Modelo de Atendimento</th>
                                                 <th>Status</th>
 												<th>Custo</th>

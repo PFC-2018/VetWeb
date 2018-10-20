@@ -23,7 +23,7 @@
             <!-- FIM MENU DE CONSULTA DE NAVEGAÇÃO -->
 
 <div class="">
-                <div class="col-8">
+                <div class="col-6">
                     <div class="card">
                         <div class="card-title">
                             <h1>Cadastro de Raças</h1>
@@ -36,18 +36,18 @@
                 
                 <div class="form-group">
                 <label for="descricao">Descrição:</label>
-                    <form:input class="form-control input-default col-sm-8" path="descricao" id="descricao" maxlength="100"></form:input>
+                    <form:input class="form-control input-default col-sm-4" path="descricao" id="descricao" maxlength="100"></form:input>
 					<form:errors path="descricao" cssClass="errors"></form:errors>
             	</div>
             	
             	<div class="form-group">
                 <label for="especie">Espécie:</label>
-                    <form:select class="form-control input-default col-sm-9" path="especie" items="${especies}"></form:select>
+                    <form:select class="form-control input-default col-sm-4" path="especie" items="${especies}"></form:select>
 					<form:errors path="especie" cssClass="errors"></form:errors>
             	</div>
             
         <button type="submit" class="btn btn-success btn-flat btn-addon m-b-10 m-l-5"><i class="ti-save"></i> Cadastrar</button>
-        <button type="reset" class="btn btn-inverse btn-flat btn-addon m-b-10 m-l-5"><i class="ti-save"></i> Limpar</button>                    
+        <button type="reset" class="btn btn-inverse btn-flat btn-addon m-b-10 m-l-5"><i class="ti-close"></i> Limpar</button>                    
     </form:form>
     </div>
     </div>

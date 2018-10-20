@@ -44,32 +44,34 @@
                     
                     <div class="form-group">
                 		<label for="nome">Nome:</label>
-                    	<form:input class="form-control input-default col-sm-8" path="nome" id="nome" maxlength="100"></form:input>
+                    	<form:input class="form-control input-default col-sm-4" path="nome" id="nome" maxlength="100"></form:input>
 						<form:errors path="nome" cssClass="errors"></form:errors>
             		</div>                    
                     <div class="form-group">
-                		<label for="duracao">DuraÃ§Ã£o:</label>
-                    	<form:select class="form-control input-default col-sm-9" path="duracao" items="${duracoesValidas}"></form:select>
+                		<label for="duracao">Duração:</label>
+                    	<form:select class="form-control input-default col-sm-4" path="duracao" items="${duracoesValidas}"></form:select>
 						<form:errors path="duracao" cssClass="errors"></form:errors>
             		</div>                    
                     <div class="form-group">
-                		<label for="frequencia">Frequencia:</label>
-                    	<form:select class="form-control input-default col-sm-9" path="frequencia" items="${frequenciasValidas}"></form:select>
+                		<label for="frequencia">Frequência:</label>
+                    	<form:select class="form-control input-default col-sm-4" path="frequencia" items="${frequenciasValidas}"></form:select>
 						<form:errors path="frequencia" cssClass="errors"></form:errors>
             		</div>                    
                     
                     <div class="form-group">
-                    	<label for="esteril">Status:</label>
-                    	<form:radiobutton path="status" id="status" value="true"></form:radiobutton>true
-                    	<form:radiobutton path="status" id="status" value="false"></form:radiobutton>false
+                    	<label for="esteril">Ativo:</label>
+                    	<form:radiobutton path="status" id="status" value="true"></form:radiobutton>Sim
+                    	<form:radiobutton path="status" id="status" value="false"></form:radiobutton>Não
                     </div> 
+                    <div class="form-group">
                     <tr>
-                        <th><label for="modeloAtendimento"><spring:message code="modeloAtendimento"/></label></th>
-                        <td><form:textarea path="modeloAtendimento" id="modeloAtendimento"></form:textarea></td>
+                        <th><label for="modeloAtendimento"><spring:message code="modeloAtendimento"/>:</label></th>
+                        <td><form:textarea class="form-control input-default col-sm-4" cols="3" rows="15" path="modeloAtendimento" id="modeloAtendimento"></form:textarea></td>
                     </tr>                    
+                    </div> 
                     <div class="form-group">
                 		<label for="custo">Custo:</label>
-                    	<form:input class="form-control input-default col-sm-8" path="custo" id="custo"></form:input>
+                    	<form:input class="form-control input-default col-sm-2" path="custo" id="custo"></form:input>
 						<form:errors path="custo" cssClass="errors"></form:errors>
             		</div>
             
@@ -79,7 +81,7 @@
 								<i class="ti-save"></i> Cadastrar</button>
         	<button type="reset"
 								class="btn btn-inverse btn-flat btn-addon m-b-10 m-l-5">
-								<i class="ti-save"></i> Limpar</button>               
+								<i class="ti-close"></i> Limpar</button>               
         </form:form>
         </div>
         </div>

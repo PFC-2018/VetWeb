@@ -29,7 +29,7 @@
 		<!-- FIM MENU DE CONSULTA DE NAVEGAÇÃO -->
 
 		<div class="">
-			<div class="col-8">
+			<div class="col-6">
 				<div class="card">
 					<div class="card-title">
 						<h1>Cadastro de Espécies</h1>
@@ -42,7 +42,7 @@
 
 						<div class="form-group">
 							<label for="descricao">Descrição:</label>
-							<form:input class="form-control input-default col-sm-8"
+							<form:input class="form-control input-default col-sm-4"
 								path="descricao" id="descricao" maxlength="100"></form:input>
 							<form:errors path="descricao" cssClass="errors"></form:errors>
 						</div>
@@ -52,7 +52,7 @@
 						</button>
 						<button type="reset"
 							class="btn btn-inverse btn-flat btn-addon m-b-10 m-l-5">
-							<i class="ti-save"></i> Limpar
+							<i class="ti-close"></i> Limpar
 						</button>
 					</form:form>
 				</div>

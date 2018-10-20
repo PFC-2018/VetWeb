@@ -40,16 +40,16 @@
                     <form:hidden path="modelodocumentoId" id="modelodocumentoId"></form:hidden>
                     <div class="form-group">
 								<label for="nome">Nome:</label>
-								<form:input class="form-control input-default col-sm-8"
+								<form:input class="form-control input-default col-sm-4"
 									path="nome" id="nome" maxlength="100"></form:input>
 								<form:errors path="nome" cssClass="errors"></form:errors>
 					</div>
                     <tr>
-                        <th><label for="infoCliente"><spring:message code="infoCliente"/></label></th>
+                        <th><label for="infoCliente"><spring:message code="infoCliente"/>:</label></th>
                         <td><form:checkbox path="infoCliente"/></td>
                     </tr>
                     <tr>
-                        <th><label for="modelo"><spring:message code="modelo"/></label></th>
+                        <th><label for="modelo"><spring:message code="modelo"/>:</label></th>
                         <td>
                             <form:textarea path="modelo" id="modelo"/>
                         </td>
@@ -57,7 +57,7 @@
                 </tbody>
             </table>
             <button type="submit" class="btn btn-success btn-flat btn-addon m-b-10 m-l-5"><i class="ti-save"></i> Cadastrar</button>
-        	<button type="reset" class="btn btn-inverse btn-flat btn-addon m-b-10 m-l-5"><i class="ti-save"></i> Limpar</button>                
+        	<button type="reset" class="btn btn-inverse btn-flat btn-addon m-b-10 m-l-5"><i class="ti-close"></i> Limpar</button>                
         </form:form>
         </div>
    	 	</div>

@@ -30,7 +30,7 @@
             <!-- FIM MENU DE CONSULTA DE NAVEGAÇÃO -->
             
 			<div class="">
-                <div class="col-8">
+                <div class="col-6">
                     <div class="card">
                         <div class="card-title">
                             <h1>Cadastro de Vacinas</h1>
@@ -42,14 +42,14 @@
                     <div class="form-group">
                 		<label for="nome">Nome:</label>
                     	<form:input
-							class="form-control input-default col-sm-8" path="nome"
+							class="form-control input-default col-sm-4" path="nome"
 							id="nome" maxlength="100"></form:input>
 						<form:errors path="nome" cssClass="errors"></form:errors>
             		</div>
             		<div class="form-group">
                 		<label for="grupo">Grupo:</label>
                     	<form:input
-							class="form-control input-default col-sm-8" path="grupo"
+							class="form-control input-default col-sm-4" path="grupo"
 							id="grupo" maxlength="100"></form:input>
 						<form:errors path="grupo" cssClass="errors"></form:errors>
             		</div>            		
@@ -61,12 +61,12 @@
                     <div class="form-group">
                 		<label for="laboratorio">Laborat�rio:</label>
                     	<form:input
-							class="form-control input-default col-sm-8" path="laboratorio"
+							class="form-control input-default col-sm-4" path="laboratorio"
 							id="laboratorio" maxlength="100"></form:input>
 						<form:errors path="laboratorio" cssClass="errors"></form:errors>
             		</div>
             		<tr>
-                        <th><label for="custo"><spring:message code="custo"/></label></th>
+                        <th><label for="custo"><spring:message code="custo"/>:</label></th>
                         <td><form:input class="form-control input-default col-sm-2" path="preco" 
                         	id="custo"></form:input></td>
                     </tr>
@@ -76,7 +76,7 @@
 								<i class="ti-save"></i> Cadastrar</button>
         <button type="reset"
 								class="btn btn-inverse btn-flat btn-addon m-b-10 m-l-5">
-								<i class="ti-save"></i> Limpar</button>                   
+								<i class="ti-close"></i> Limpar</button>                   
         </form:form>
         </div>
         </div>
