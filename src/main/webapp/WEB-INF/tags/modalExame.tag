@@ -1,8 +1,3 @@
-<%-- 
-    Document   : modal.tag
-    Created on : 31 de julho de 2018
-    Author     : renan.rodrigues@metasix.com.br
---%>
 <%@ taglib prefix="vetweb" tagdir="/WEB-INF/tags"%>
 <%@attribute name="prontuario" required="true" type="java.lang.Object" %>
 <%@attribute name="exames" required="true" type="java.util.List" %>
@@ -11,14 +6,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
       <!-- Modal -->
-      <div class="modal fade" id="modalExame" tabindex="-1" role="dialog" aria-labelledby="labelModalExame" aria-hidden="true">
+      <div class="modal" id="modalExame">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="labelModalExame"><strong><spring:message code="adcExame"/></strong></h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
             <form:form servletRelativeAction="/prontuario/adicionarExame?prontuarioId=${prontuario.prontuarioId}" method="POST" id="frmIncluirExame">
@@ -29,7 +22,7 @@
                       
                       <input type="text" name="ocorrenciaExameId" id="ocorrenciaExameId" hidden  />
                       
-                      <br	/>
+                      <br/>
                       
                       <tr>
                           <th><spring:message code="exame"></spring:message>: </th>

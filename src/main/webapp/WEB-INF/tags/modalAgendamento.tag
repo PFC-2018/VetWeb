@@ -7,20 +7,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
        <!-- Modal -->
-       <div class="modal fade" id="modalAgendamento" tabindex="-1" role="dialog" aria-labelledby="labelModalAgendamento" aria-hidden="true">
-       
+       <div class="modal" id="modalAgendamento">
          <div class="modal-dialog" role="document">
-         
            <div class="modal-content">
-           
              <div class="modal-header">
-             
-               <h5 class="modal-title" id="labelModalAgendamento"><strong><spring:message code="adcAgendamento"/></strong></h5>
-               
-               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                 <span aria-hidden="true">&times;</span>
-               </button>
-               
+               <h5 class="modal-title">Adicionar Agendamento</h5>
+               <button type="button" class="close" data-dismiss="modal">&times;</button>
              </div>
              
              <div class="modal-body">

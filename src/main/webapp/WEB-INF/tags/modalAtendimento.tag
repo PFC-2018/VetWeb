@@ -1,8 +1,3 @@
-<%-- 
-    Document   : modal.tag
-    Created on : 31 de julho de 2018
-    Author     : renan.rodrigues@metasix.com.br
---%>
 <%@ taglib prefix="vetweb" tagdir="/WEB-INF/tags"%>
 <%@attribute name="prontuario" required="true" type="java.lang.Object" %>
 <%@attribute name="tiposDeAtendimento" required="true" type="java.util.List" %>
@@ -11,14 +6,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
        <!-- Modal -->
-       <div class="modal fade" id="modalAtendimento" tabindex="-1" role="dialog" aria-labelledby="labelModalAtendimento" aria-hidden="true">
+       <div class="modal" id="modalAtendimento">
          <div class="modal-dialog" role="document">
            <div class="modal-content">
              <div class="modal-header">
-               <h5 class="modal-title" id="labelModalAtendimento"><strong><spring:message code="adcAtendimento" arguments="${prontuario.animal.nome}"/></strong></h5>
-               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                 <span aria-hidden="true">&times;</span>
-               </button>
+               <h5 class="modal-title">Animal: ${prontuario.animal.nome}</h5>
+               <button type="button" class="close" data-dismiss="modal">&times;</button>
              </div>
              <div class="modal-body">
              <form:form servletRelativeAction="/prontuario/adicionarAtendimento?prontuarioId=${prontuario.prontuarioId}"

@@ -414,9 +414,6 @@
 		src="<c:url value="/resources/js/fullcalendar/pt-br.js"></c:url>"
 		type="text/javascript"></script>
 
-	<script src="<c:url value="/resources/js/custom.js"></c:url>"
-		type="text/javascript"></script>
-
 	<script
 		src="<c:url value="/resources/js/jquery/jquery.maskedinput.js"></c:url>"
 		type="text/javascript"></script>

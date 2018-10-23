@@ -218,8 +218,7 @@ public class ProprietarioDAO implements IDAO<Proprietario> {
 					}
 				}
 			} else {
-				query.append("(v.pago = false OR a.pago = false OR e.pago = false) ");
-				query.append("AND (v.data < :data30 OR a.data < :data30 OR e.data < :data30)");
+				query.append("v.pago = false OR a.pago = false OR e.pago = false AND v.data < :data30 OR a.data < :data30 OR e.data < :data30");
 			}
 		List<Proprietario> clientesComDebito = entityManager
 												.createQuery(query.toString(), Proprietario.class).setParameter("data30", dataApos30.minusDays(30))
