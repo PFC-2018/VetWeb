@@ -5,6 +5,7 @@ package com.vetweb.dao;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -178,7 +179,7 @@ public class ProprietarioDAO implements IDAO<Proprietario> {
     }
 
 	public List<Proprietario> buscarClientesEmDebito(TipoOcorrenciaProntuario... tipoOcorrenciaProntuario) {
-		LocalDateTime dataApos30 = LocalDateTime.now();
+		LocalDateTime dataApos30 = LocalDateTime.now().minusDays(30);
 		
 		StringBuilder query = new StringBuilder("SELECT p FROM Proprietario p "
 			+ "JOIN p.animais a "
@@ -221,7 +222,7 @@ public class ProprietarioDAO implements IDAO<Proprietario> {
 				query.append("v.pago = false OR a.pago = false OR e.pago = false AND v.data < :data30 OR a.data < :data30 OR e.data < :data30");
 			}
 		List<Proprietario> clientesComDebito = entityManager
-												.createQuery(query.toString(), Proprietario.class).setParameter("data30", dataApos30.minusDays(30))
+												.createQuery(query.toString(), Proprietario.class).setParameter("data30", dataApos30)
 												.getResultList();
 		return clientesComDebito;
 	}

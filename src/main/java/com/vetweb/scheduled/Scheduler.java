@@ -11,11 +11,15 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.vetweb.dao.AnimalDAO;
 import com.vetweb.dao.AtendimentoDAO;
 import com.vetweb.dao.ProntuarioDAO;
 import com.vetweb.dao.ProprietarioDAO;
+import com.vetweb.model.Animal;
 import com.vetweb.model.OcorrenciaAtendimento;
+import com.vetweb.model.OcorrenciaVacina;
 import com.vetweb.model.Pessoa;
+import com.vetweb.model.Prontuario;
 import com.vetweb.model.Proprietario;
 import com.vetweb.service.EmailService;
 
@@ -26,6 +30,9 @@ public class Scheduler {
 	
 	@Autowired
 	private ProprietarioDAO proprietarioDAO;
+	
+	@Autowired
+	private AnimalDAO animalDAO;
 	
 	@Autowired
 	private AtendimentoDAO atendimentoDAO;
@@ -43,24 +50,33 @@ public class Scheduler {
 	private static final long HORA = 3600000;
 	
     @Scheduled(fixedDelay = MINUTO/4)
-    public void verificacaoClientesEmDebito() {
-    	List<Proprietario> proprietariosComDebito = proprietarioDAO.buscarClientesEmDebito(); 
+    public void verificarClientesEmDebitoDesativar() {
+    	LOGGER.info("EXECUTANDO JOB - VERIFICANDO CLIENTES DEVEDORES - DESATIVACAO");
+    	List<Proprietario> proprietariosComDebito = proprietarioDAO.buscarClientesEmDebito();
     	proprietariosComDebito
     		.stream()
     		.filter(prop -> prop.isAtivo())
     		.filter(prop -> prop.getAnimais().size() > 0)
     		.peek(prop -> LOGGER.info("INATIVANDO CLIENTE " + prop.getNome()))
     		.forEach(prop ->  {prop.setAtivo(false); proprietarioDAO.salvar(prop);});
-    	
+    	LOGGER.info("FIM DO JOB - VERIFICANDO CLIENTES DEVEDORES - DESATIVACAO");
+    }
+    
+    @Scheduled(fixedDelay = MINUTO/4)
+    public void verificarClientesEmDebitoAtivar() {
+    	LOGGER.info("EXECUTANDO JOB - VERIFICANDO CLIENTES DEVEDORES - ATIVACAO");
     	Set<Proprietario> proprietariosInativosAdimplentes = proprietarioDAO.buscarClientesInativosAdimplentes();
     	proprietariosInativosAdimplentes
     		.stream()
     		.peek(prop -> LOGGER.info("REATIVANDO CLIENTE " + prop.getNome()))
     		.forEach(prop -> {prop.setAtivo(true); proprietarioDAO.salvar(prop); });
+    	LOGGER.info("FIM DO JOB - VERIFICANDO CLIENTES DEVEDORES - ATIVACAO");
     }
+    
     
     @Scheduled(fixedDelay = MINUTO)
     public void verificacaoRetornoAtendimento() {
+    	LOGGER.info("EXECUTANDO JOB - VERIFICANDO RETORNO DE ATENDIMENTO");
     	atendimentoDAO
     		.listarTodos()
     		.stream()
@@ -68,6 +84,7 @@ public class Scheduler {
     			LocalDate.of(ate.getData().getYear(), ate.getData().getMonthValue(), ate.getData().getDayOfMonth())
     			.isEqual(LocalDate.now()))
     		.forEach(ate -> this.notificaRetornoAtendimento(ate));
+    	LOGGER.info("FIM DO JOB - VERIFICANDO RETORNO DE ATENDIMENTO");
     }
     
     @SuppressWarnings("static-access")
