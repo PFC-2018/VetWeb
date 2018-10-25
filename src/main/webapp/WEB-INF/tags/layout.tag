@@ -409,6 +409,11 @@
 	<script
 		src="<c:url value="/resources/js/fullcalendar/fullcalendar.js"></c:url>"
 		type="text/javascript"></script>
+		
+		<script
+		src="<c:url value="/resources/js/fullcalendar/pt-br.js"></c:url>"
+		type="text/javascript"></script>
+		
 
 	<script
 		src="<c:url value="/resources/js/fullcalendar/pt-br.js"></c:url>"
