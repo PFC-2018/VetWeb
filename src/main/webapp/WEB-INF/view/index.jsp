@@ -102,6 +102,19 @@
             <!-- FIM CORPO DA PÁGINA  -->
             <!-- column -->
             <div class="row">
+            <div class="col-md-3">
+                  <div class="card p-30">
+                     <div class="media">
+                        <div class="media-left meida media-middle">
+                           <span><i class="fa fa-paw f-s-40 color-warning"></i></span>
+                        </div>
+                        <div class="media-body media-text-right">
+                           <h2>${quantidadeAnimais/quantidadeClientes}</h2>
+                           <p class="m-b-0">Média de Animais por Cliente</p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
                <div class="col-md-3">
                   <div class="card">
                      <div class="card-title">
@@ -111,10 +124,6 @@
                         <p class="f-w-600">Clientes Devedores<span class="pull-right">${clientesDevedores*100/quantidadeClientes}%</span></p>
                         <div class="progress ">
                            <div role="progressbar" style="width: ${clientesDevedores*100/quantidadeClientes}%; height:8px;" class="progress-bar bg-danger wow animated progress-animated"> <span class="sr-only"></span> </div>
-                        </div>
-                        <p class="m-t-30 f-w-600">Teste com numeros<span class="pull-right">85%</span></p>
-                        <div class="progress">
-                           <div role="progressbar" style="width: 85%; height:8px;" class="progress-bar bg-info wow animated progress-animated"> <span class="sr-only"></span> </div>
                         </div>
                      </div>
                   </div>
@@ -130,7 +139,7 @@
                   </div>
                </div>
                <!-- column -->
-               <div class="col-md-6">
+               <div class="col-md-3">
                   <div class="card">
                      <div class="card-body">
                         <div class="year-calendar">

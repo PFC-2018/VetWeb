@@ -57,7 +57,7 @@
 
                                     <div class="form-group">
                                             <label for="imagem">Imagem do Animal</label>
-                                            <input type="file" name="imagemFile"/>
+                                            <input type="file" name="imagemFile" required/>
                                     </div>
                                     
                                     <div class="form-group">

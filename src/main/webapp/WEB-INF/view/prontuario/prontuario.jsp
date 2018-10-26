@@ -38,7 +38,7 @@
                                     <div class="">
                                         <div class="col-6">
                                             <div class="card">
-                                                <div class="card-body" style="background-color: ${prontuario.animal.pelagem.cor}">
+                                                <div class="card-body">
                                                     <h2 class="card-title">Prontuário do Animal ${prontuario.animal.nome}</h2>
                                                     <div class="col-md-12">
                                                         <button type="button" data-toggle="modal" data-target="#modalAtendimento" onclick="ajaxService.buscarModeloPorTipoDeAtendimento()" class="btn btn-info col-2">
