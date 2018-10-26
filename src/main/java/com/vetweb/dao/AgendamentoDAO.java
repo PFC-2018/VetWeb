@@ -18,9 +18,6 @@ public class AgendamentoDAO implements IDAO<Agendamento>{
 	private EntityManager entityManager;
 
 	public void salvar(Agendamento agendamento) {
-		if (!listarTodos(agendamento.getDataHoraInicial(), agendamento.getDataHoraFinal()).isEmpty()) {
-			throw new RuntimeException("O AGENDAMENTO CONFLITA COM OUTRO EXISTENTE NO MESMO HORÁRIO.");
-		}
 		if (agendamento.getAgendamentoId() == null) {
 			entityManager.persist(agendamento);
 		} else {
@@ -66,6 +63,20 @@ public class AgendamentoDAO implements IDAO<Agendamento>{
 	@Override
 	public void remover(Agendamento agendamento) {
 		entityManager.remove(agendamento);
+	}
+	
+	public boolean possuiAgendaPara(LocalDateTime dataHoraInicial, LocalDateTime dataHoraFinal) {
+		Agendamento agendamentoEncontradoFiltro = new Agendamento();
+		try {
+			agendamentoEncontradoFiltro = entityManager
+					.createQuery("SELECT a FROM Agendamento a WHERE a.dataHoraFinal BETWEEN :dataHoraInicial AND :dataHoraFinal", Agendamento.class)
+					.setParameter("dataHoraInicial", dataHoraInicial)
+					.setParameter("dataHoraFinal", dataHoraFinal)
+					.getSingleResult();
+		} catch (NoResultException noResultException) {
+			return false;
+		}
+		return agendamentoEncontradoFiltro != null;
 	}
 	
 	

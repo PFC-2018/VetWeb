@@ -5,6 +5,7 @@ package com.vetweb.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
@@ -62,10 +63,14 @@ public class ProntuarioDAO implements IDAO<Prontuario>{
     }
     
     public Prontuario buscarPorIdAnimal(Long idAnimal) {
-    	return entityManager
-    			.createQuery("SELECT p FROM Prontuario p WHERE p.animal.animalId = :codigoAnimal", Prontuario.class)
-    			.setParameter("codigoAnimal", idAnimal)
-    			.getSingleResult();
+    	try {
+    		return entityManager
+    				.createQuery("SELECT p FROM Prontuario p WHERE p.animal.animalId = :codigoAnimal", Prontuario.class)
+    				.setParameter("codigoAnimal", idAnimal)
+    				.getSingleResult();
+    	} catch (NoResultException noResultException) {
+    		return null;
+    	}
     }
     
     public List<Vacina> buscarVacinas() {

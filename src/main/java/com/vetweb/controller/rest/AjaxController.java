@@ -1,8 +1,12 @@
 package com.vetweb.controller.rest;
 //@author renan.rodrigues@metasix.com.br
 
+import java.io.IOException;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -119,24 +123,80 @@ public class AjaxController {
     public Agendamento remarcarOcorrencia(@PathVariable("codigoOcorrencia") Long idOcorrencia, 
     		@RequestParam("tipoOcorrencia") String tipoOcorrencia,
     		@RequestParam("dataHoraInicial") LocalDateTime dataHoraInicial,
-    		@RequestParam("dataHoraFinal") LocalDateTime dataHoraFinal) {
+    		@RequestParam("dataHoraFinal") LocalDateTime dataHoraFinal,
+    		HttpServletResponse response) throws IOException {
+    	OcorrenciaProntuario ocorrenciaProntuario = ocorrenciaFactory.getOcorrencia(tipoOcorrencia, idOcorrencia);
     	Agendamento ocorrenciaAgendamento = agendamentoDAO.buscarPorIdOcorrencia(idOcorrencia);
-    	if (ocorrenciaAgendamento != null) {
-    		ocorrenciaAgendamento.setTipo(TipoOcorrenciaProntuario.valueOf(tipoOcorrencia));
-    		ocorrenciaAgendamento.setDataHoraInicial(dataHoraInicial);
-    		ocorrenciaAgendamento.setDataHoraFinal(dataHoraInicial);
-    		agendamentoDAO.salvar(ocorrenciaAgendamento);
-    		return ocorrenciaAgendamento;
+    	if (dataHoraFinal.isBefore(LocalDateTime.now())) {
+    		ocorrenciaProntuario.setData(dataHoraInicial);
+    		switch (ocorrenciaProntuario.getTipo()) {
+			case ATENDIMENTO:
+				OcorrenciaAtendimento ocorrenciaAtendimento = (OcorrenciaAtendimento)ocorrenciaProntuario;
+				atendimentoDAO.salvar(ocorrenciaAtendimento);
+				break;
+			case VACINA:
+				OcorrenciaVacina ocorrenciaVacina = (OcorrenciaVacina)ocorrenciaProntuario;
+				prontuarioDAO.salvarOcorrenciaVacina(ocorrenciaVacina);
+				break;
+			case EXAME:
+				OcorrenciaExame ocorrenciaExame = (OcorrenciaExame)ocorrenciaProntuario;
+				prontuarioDAO.salvarOcorrenciaExame(ocorrenciaExame);
+			case PATOLOGIA: 
+				break;
+			default:
+				break;
+			}
+    		if (ocorrenciaAgendamento != null) agendamentoDAO.remover(ocorrenciaAgendamento);
+    		return null;
+    	}
+    	if (agendamentoDAO.possuiAgendaPara(dataHoraInicial, dataHoraFinal)) {
+    		response.sendError(400, "AGENDA BLOQUEADA PARA A DATA/INTERVALO INFORMADO.");
+    		return null;
     	} else {
-    		OcorrenciaProntuario ocorrenciaProntuario = ocorrenciaFactory.getOcorrencia(tipoOcorrencia, idOcorrencia);
-    		Agendamento agendamento = new Agendamento();
-    		agendamento.setOcorrencia(ocorrenciaProntuario);
-    		agendamento.setDataHoraInicial(dataHoraInicial);
+    		if (ocorrenciaAgendamento != null) {
+    			ocorrenciaAgendamento.setTipo(TipoOcorrenciaProntuario.valueOf(tipoOcorrencia));
+    			ocorrenciaAgendamento.setDataHoraInicial(dataHoraInicial);
+    			ocorrenciaAgendamento.setDataHoraFinal(dataHoraInicial);
+    			agendamentoDAO.salvar(ocorrenciaAgendamento);
+    			return ocorrenciaAgendamento;
+    		} else {
+    			Agendamento agendamento = new Agendamento();
+    			agendamento.setOcorrencia(ocorrenciaProntuario);
+    			agendamento.setDataHoraInicial(dataHoraInicial);
+    			agendamento.setDataHoraFinal(dataHoraFinal);
+    			agendamento.setTipo(TipoOcorrenciaProntuario.valueOf(tipoOcorrencia));
+    			agendamentoDAO.salvar(agendamento);
+    			return agendamento;
+    		}
+    	}
+    }
+    @RequestMapping(value = "/ocorrencia/reagendamento/{codigoOcorrencia}", method = RequestMethod.GET)
+    public void remarcarOcorrenciasIntervalo(@PathVariable("codigoOcorrencia") Long idOcorrencia,
+    		@RequestParam("tipoOcorrencia") String tipoOcorrencia,
+    		@RequestParam("novaDataHora") LocalDateTime novaDataHora,
+    		@RequestParam("dataHoraInicial") LocalDateTime dataHoraInicial,
+    		@RequestParam("dataHoraFinal") LocalDateTime dataHoraFinal,
+    		HttpServletResponse response) throws IOException {
+    	Duration diferencaIntervaloAgendamento = Duration.between(dataHoraInicial, dataHoraFinal);
+    	agendamentoDAO
+    		.listarTodos(dataHoraInicial, dataHoraFinal)
+    		.forEach(ag -> {
+    			ag.setDataHoraInicial(novaDataHora);
+    			ag.setDataHoraFinal(novaDataHora.plus(diferencaIntervaloAgendamento));
+    			agendamentoDAO.salvar(ag);
+    		});
+    	Agendamento agendamento = agendamentoDAO.buscarPorIdOcorrencia(idOcorrencia);
+    	if (agendamento != null) {
+    		agendamento.setDataHoraFinal(dataHoraInicial);
     		agendamento.setDataHoraFinal(dataHoraFinal);
-    		agendamento.setTipo(TipoOcorrenciaProntuario.valueOf(tipoOcorrencia));
     		agendamentoDAO.salvar(agendamento);
-    		return agendamento;
-    		
+    	} else {
+    		Agendamento ag = new Agendamento();
+    		ag.setOcorrencia(ocorrenciaFactory.getOcorrencia(tipoOcorrencia, idOcorrencia));
+    		ag.setDataHoraInicial(dataHoraInicial);
+    		ag.setDataHoraFinal(dataHoraFinal);
+    		ag.setTipo(TipoOcorrenciaProntuario.valueOf(tipoOcorrencia));
+    		agendamentoDAO.salvar(ag);
     	}
     }
     

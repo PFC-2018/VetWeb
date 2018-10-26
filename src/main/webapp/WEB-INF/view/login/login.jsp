@@ -63,7 +63,7 @@
             <script src="<c:url value="/resources/js/lib/jquery/jquery.min.js"></c:url>" type="text/javascript"></script>    
             <!-- Bootstrap tether Core JavaScript -->
             <script src="<c:url value="/resources/js/lib/bootstrap/js/popper.min.js"></c:url>" type="text/javascript"></script>
-        <script src="<c:url value="/resources/js/lib/bootstrap/js/bootstrap.js"></c:url>" type="text/javascript"></script>
+        	<script src="<c:url value="/resources/js/lib/bootstrap/js/bootstrap.min.js"></c:url>" type="text/javascript"></script>
             <!-- slimscrollbar scrollbar JavaScript -->
             <script src="<c:url value="/resources/js/jquery.slimscroll.js"></c:url>" type="text/javascript"></script>
             <!--Menu sidebar -->

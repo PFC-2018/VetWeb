@@ -7,8 +7,21 @@
 
 <vetweb:layout title="Agendamento">
      <jsp:attribute name="jsFooter">
+     
+     	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+     
         <script>
+        
+        var remarcacaoInicio = null;
+        
+        var remarcacaoFim = null;
+        
+        var remarcacao = null;
+        
+        var remarcacaoType = null;
+        
             $(document).ready(function() {
+            	$('#dataRemarcacao').datetimepicker();
                 ajaxService.buscarAnimaisPorCliente();
                   $('#calendar').fullCalendar({
                     header: {
@@ -30,6 +43,23 @@
                         var url = '/vetweb/agendamento/ocorrencia/';
                         enderecoProntuario.attr('href', url + $('#type').text() + '/' + $('#id').text());
                     },
+					eventDrop: function(event, delta, revertFunc, jsEvent, ui, view) {
+					    if (!confirm("CONFIRMA A REMARCAÇÃO DA OCORRÊNCIA DE " + event.type + "?")) {
+					        revertFunc();
+				      	} else {
+				      		try {
+			   				 	ajaxService.remarcarOcorrencia(event.id, event.type, moment(event.start._i).format('YYYY-MM-DDTHH:mm'), moment(event.end._i).format('YYYY-MM-DDTHH:mm'));
+				      		} catch(e) {
+				      			 if (confirm('JÁ EXISTE OCORRÊNCIA NA DATA/INTERVALO SELECIONADO. DESEJA REMARCAR A OCORRÊNCIA SOBRESCRITA OU CANCELAR A OPERAÇÃO?')) {
+				      				remarcacao = event.id;
+				      				remarcacaoType = event.type;
+				      				remarcacaoInicio = moment(event.start._i).format('YYYY-MM-DDTHH:mm');
+				      				remarcacaoFim = moment(event.end._i).format('YYYY-MM-DDTHH:mm');
+				      				$('#modalReagendar').modal('show');
+				      			 }
+				      		}
+				      	}
+					},
                     selectable: true,
                     selectHelper: true,
                     select: function(start, end){
@@ -45,6 +75,11 @@
             $('#slcProprietarios').on('change', function() {
                 ajaxService.buscarAnimaisPorCliente();
             });
+            
+			$('#btnRemarcacao').on('click', function() {
+				ajaxService.remarcarOcorrenciasIntervalo(remarcacao, remarcacaoType, moment($('#dataRemarcacao').val()).format('YYYY-MM-DDTHH:mm'), remarcacaoInicio, remarcacaoFim);				
+   				$('#modalReagendar').modal('toggle');
+			});            
             
             $('.rdoTipo').on('click', function() {
                 var rdoSelecionado = $(this); 
@@ -109,6 +144,8 @@
                                     tiposDeAtendimento="${tiposDeAtendimento}"
                                     vacinas="${todasAsVacinas}">
                                     </vetweb:modalAgendamento>
+                                    
+                                    <vetweb:modalReagendar></vetweb:modalReagendar>
 
                                 </table>
                             </div>
