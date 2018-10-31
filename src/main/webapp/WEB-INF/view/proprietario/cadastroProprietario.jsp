@@ -152,7 +152,7 @@
 
                                         <div class="form-group">
                                             <label for="contato.telefone">Telefone:</label>
-                                        <form:input class="form-control input-default col-sm-3" path="contato.telefone" id="telefone"></form:input>
+                                        <form:input class="form-control input-default col-sm-3"  path="contato.telefone" id="telefone"></form:input>
                                         <form:errors path="contato.telefone" cssClass="errors"></form:errors>
                                         </div>  
 

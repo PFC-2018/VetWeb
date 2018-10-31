@@ -46,7 +46,7 @@
                                         <tbody>
 
                                             <tr> 
-                                                <th>Raz√£o Social</th> 
+                                                <th>Raz„o Social</th> 
                                                 <td>${clinica.razaoSocial}</td>
                                             </tr>
                                             <tr> 
@@ -58,7 +58,7 @@
                                                 <td>${clinica.cnpj}</td>
                                             </tr>
                                             <tr> 
-                                                <th>Propriet√°rio</th> 
+                                                <th>Propriet·rio</th> 
                                                 <td>${clinica.proprietario}</td>
                                             </tr>
 
