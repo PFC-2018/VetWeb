@@ -93,7 +93,12 @@
                         <td>${tipoDeAtendimento.duracao}</td>
                         <td>${tipoDeAtendimento.frequencia}</td>
                         <td>${tipoDeAtendimento.modeloAtendimento}</td>
-                        <td>${tipoDeAtendimento.status}</td>
+                        <c:if test="${tipoDeAtendimento.status == true}">
+								<td>Ativo</td>
+							</c:if>
+							<c:if test="${tipoDeAtendimento.status == false}">
+								<td>Inativo</td>
+							</c:if>
                         <td>${tipoDeAtendimento.custo}</td>
                     </tr>
                 </c:forEach>

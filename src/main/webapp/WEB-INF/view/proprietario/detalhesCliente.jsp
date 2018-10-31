@@ -74,7 +74,12 @@
                                             </tr>
                                             <tr>
                                                 <th>Sexo</th>
-                                                <td>${proprietario.sexo}</td>
+                                                <c:if test="${proprietario.sexo == 'M'}">
+													<td>Masculino</td>
+												</c:if>
+												<c:if test="${proprietario.sexo == 'F'}">
+													<td>Feminino</td>
+												</c:if>
                                             </tr>
                                             <tr>
                                                 <th>Tipo de pessoa</th>

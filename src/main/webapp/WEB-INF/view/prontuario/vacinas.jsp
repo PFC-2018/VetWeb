@@ -89,9 +89,12 @@
                         <td>
                             ${vacina.grupo}
                         </td>
-                        <td>
-                            ${vacina.status}
-                        </td>
+                            <c:if test="${vacina.status == true}">
+								<td>Ativo</td>
+							</c:if>
+							<c:if test="${vacina.status == false}">
+								<td>Inativo</td>
+							</c:if>
                         <td>
                             ${vacina.laboratorio}
                         </td>

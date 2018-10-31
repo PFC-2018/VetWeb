@@ -9,7 +9,6 @@
     <jsp:attribute name="mascaras">   
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/mascaras.js"></script>
     </jsp:attribute>
-    
     <jsp:body>
         <div class="page-wrapper">
             <!-- INICIO MENU DE CONSULTA DE NAVEGAÇÃO -->
@@ -57,8 +56,8 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="cpf">CPF:</label>
-                                        <form:input class="form-control input-default col-sm-3"  path="cpf" id="cpf"></form:input>
+                                        	<label for="cpf">CPF:</label>
+                                        <form:input class="form-control input-default col-sm-3" path="cpf" id="cpf"></form:input>
                                         <form:errors path="cpf" cssClass="errors"></form:errors>
                                         </div>    
 

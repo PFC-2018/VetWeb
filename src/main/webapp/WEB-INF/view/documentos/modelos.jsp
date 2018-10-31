@@ -85,9 +85,12 @@
                                 <i class="fa fa-trash-o fa-2x"></i>
                             </a>
                         </td>
-                        <td>
-                            ${modelo.infoCliente}
-                        </td>
+                            <c:if test="${modelo.infoCliente == true}">
+								<td>Sim</td>
+							</c:if>
+							<c:if test="${modelo.infoCliente == false}">
+								<td>Não</td>
+							</c:if>
                         <td>
                             ${modelo.modelo}
                         </td>
