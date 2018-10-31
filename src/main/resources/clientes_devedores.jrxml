@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="clientes_devedores" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3e63d41a-f02c-4ca9-a772-15657caac0a4">
-	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.zoom" value="0.75"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<queryString>
@@ -11,12 +11,24 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="27" splitType="Stretch">
-			<staticText>
-				<reportElement x="0" y="3" width="555" height="20" uuid="ab2104df-3084-429d-9c22-5700a165c98c"/>
-				<textElement textAlignment="Center"/>
-				<text><![CDATA[RELÁTORIO]]></text>
-			</staticText>
+		<band height="80" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="100" backcolor="#006699" uuid="511a430d-1c0d-4b1b-820f-07217df1d473"/>
+				<staticText>
+					<reportElement x="20" y="20" width="234" height="43" forecolor="#FFFFFF" uuid="192be2c7-6273-4c3a-b536-351d849cd1f6"/>
+					<textElement>
+						<font size="34" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Relátorio]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="296" y="43" width="279" height="20" forecolor="#FFFFFF" uuid="d2e16564-13c7-4586-b09f-8fd329b89b51"/>
+					<textElement textAlignment="Right">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Relatório de Clientes]]></text>
+				</staticText>
+			</frame>
 		</band>
 	</title>
 	<pageHeader>
