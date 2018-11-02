@@ -86,23 +86,23 @@ AND ocorrencia.data BETWEEN $P{Data_Ini} AND $P{Data_Fim};]]>
 			</line>
 			<staticText>
 				<reportElement x="100" y="1" width="100" height="20" uuid="2b2877c0-acf7-4b93-81fb-228e7ec9f10d"/>
-				<text><![CDATA[nome_cliente]]></text>
+				<text><![CDATA[Cliente]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="200" y="1" width="100" height="20" uuid="669b3ce2-1b59-4784-b6a2-b86b89d89977"/>
-				<text><![CDATA[nome_animal]]></text>
+				<text><![CDATA[Animal]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="276" y="1" width="100" height="20" uuid="484a7f52-bf13-40ec-8164-81cb9f0c557b"/>
-				<text><![CDATA[tipo_ocorrencia]]></text>
+				<text><![CDATA[Ocorrencia]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="376" y="1" width="100" height="20" uuid="539c9e7e-840e-4def-9140-d435dcf27181"/>
-				<text><![CDATA[data_ocorrencia]]></text>
+				<text><![CDATA[Data]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="0" width="100" height="20" uuid="ebfcb3fa-c5cb-4dc8-8687-2c608198e7ef"/>
-				<text><![CDATA[codigo_prontuario]]></text>
+				<text><![CDATA[Prontuario]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
