@@ -43,11 +43,6 @@
                                                 <label>Senha</label>
                                                 <input type="password" name="password" id="password" class="form-control" placeholder="senha">
                                             </div>
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox"> Lembrar de mim
-                                                </label>
-                                            </div>
                                             <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">Entrar</button>
                                         </form:form>
                                     </div>
