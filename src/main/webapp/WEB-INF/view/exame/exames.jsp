@@ -61,7 +61,7 @@
                      	<i class="ti-save"></i> Cadastrar
                      </button>
                      
-                     <div class="table-responsive m-t-40 col-8">
+                     <div class="table-responsive m-t-40 col-12">
                         <table id="exames"
                            class="display nowrap table table-hover table-striped table-bordered"
                            cellspacing="0" width="100%">

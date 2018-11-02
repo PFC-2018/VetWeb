@@ -40,7 +40,7 @@
             </div>
 			<div class="form-group">
                 <label for="cor">Cor:</label>
-                    <form:input type="color" class="form-control input-default col-sm-8" path="cor" id="cor" maxlength="100"></form:input>
+                    <form:input type="color" class="form-control input-default col-sm-4" path="cor" id="cor" maxlength="100"></form:input>
 					<form:errors path="cor" cssClass="errors"></form:errors>
             </div>
             

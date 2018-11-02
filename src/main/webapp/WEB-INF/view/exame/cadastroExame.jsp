@@ -44,8 +44,7 @@
                      <h1>Cadastro de Exames</h1>
                   </div>
                   <form:form servletRelativeAction="/exames/submitForm" method="POST" modelAttribute="exame">
-                     <table class="table table-responsive">
-                        <tbody>
+                     
                            <form:hidden path="exameId" id="exameId"></form:hidden>
                            <div class="form-group">
                               <label for="descricao">Descrição:</label>
@@ -54,45 +53,35 @@
                                  id="descricao" maxlength="100"></form:input>
                               <form:errors path="descricao" cssClass="errors"></form:errors>
                            </div>
+                           
+                           
+                           
                            <div class="form-group">
-                              <tr>
-                                 <th>
-                                    <label for="apresentacao">
-                                       <spring:message
-                                          code="apresentacao" />
-                                       :
-                                    </label>
-                                 </th>
-                                 </br>
-                                 <td>
-                                    <form:textarea class="form-control input-default col-sm-4" cols="3" rows="5" path="apresentacao"
-                                       id="apresentacao" />
-                                 </td>
-                              </tr>
-                           </div>
-                           <div class="form-group">
-                              <tr>
-                                 <th>
-                                    <label for="encerramento">
-                                       <spring:message code="encerramento" />:</label>
-                                 </th>
-                                 <td>
-                                    <form:textarea class="form-control input-default col-sm-4" cols="3" rows="5" path="encerramento"
-                                       id="encerramento" />
-                                 </td>
-                              </tr>
-                           </div>
+		                    <tr>
+		                        <th><label for="apresentacao"><spring:message code="apresentacao"/>:</label></th>
+		                        <td><form:textarea class="form-control input-default col-sm-4" cols="3" rows="15" path="apresentacao" id="apresentacao"></form:textarea></td>
+		                    </tr>                    
+		                    </div>
+		                    
+		                    <div class="form-group">
+		                    <tr>
+		                        <th><label for="encerramento"><spring:message code="encerramento"/>:</label></th>
+		                        <td><form:textarea class="form-control input-default col-sm-4" cols="3" rows="15" path="encerramento" id="encerramento"></form:textarea></td>
+		                    </tr>                    
+		                    </div>
+                           
+                           
                            <div class="form-group">
                               <tr>
                                  <th><label for="preco"><spring:message code="custo"/></label></th>
-                                 <td><form:input class="form-control input-default col-sm-4" path="preco" id="preco"></form:input></td>
+                                 <td><form:input class="form-control input-default col-sm-2" path="preco" id="preco"></form:input></td>
                               </tr>
                            </div>
                            <div class="form-group">
                               <tr>
                                  <th><label for="duracao"><spring:message code="duracao"/></label></th>
                                  <td>
-                                 	<select name="duracao" class="form-control input-default col-sm-4">
+                                 	<select name="duracao" class="form-control input-default col-sm-3">
 			                        	<c:forEach items="${duracoes}" var="duracao">
 			                        		<option>${duracao}</option>
 			                        	</c:forEach>
@@ -100,10 +89,7 @@
                                  </td>
                               </tr>
                            </div>
-                           
-                           
-                        </tbody>
-                     </table>
+                     
                      <button type="submit"
                         class="btn btn-success btn-flat btn-addon m-b-10 m-l-5">
                      <i class="ti-save"></i> Cadastrar</button>
