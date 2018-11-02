@@ -60,6 +60,8 @@
 
 <jsp:invoke fragment="jsHead"></jsp:invoke>
 <jsp:invoke fragment="mascaras"></jsp:invoke>
+	<script	src="<c:url value="/resources/js/jquery/jquery.mask.js"></c:url>"type="text/javascrpit"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
 </head>
 
 <body class="fix-header fix-sidebar">
@@ -422,13 +424,11 @@
 	<script
 		src="<c:url value="/resources/js/jquery/jquery.maskedinput.js"></c:url>"
 		type="text/javascript"></script>
-	<script
-		src="<c:url value="/resources/js/jquery/jquery.mask.js"></c:url>"
-		type="text/javascrpit"></script>
+	<script	src="<c:url value="/resources/js/jquery/jquery.mask.js"></c:url>"type="text/javascrpit"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
 	<script
 		src="<c:url value="/resources/js/lib/sweetalert/sweetalert.min.js"></c:url>"
 		type="text/javascript"></script>
-
 	<script
 		src="<c:url value="/resources/js/lib/sweetalert/sweetalert.init.js"></c:url>"
 		type="text/javascript"></script>

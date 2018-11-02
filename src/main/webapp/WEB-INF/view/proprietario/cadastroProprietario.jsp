@@ -9,6 +9,8 @@
     <jsp:attribute name="mascaras">   
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/mascaras.js"></script>
     </jsp:attribute>
+   
+	
     <jsp:body>
         <div class="page-wrapper">
             <!-- INICIO MENU DE CONSULTA DE NAVEGAÇÃO -->
@@ -206,5 +208,6 @@
             </div>
             <!-- FIM CORPO DA PÁGINA  -->
         </div>
+        
     </jsp:body>
 </vetweb:layout>

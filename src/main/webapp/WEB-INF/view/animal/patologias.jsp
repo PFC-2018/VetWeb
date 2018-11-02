@@ -56,7 +56,7 @@
     <!-- INICIO CORPO DA PÁGINA  -->
             
                 <div class="">
-                    <div class="col-6">
+                    <div class="col-10">
                         <div class="card">          
                             <div class="card-body">
                                 <h4 class="card-title">Cadastre novas patologias</h4>
@@ -75,6 +75,8 @@
                                         <thead>
                                             <tr>
                                                 <th>Patologias</th>
+                                                <th>Status</th>
+                                                <th>Descrição</th>
                                             </tr>
                                         </thead>
             <tbody>
@@ -89,6 +91,13 @@
                                 <i class="fa fa-trash-o fa-2x"></i>
                             </a>                            
                         </td>
+                        <c:if test="${patologia.ativo == true}">
+							<td>Ativo</td>
+						</c:if>
+						<c:if test="${patologia.ativo == false}">
+							<td>Inativo</td>
+						</c:if>
+						<td>${patologia.descricao}</td>
                     </tr>
                 </c:forEach>
             </tbody>
