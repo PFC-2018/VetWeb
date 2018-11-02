@@ -1,5 +1,7 @@
 package com.vetweb.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
@@ -25,6 +27,7 @@ import com.vetweb.model.Patologia;
 import com.vetweb.model.Pelagem;
 import com.vetweb.model.Raca;
 import com.vetweb.service.FileService;
+
 
 @Controller
 @Transactional
@@ -238,9 +241,20 @@ public class AnimalController {
     @RequestMapping(value = "/removerEspecie/{especieId}", method = RequestMethod.GET)
     public ModelAndView delEspecie(@PathVariable("especieId") Long especieId){
         modelDML = "Especie";
-        ModelAndView modelAndView = new ModelAndView("redirect:/animais/especies");
-        animalDAO.removerEspecie(animalDAO.buscarEspeciePorId(especieId));
-        return modelAndView;
+        ModelAndView modelAndView; 
+        
+        Especie especie = new Especie();
+                
+        especie = animalDAO.buscarEspeciePorId(especieId);
+        List<Raca> listRaca = animalDAO.buscarRacasPorEspecie(especie.getDescricao());
+        
+        if(listRaca.isEmpty()) {
+        	animalDAO.removerEspecie(animalDAO.buscarEspeciePorId(especieId));
+        	return new ModelAndView("redirect:/animais/especies");
+        }else {
+        	
+        	return new ModelAndView("redirect:/animais/especies");
+        }
     }
     
     @RequestMapping(value = "/removerRaca/{racaId}", method = RequestMethod.GET)
