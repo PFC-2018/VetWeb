@@ -421,11 +421,7 @@
 		src="<c:url value="/resources/js/fullcalendar/pt-br.js"></c:url>"
 		type="text/javascript"></script>
 
-	<script
-		src="<c:url value="/resources/js/jquery/jquery.maskedinput.js"></c:url>"
-		type="text/javascript"></script>
 	<script	src="<c:url value="/resources/js/jquery/jquery.mask.js"></c:url>"type="text/javascrpit"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
 	<script
 		src="<c:url value="/resources/js/lib/sweetalert/sweetalert.min.js"></c:url>"
 		type="text/javascript"></script>
