@@ -67,7 +67,7 @@
             		</div>
             		<tr>
                         <th><label for="custo"><spring:message code="custo"/>:</label></th>
-                        <td><form:input class="form-control input-default col-sm-2" path="preco" 
+                        <td><form:input class="form-control input-default col-sm-3" path="preco" 
                         	id="custo"></form:input></td>
                     </tr>
                     </br>

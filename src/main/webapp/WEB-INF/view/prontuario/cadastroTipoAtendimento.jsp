@@ -71,7 +71,7 @@
                     </div> 
                     <div class="form-group">
                 		<label for="custo">Custo:</label>
-                    	<form:input class="form-control input-default col-sm-2" path="custo" id="custo"></form:input>
+                    	<form:input class="form-control input-default col-sm-3" path="custo" id="custo"></form:input>
 						<form:errors path="custo" cssClass="errors"></form:errors>
             		</div>
             

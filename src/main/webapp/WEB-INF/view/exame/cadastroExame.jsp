@@ -74,7 +74,7 @@
                            <div class="form-group">
                               <tr>
                                  <th><label for="preco"><spring:message code="custo"/></label></th>
-                                 <td><form:input class="form-control input-default col-sm-2" path="preco" id="preco"></form:input></td>
+                                 <td><form:input class="form-control input-default col-sm-3" path="preco" id="preco"></form:input></td>
                               </tr>
                            </div>
                            <div class="form-group">

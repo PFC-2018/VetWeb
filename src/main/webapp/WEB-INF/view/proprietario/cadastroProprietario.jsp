@@ -12,6 +12,7 @@
    
 	
     <jsp:body>
+    
         <div class="page-wrapper">
             <!-- INICIO MENU DE CONSULTA DE NAVEGAÇÃO -->
             <div class="row page-titles">
@@ -53,13 +54,13 @@
 
                                         <div class="form-group">
                                             <label for="rg">RG:</label>
-                                        <form:input class="form-control input-default col-sm-3" path="rg" id="rg"></form:input>
+                                        <form:input class="form-control input-default col-sm-4" path="rg" id="rg"></form:input>
                                         <form:errors path="rg" cssClass="errors"></form:errors>
                                         </div>
 
                                         <div class="form-group">
                                         	<label for="cpf">CPF:</label>
-                                        <form:input class="form-control input-default col-sm-3" path="cpf" id="cpf"></form:input>
+                                        <form:input class="form-control input-default col-sm-4" path="cpf" id="cpf"></form:input>
                                         <form:errors path="cpf" cssClass="errors"></form:errors>
                                         </div>    
 
@@ -208,6 +209,5 @@
             </div>
             <!-- FIM CORPO DA PÁGINA  -->
         </div>
-        
     </jsp:body>
 </vetweb:layout>
