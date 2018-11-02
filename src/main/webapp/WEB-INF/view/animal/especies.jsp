@@ -57,10 +57,10 @@
             <!-- FIM MENU DE CONSULTA DE NAVEGAÇÃO -->
     	
     	
+
     	
     	
-    
-    	${existeRaca} 
+    	
     	
     	
          <div class="">
@@ -74,7 +74,9 @@
 								onclick="location.href='<c:url value="/animais/cadastroEspecie"> </c:url>'">
                                 <i class="ti-save"></i> Cadastrar</button>
                                 <div class="table-responsive m-t-40 col-6">
+        
         <table id="especies"class="display nowrap table table-hover table-striped table-bordered"cellspacing="0" width="100%">
+        	<caption><span class="badge badge-danger">${existeRaca}</span></caption>
             <thead>
                 <tr>
                     <th>Espécie</th>
