@@ -1,11 +1,10 @@
 package com.vetweb.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.time.Duration;
 
 import javax.persistence.Column;
-
-//@author renan.rodrigues@metasix.com.br
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,6 +27,10 @@ public class Exame implements Serializable {
 	
 	@Column(columnDefinition = "TEXT")
     private String encerramento;
+	
+	private BigDecimal preco;
+	
+	private Duration duracao;
 
     public Exame() {
 	}
@@ -68,6 +71,22 @@ public class Exame implements Serializable {
 
 	public void setEncerramento(String encerramento) {
 		this.encerramento = encerramento;
+	}
+
+	public BigDecimal getPreco() {
+		return preco;
+	}
+
+	public void setPreco(BigDecimal preco) {
+		this.preco = preco;
+	}
+
+	public Duration getDuracao() {
+		return duracao;
+	}
+
+	public void setDuracao(Duration duracao) {
+		this.duracao = duracao;
 	}
     
 }
