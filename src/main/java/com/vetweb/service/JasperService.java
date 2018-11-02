@@ -121,7 +121,12 @@ public class JasperService {
 		List<Proprietario> proprietariosComDebito = proprietarioDAO.buscarClientesEmDebito();
 		proprietariosComDebito.stream()
 				.peek(prop -> LOGGER.info("JasperService - Clientes Devedores " + prop.getNome()))		
-				.forEach(prop -> { ClienteDevedoresVO cVO = new ClienteDevedoresVO(); cVO.setNome(prop.getNome());cVOList.add(cVO); });	
+				.forEach(prop -> { 
+						ClienteDevedoresVO cVO = new ClienteDevedoresVO(); 
+						cVO.setNome(prop.getNome());
+						
+						cVOList.add(cVO); 
+					});	
 
 		return cVOList;
 	}

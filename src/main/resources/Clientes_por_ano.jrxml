@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Clientes_por_ano" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="95acdb59-5d07-4554-89dc-bd8c551d6bf5">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="1.6105100000000008"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<subDataset name="qtd_clientes" uuid="ea137dea-652d-4ef7-b0c8-90347989a9e2">
@@ -36,7 +36,7 @@ group by nome_cliente, email_cliente, cep_cliente, celular_cliente, data_cadastr
 			<staticText>
 				<reportElement x="0" y="0" width="555" height="79" uuid="bd6a2c82-7f51-4de6-858f-51fad618a029"/>
 				<textElement textAlignment="Center">
-					<font fontName="Garuda" size="24"/>
+					<font fontName="SansSerif" size="24"/>
 				</textElement>
 				<text><![CDATA[Relatório de clientes]]></text>
 			</staticText>
