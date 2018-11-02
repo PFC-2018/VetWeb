@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.vetweb.dao.AnimalDAO;
 import com.vetweb.dao.ProntuarioDAO;
@@ -157,9 +158,10 @@ public class AnimalController {
     }
     
     @RequestMapping(value = "/especies", method = RequestMethod.GET)
-    public ModelAndView buscarEspecies(){
+    public ModelAndView buscarEspecies(@RequestParam(value="existeRaca", required=false) String existeRaca){
         ModelAndView modelAndView = new ModelAndView("animal/especies");
         modelAndView.addObject("especies", animalDAO.buscarEspecies());
+        modelAndView.addObject("existeRaca", existeRaca);
         return modelAndView;
     }
     
@@ -239,21 +241,22 @@ public class AnimalController {
     }
     
     @RequestMapping(value = "/removerEspecie/{especieId}", method = RequestMethod.GET)
-    public ModelAndView delEspecie(@PathVariable("especieId") Long especieId){
+    public ModelAndView delEspecie(@PathVariable("especieId") Long especieId, RedirectAttributes attributes){
         modelDML = "Especie";
-        ModelAndView modelAndView; 
+		ModelAndView mv = new ModelAndView("redirect:/animais/especies");
         
         Especie especie = new Especie();
-                
         especie = animalDAO.buscarEspeciePorId(especieId);
         List<Raca> listRaca = animalDAO.buscarRacasPorEspecie(especie.getDescricao());
         
+        
+        //Verifica se existem racas com aquela especie
         if(listRaca.isEmpty()) {
         	animalDAO.removerEspecie(animalDAO.buscarEspeciePorId(especieId));
-        	return new ModelAndView("redirect:/animais/especies");
+        	return mv;
         }else {
-        	
-        	return new ModelAndView("redirect:/animais/especies");
+        	attributes.addAttribute("existeRaca", "Já existem Raças cadastradas com essa Espécie");
+        	return mv;
         }
     }
     

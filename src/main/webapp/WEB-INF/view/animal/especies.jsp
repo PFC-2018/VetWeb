@@ -32,7 +32,10 @@
 	        	    }             	   
                });
             });
-        </script>         
+        </script>    
+        
+        
+             
     </jsp:attribute>    
     <jsp:body>
         
@@ -52,6 +55,13 @@
                 </div>
             </div>
             <!-- FIM MENU DE CONSULTA DE NAVEGAÇÃO -->
+    	
+    	
+    	
+    	
+    
+    	${existeRaca} 
+    	
     	
          <div class="">
                     <div class="col-6">
@@ -80,7 +90,8 @@
                             </a>     
                             <a href="<c:url value="/animais/removerEspecie/${especie.especieId}"></c:url>">
                                 <i class="fa fa-trash-o fa-2x"></i>
-                            </a>                      
+                            </a> 
+                                                
                         </td>
                     </tr>
                 </c:forEach>
