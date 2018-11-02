@@ -34,7 +34,6 @@
             });
         </script>    
         
-        
              
     </jsp:attribute>    
     <jsp:body>
@@ -55,13 +54,6 @@
                 </div>
             </div>
             <!-- FIM MENU DE CONSULTA DE NAVEGAÇÃO -->
-    	
-    	
-
-    	
-    	
-    	
-    	
     	
          <div class="">
                     <div class="col-6">
