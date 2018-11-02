@@ -24,6 +24,8 @@
         		$('#dataRemarcacao').datetimepicker();
 	        	ajaxService.buscarAnimaisPorCliente();
 	    		  $('#calendar').fullCalendar({
+	    			height: 750,
+	    			aspectRatio: 7,
 					header: {
 						left: 'prev,next today',
 						center: 'title',
@@ -120,8 +122,7 @@
 
     <jsp:body>
           
-          <div id="calendar">
-          </div>
+          <div id="calendar" style="width:70%; margin: 0 auto;" > </div>
           
           <vetweb:modalOcorrenciaProntuario></vetweb:modalOcorrenciaProntuario>
           
