@@ -1,5 +1,4 @@
 package com.vetweb.controller.rest;
-//@author renan.rodrigues@metasix.com.br
 
 import java.io.IOException;
 import java.time.Duration;

@@ -1,8 +1,3 @@
-<%-- 
-    Document   : modal.tag
-    Created on : 06/8/2018.
-    Author     : renan.rodrigues@metasix.com.br
---%>
 <%@ taglib prefix="vetweb" tagdir="/WEB-INF/tags"%>
 
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>

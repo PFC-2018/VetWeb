@@ -124,17 +124,21 @@ public class AgendamentoController {
 
 	private void addEvents(LocalDate dataInicialFiltro, LocalDate dataFinalFiltro,
 			List<EventFullCalendar> events) {
+		DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
 		prontuarioDAO
 			.buscarTodasOcorrenciasVacina()
 			.stream()
 			.filter(ocorrenciaVacina -> ocorrenciaVacina.getData().isBefore(LocalDateTime.now()))
 			.filter(ocorrenciaVacina -> aplicarFiltroDeData(dataInicialFiltro, dataFinalFiltro, ocorrenciaVacina))
-			.filter(ocorrenciaVacina -> ocorrenciaVacina.getAgendamentos().size() == 0)
+			.filter(ocorrenciaVacina -> {
+				return possuiAgendamentoVigente(ocorrenciaVacina);
+			})
 			.forEach(ocorrenciaVacina -> {
 				EventFullCalendar event = new EventFullCalendar();
 				event.setId(String.valueOf(ocorrenciaVacina.getOcorrenciaId()));
 				event.setTitle(ocorrenciaVacina.getDescricao());
-				event.setStart(DateTimeFormatter.ISO_DATE_TIME.format(ocorrenciaVacina.getData()));
+				event.setStart(formatter.format(ocorrenciaVacina.getData()));
+				event.setEnd(formatter.format(ocorrenciaVacina.getData().plusMinutes(30)));
 				event.setType(ocorrenciaVacina.getTipo().name());
 				event.setColor("#fff0b3");
 				events.add(event);
@@ -144,13 +148,15 @@ public class AgendamentoController {
 			.stream()
 			.filter(atendimento -> atendimento.getData().isBefore(LocalDateTime.now()))
 			.filter(atendimento -> aplicarFiltroDeData(dataInicialFiltro, dataFinalFiltro, atendimento))
-			.filter(atendimento -> atendimento.getAgendamentos().size() == 0)
+			.filter(atendimento -> {
+				return possuiAgendamentoVigente(atendimento);
+			})
 			.forEach(atendimento -> {
 				EventFullCalendar event = new EventFullCalendar();
 				event.setId(String.valueOf(atendimento.getOcorrenciaId()));
 				event.setTitle(atendimento.getTipoDeAtendimento().getNome());
-				event.setStart(DateTimeFormatter.ISO_DATE_TIME.format(atendimento.getData()));
-				event.setEnd(DateTimeFormatter.ISO_DATE_TIME.format(atendimento.getData().plus(atendimento.getTipoDeAtendimento().getDuracao())));
+				event.setStart(formatter.format(atendimento.getData()));
+				event.setEnd(formatter.format(atendimento.getData().plus(atendimento.getTipoDeAtendimento().getDuracao())));
 				event.setType(atendimento.getTipo().name());
 				event.setColor("#ccf5ff");
 				events.add(event); 
@@ -160,16 +166,24 @@ public class AgendamentoController {
 			.stream()
 			.filter(ocorrenciaExame -> ocorrenciaExame.getData().isBefore(LocalDateTime.now()))
 			.filter(ocorrenciaExame -> aplicarFiltroDeData(dataInicialFiltro, dataFinalFiltro, ocorrenciaExame))
-			.filter(ocorrenciaExame -> ocorrenciaExame.getAgendamentos().size() == 0)
+			.filter(ocorrenciaExame -> {
+				return possuiAgendamentoVigente(ocorrenciaExame);
+			})
 			.forEach(ocorrenciaExame -> {
 				EventFullCalendar eventFullCalendar = new EventFullCalendar();
 				eventFullCalendar.setId(String.valueOf(ocorrenciaExame.getOcorrenciaId()));
 				eventFullCalendar.setTitle(ocorrenciaExame.getExame().getDescricao());
-				eventFullCalendar.setStart(DateTimeFormatter.ISO_DATE_TIME.format(ocorrenciaExame.getData()));
+				eventFullCalendar.setStart(formatter.format(ocorrenciaExame.getData()));
+				eventFullCalendar.setEnd(formatter.format(ocorrenciaExame.getData().plus(ocorrenciaExame.getExame().getDuracao())));
 				eventFullCalendar.setType(ocorrenciaExame.getTipo().name());
 				eventFullCalendar.setColor("#BFBFBF");
 				events.add(eventFullCalendar);
 			});
+	}
+
+	private boolean possuiAgendamentoVigente(OcorrenciaProntuario ocorrenciaProntuario) {
+		long qtdAgendamentosVigentes = ocorrenciaProntuario.getAgendamentos().stream().filter(ag -> ag.getDataHoraFinal().isAfter(LocalDateTime.now())).count();
+		return qtdAgendamentosVigentes == 0;
 	}
 
 	private boolean aplicarFiltroDeData(LocalDate dataInicialFiltro, LocalDate dataFinalFiltro,
