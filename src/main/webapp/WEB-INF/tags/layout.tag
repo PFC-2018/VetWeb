@@ -307,7 +307,6 @@
 										de Atendimento</a></li>
 								<li><a href="<c:url value="/prontuario/vacinas"></c:url>">Vacinas</a></li>
 								<li><a href="<c:url value="/exames"></c:url>">Exames</a></li>
-								<li><a href="<c:url value="/documentos/modelos"></c:url>">Modelos</a></li>
 							</ul></li>
 
 

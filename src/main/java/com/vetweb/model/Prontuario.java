@@ -39,10 +39,6 @@ public class Prontuario implements Serializable {
     
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "prontuario")
     @JsonBackReference
-    private List<Documento> documentos;
-    
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "prontuario")
-    @JsonBackReference
     private List<OcorrenciaExame> exames;
     
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "prontuario")
@@ -85,13 +81,6 @@ public class Prontuario implements Serializable {
 		this.vacinas = vacinas;
 	}
 
-	public List<Documento> getDocumentos() {
-		return documentos;
-	}
-
-	public void setDocumentos(List<Documento> documentos) {
-		this.documentos = documentos;
-	}
 
 	public List<OcorrenciaExame> getExames() {
 		return exames;
