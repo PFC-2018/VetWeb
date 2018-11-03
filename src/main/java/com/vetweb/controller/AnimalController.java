@@ -19,9 +19,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.vetweb.dao.AgendamentoDAO;
 import com.vetweb.dao.AnimalDAO;
 import com.vetweb.dao.ProntuarioDAO;
 import com.vetweb.dao.ProprietarioDAO;
+import com.vetweb.model.Agendamento;
 import com.vetweb.model.Animal;
 import com.vetweb.model.Especie;
 import com.vetweb.model.OcorrenciaAtendimento;
@@ -48,6 +50,9 @@ public class AnimalController {
     
     @Autowired
     private ProntuarioDAO prontuarioDAO;
+    
+    @Autowired
+    private AgendamentoDAO agendamentoDAO;
     
     @Autowired @Qualifier("amazon")
     private FileService arquivoService;
@@ -90,7 +95,7 @@ public class AnimalController {
     
     @RequestMapping(value = "/remover/{animalId}")
     public ModelAndView remover(@PathVariable("animalId") long animalId) {
-        ModelAndView modelAndView = new ModelAndView("redirect:/animais/especies");//redirect:/clientes/listar
+        ModelAndView modelAndView = new ModelAndView("redirect:/clientes/listar");
         modelDML = "Animal";
         try {
             LOGGER.info(("Eliminando prontuário do animal " + animalDAO.buscarPorId(animalId).getNome()).toUpperCase());
@@ -101,19 +106,39 @@ public class AnimalController {
             List<OcorrenciaExame> exames = p.getExames();
             List<OcorrenciaPatologia> patologias = p.getPatologias();
             
-
-            //Removendo atendimentos, vacinas, exames e patologias do prontuario do animal.
+            //Removendo Agendamentos e Atendimentos do animal
             for (OcorrenciaAtendimento ocorrenciaAtendimento : atendimentos) {
             	prontuarioDAO.removerAtendimento(ocorrenciaAtendimento);
+            	
+            	List<Agendamento> agendamentos = ocorrenciaAtendimento.getAgendamentos();
+            	for (Agendamento ag : agendamentos) {
+            		agendamentoDAO.remover(ag);
+				}
+            	
 			}
             for (OcorrenciaVacina ocorrenciaVacina : vacinas) {
             	prontuarioDAO.removerOcorrenciaVacina(ocorrenciaVacina);
+            	
+            	List<Agendamento> agendamentos = ocorrenciaVacina.getAgendamentos();
+            	for (Agendamento ag : agendamentos) {
+            		agendamentoDAO.remover(ag);
+				}
 			}
             for (OcorrenciaExame ocorrenciaExame : exames) {
             	prontuarioDAO.removerOcorrenciaExame(ocorrenciaExame);
+            	
+            	List<Agendamento> agendamentos = ocorrenciaExame.getAgendamentos();
+            	for (Agendamento ag : agendamentos) {
+            		agendamentoDAO.remover(ag);
+				}
 			}
             for (OcorrenciaPatologia ocorrenciaPatologia : patologias) {
             	prontuarioDAO.removerOcorrenciaPatologia(ocorrenciaPatologia);
+            	
+            	List<Agendamento> agendamentos = ocorrenciaPatologia.getAgendamentos();
+            	for (Agendamento ag : agendamentos) {
+            		agendamentoDAO.remover(ag);
+				}
 			}
             
             prontuarioDAO.remover(p);
