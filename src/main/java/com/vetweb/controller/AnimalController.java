@@ -51,13 +51,6 @@ public class AnimalController {
     
     public static String modelDML = null;
     
-    @RequestMapping(value = "/listar", method = RequestMethod.GET)
-    public ModelAndView listarTodos() {
-        ModelAndView modelAndView = new ModelAndView("animal/animais");
-        modelAndView.addObject("animais", animalDAO.listarTodos());
-        return modelAndView;
-    }
-    
     @RequestMapping(value = "/cadastro", method = RequestMethod.GET)
     public synchronized ModelAndView form(Animal animal, @RequestParam("desabilitaTrocaProprietario") final boolean desabilitaTrocaProprietario) {
         ModelAndView modelAndView = new ModelAndView("animal/cadastroAnimal");
