@@ -24,8 +24,13 @@ import com.vetweb.dao.ProntuarioDAO;
 import com.vetweb.dao.ProprietarioDAO;
 import com.vetweb.model.Animal;
 import com.vetweb.model.Especie;
+import com.vetweb.model.OcorrenciaAtendimento;
+import com.vetweb.model.OcorrenciaExame;
+import com.vetweb.model.OcorrenciaPatologia;
+import com.vetweb.model.OcorrenciaVacina;
 import com.vetweb.model.Patologia;
 import com.vetweb.model.Pelagem;
+import com.vetweb.model.Prontuario;
 import com.vetweb.model.Raca;
 import com.vetweb.service.FileService;
 
@@ -85,11 +90,33 @@ public class AnimalController {
     
     @RequestMapping(value = "/remover/{animalId}")
     public ModelAndView remover(@PathVariable("animalId") long animalId) {
-        ModelAndView modelAndView = new ModelAndView("redirect:/clientes/listar");
+        ModelAndView modelAndView = new ModelAndView("redirect:/animais/especies");//redirect:/clientes/listar
         modelDML = "Animal";
         try {
             LOGGER.info(("Eliminando prontuário do animal " + animalDAO.buscarPorId(animalId).getNome()).toUpperCase());
-            prontuarioDAO.remover(prontuarioDAO.buscarProntuarioPorAnimal(animalId));
+            
+            Prontuario p = prontuarioDAO.buscarProntuarioPorAnimal(animalId);
+            List<OcorrenciaAtendimento> atendimentos = p.getAtendimentos();
+            List<OcorrenciaVacina> vacinas = p.getVacinas();
+            List<OcorrenciaExame> exames = p.getExames();
+            List<OcorrenciaPatologia> patologias = p.getPatologias();
+            
+
+            //Removendo atendimentos, vacinas, exames e patologias do prontuario do animal.
+            for (OcorrenciaAtendimento ocorrenciaAtendimento : atendimentos) {
+            	prontuarioDAO.removerAtendimento(ocorrenciaAtendimento);
+			}
+            for (OcorrenciaVacina ocorrenciaVacina : vacinas) {
+            	prontuarioDAO.removerOcorrenciaVacina(ocorrenciaVacina);
+			}
+            for (OcorrenciaExame ocorrenciaExame : exames) {
+            	prontuarioDAO.removerOcorrenciaExame(ocorrenciaExame);
+			}
+            for (OcorrenciaPatologia ocorrenciaPatologia : patologias) {
+            	prontuarioDAO.removerOcorrenciaPatologia(ocorrenciaPatologia);
+			}
+            
+            prontuarioDAO.remover(p);
             proprietarioDAO.removerAnimal(animalId);
         } catch (Exception e) {
             LOGGER.error(("Erro na remoção do animal " + animalId + ". ").toUpperCase(), e);
