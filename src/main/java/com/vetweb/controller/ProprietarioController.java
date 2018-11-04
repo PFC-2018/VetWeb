@@ -30,10 +30,17 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.TypeFactory;
+import com.vetweb.dao.AgendamentoDAO;
 import com.vetweb.dao.AnimalDAO;
 import com.vetweb.dao.ProntuarioDAO;
 import com.vetweb.dao.ProprietarioDAO;
+import com.vetweb.model.Agendamento;
 import com.vetweb.model.Animal;
+import com.vetweb.model.OcorrenciaAtendimento;
+import com.vetweb.model.OcorrenciaExame;
+import com.vetweb.model.OcorrenciaPatologia;
+import com.vetweb.model.OcorrenciaVacina;
+import com.vetweb.model.Prontuario;
 import com.vetweb.model.Proprietario;
 import com.vetweb.model.pojo.Pais;
 import com.vetweb.model.pojo.Profissao;
@@ -49,6 +56,9 @@ public class ProprietarioController {
     
     @Autowired
     private AnimalDAO animalDAO;
+    
+    @Autowired
+    private AgendamentoDAO agendamentoDAO;
     
     @Autowired
     private ProntuarioDAO prontuarioDAO;
@@ -109,17 +119,64 @@ public class ProprietarioController {
 	@RequestMapping(value = "/remover/{pessoaId}")
     public ModelAndView remover(@PathVariable("pessoaId") long pessoaId){
         ModelAndView modelAndView = new ModelAndView("redirect:/clientes/listar");
-        Proprietario p = proprietarioDAO.buscarPorId(pessoaId);
+        Proprietario prop = proprietarioDAO.buscarPorId(pessoaId);
+        List<Animal> animais = prop.getAnimais();
+        
+        
+        //ERRO NO FOR, DIZ Q MODIFIQUEI ELE ETC... MOSTRAR PARA O RENAN
         try{
-            p.getAnimais().stream().forEach(a -> {
-            	
-                prontuarioDAO.remover(prontuarioDAO.buscarProntuarioPorAnimal(a.getAnimalId()));
-            });
-            LOGGER.info(("Prontuários dos animais do " + p.getNome() + " eliminados.").toUpperCase());
-            p.getAnimais().stream().forEach(a -> animalDAO.remover(a));
-            LOGGER.info(("Animais do cliente " + p.getNome() + " removidos com sucesso.").toUpperCase());
-            proprietarioDAO.remover(p);
-            LOGGER.info(("Proprietário " + p.getNome() + " removido com sucesso. ").toUpperCase());
+        	for (Animal animal : animais) {
+    			
+            	Prontuario p = prontuarioDAO.buscarProntuarioPorAnimal(animal.getAnimalId());
+                List<OcorrenciaAtendimento> atendimentos = p.getAtendimentos();
+                List<OcorrenciaVacina> vacinas = p.getVacinas();
+                List<OcorrenciaExame> exames = p.getExames();
+                List<OcorrenciaPatologia> patologias = p.getPatologias();
+                
+                //Removendo Agendamentos e Atendimentos do animal
+                for (OcorrenciaAtendimento ocorrenciaAtendimento : atendimentos) {
+                	prontuarioDAO.removerAtendimento(ocorrenciaAtendimento);
+                	
+                	List<Agendamento> agendamentos = ocorrenciaAtendimento.getAgendamentos();
+                	for (Agendamento ag : agendamentos) {
+                		agendamentoDAO.remover(ag);
+    				}
+    			}
+                for (OcorrenciaVacina ocorrenciaVacina : vacinas) {
+                	prontuarioDAO.removerOcorrenciaVacina(ocorrenciaVacina);
+                	
+                	List<Agendamento> agendamentos = ocorrenciaVacina.getAgendamentos();
+                	for (Agendamento ag : agendamentos) {
+                		agendamentoDAO.remover(ag);
+    				}
+    			}
+                for (OcorrenciaExame ocorrenciaExame : exames) {
+                	prontuarioDAO.removerOcorrenciaExame(ocorrenciaExame);
+                	
+                	List<Agendamento> agendamentos = ocorrenciaExame.getAgendamentos();
+                	for (Agendamento ag : agendamentos) {
+                		agendamentoDAO.remover(ag);
+    				}
+    			}
+                for (OcorrenciaPatologia ocorrenciaPatologia : patologias) {
+                	prontuarioDAO.removerOcorrenciaPatologia(ocorrenciaPatologia);
+                	
+                	List<Agendamento> agendamentos = ocorrenciaPatologia.getAgendamentos();
+                	for (Agendamento ag : agendamentos) {
+                		agendamentoDAO.remover(ag);
+    				}
+    			}
+                
+                prontuarioDAO.remover(p);
+                proprietarioDAO.removerAnimal(animal.getAnimalId());
+                
+                LOGGER.info(("Prontuário do Animal 	" + animal.getNome() + " deletado.").toUpperCase());
+                LOGGER.info(("Animal " + animal.getNome() + " removido com sucesso.").toUpperCase());
+    		}
+        	
+        	proprietarioDAO.remover(prop);
+        	LOGGER.info(("Proprietário " + prop.getNome() + " removido com sucesso. ").toUpperCase());
+        	
         }catch(Exception e){
             LOGGER.error(e);
         }
@@ -130,6 +187,8 @@ public class ProprietarioController {
     public ModelAndView atualizar(@PathVariable("pessoaId") long pessoaId){
         ModelAndView modelAndView = new ModelAndView("proprietario/cadastroProprietario");
         modelAndView.addObject("proprietario", proprietarioDAO.buscarPorId(pessoaId));
+        modelAndView.addObject("paises", paises);
+        modelAndView.addObject("profissoes", profissao.getProfissoes());
         return modelAndView;
     } 
     

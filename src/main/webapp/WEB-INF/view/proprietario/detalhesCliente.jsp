@@ -73,6 +73,10 @@
                                                 <td>${proprietario.cpf}</td>
                                             </tr>
                                             <tr>
+                                                <th>Nacionalidade</th>
+                                                <td>${proprietario.nacionalidade}</td>
+                                            </tr>
+                                            <tr>
                                                 <th>Sexo</th>
                                                 <c:if test="${proprietario.sexo == 'M'}">
 													<td>Masculino</td>

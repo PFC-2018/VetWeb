@@ -154,6 +154,8 @@ public class AnimalController {
         ModelAndView modelAndView = new ModelAndView("animal/cadastroAnimal");
         modelAndView.addObject("animal", animalDAO.buscarPorId(animalId));
         modelAndView.addObject("proprietarios", proprietarioDAO.listarTodos());
+        modelAndView.addObject("especies", animalDAO.buscarEspecies());
+        modelAndView.addObject("pelagens", animalDAO.buscarPelagens());
         modelAndView.addObject("desabilitaTrocaProprietario", true);
         return modelAndView;
     }

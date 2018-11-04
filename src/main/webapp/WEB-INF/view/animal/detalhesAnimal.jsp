@@ -80,53 +80,45 @@
                                     </td>
                                  </tr>
                                  <tr>
-                                    <th>
-                                       <spring:message
-                                          code="nomeAnimal" />
+                                    <th>Nome do Animal
                                     </th>
                                     <td>${animal.nome}</td>
                                  </tr>
                                  <tr>
-                                    <th>
-                                       <spring:message
-                                          code="nascimento" />
+                                    <th>Data de Nascimento
                                     </th>
                                     <td>${animal.dtNascimento}</td>
                                  </tr>
                                  <tr>
-                                    <th>
-                                       <spring:message
-                                          code="esteril" />
+                                    <th>Esteril
                                     </th>
                                     <td>${animal.esteril}</td>
                                  </tr>
                                  <tr>
-                                    <th>
-                                       <spring:message
-                                          code="status" />
+                                    <th>Status
                                     </th>
                                     <td>${animal.status}</td>
                                  </tr>
                                  <tr>
-                                    <th>
-                                       <spring:message
-                                          code="peso" />
+                                    <th>Peso
                                     </th>
                                     <td>${animal.peso}</td>
                                  </tr>
                                  <tr>
-                                    <th>
-                                       <spring:message
-                                          code="pelagem" />
+                                    <th>Pelagem
                                     </th>
                                     <td>${animal.pelagem.descricao}</td>
                                  </tr>
                                  <tr>
-                                    <th>
-                                       <spring:message
-                                          code="especie" />
+                                    <th>Espécie
+                                    </th>
+                                    <td>${animal.raca.especie.descricao}</td>
+                                  </tr>
+                                 <tr>
+                                    <th>Raça
                                     </th>
                                     <td>${animal.raca.descricao}</td>
+                                  </tr>
                               </tbody>
                            </table>
                         </div>
