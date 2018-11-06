@@ -86,6 +86,7 @@ public class Scheduler {
     			LocalDate.of(ate.getData().getYear(), ate.getData().getMonthValue(), ate.getData().getDayOfMonth())
     			.isEqual(LocalDate.now()))
     		.forEach(ate -> this.notificaRetornoAtendimento(ate));
+    		LOGGER.info("O proprietário "+proprietario.getNome()+" está habilitado para receber e-mail.");
 		}
     	
     	LOGGER.info("FIM DO JOB - VERIFICANDO RETORNO DE ATENDIMENTO");
