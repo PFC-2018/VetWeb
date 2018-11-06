@@ -30,17 +30,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.TypeFactory;
-import com.vetweb.dao.AgendamentoDAO;
 import com.vetweb.dao.AnimalDAO;
-import com.vetweb.dao.ProntuarioDAO;
 import com.vetweb.dao.ProprietarioDAO;
-import com.vetweb.model.Agendamento;
 import com.vetweb.model.Animal;
-import com.vetweb.model.OcorrenciaAtendimento;
-import com.vetweb.model.OcorrenciaExame;
-import com.vetweb.model.OcorrenciaPatologia;
-import com.vetweb.model.OcorrenciaVacina;
-import com.vetweb.model.Prontuario;
 import com.vetweb.model.Proprietario;
 import com.vetweb.model.pojo.Pais;
 import com.vetweb.model.pojo.Profissao;
@@ -56,12 +48,6 @@ public class ProprietarioController {
     
     @Autowired
     private AnimalDAO animalDAO;
-    
-    @Autowired
-    private AgendamentoDAO agendamentoDAO;
-    
-    @Autowired
-    private ProntuarioDAO prontuarioDAO;
     
     private static final Logger LOGGER = Logger.getLogger(ProprietarioController.class);
     
@@ -113,73 +99,6 @@ public class ProprietarioController {
     public ModelAndView proprietarios(){
         ModelAndView modelAndView = new ModelAndView("proprietario/proprietarios");
         modelAndView.addObject("proprietarios", proprietarioDAO.listarTodos());
-        return modelAndView;
-    }
-    
-	@RequestMapping(value = "/remover/{pessoaId}")
-    public ModelAndView remover(@PathVariable("pessoaId") long pessoaId){
-        ModelAndView modelAndView = new ModelAndView("redirect:/clientes/listar");
-        Proprietario prop = proprietarioDAO.buscarPorId(pessoaId);
-        List<Animal> animais = prop.getAnimais();
-        
-        
-        //ERRO NO FOR, DIZ Q MODIFIQUEI ELE ETC... MOSTRAR PARA O RENAN
-        try{
-        	for (Animal animal : animais) {
-    			
-            	Prontuario p = prontuarioDAO.buscarProntuarioPorAnimal(animal.getAnimalId());
-                List<OcorrenciaAtendimento> atendimentos = p.getAtendimentos();
-                List<OcorrenciaVacina> vacinas = p.getVacinas();
-                List<OcorrenciaExame> exames = p.getExames();
-                List<OcorrenciaPatologia> patologias = p.getPatologias();
-                
-                //Removendo Agendamentos e Atendimentos do animal
-                for (OcorrenciaAtendimento ocorrenciaAtendimento : atendimentos) {
-                	prontuarioDAO.removerAtendimento(ocorrenciaAtendimento);
-                	
-                	List<Agendamento> agendamentos = ocorrenciaAtendimento.getAgendamentos();
-                	for (Agendamento ag : agendamentos) {
-                		agendamentoDAO.remover(ag);
-    				}
-    			}
-                for (OcorrenciaVacina ocorrenciaVacina : vacinas) {
-                	prontuarioDAO.removerOcorrenciaVacina(ocorrenciaVacina);
-                	
-                	List<Agendamento> agendamentos = ocorrenciaVacina.getAgendamentos();
-                	for (Agendamento ag : agendamentos) {
-                		agendamentoDAO.remover(ag);
-    				}
-    			}
-                for (OcorrenciaExame ocorrenciaExame : exames) {
-                	prontuarioDAO.removerOcorrenciaExame(ocorrenciaExame);
-                	
-                	List<Agendamento> agendamentos = ocorrenciaExame.getAgendamentos();
-                	for (Agendamento ag : agendamentos) {
-                		agendamentoDAO.remover(ag);
-    				}
-    			}
-                for (OcorrenciaPatologia ocorrenciaPatologia : patologias) {
-                	prontuarioDAO.removerOcorrenciaPatologia(ocorrenciaPatologia);
-                	
-                	List<Agendamento> agendamentos = ocorrenciaPatologia.getAgendamentos();
-                	for (Agendamento ag : agendamentos) {
-                		agendamentoDAO.remover(ag);
-    				}
-    			}
-                
-                prontuarioDAO.remover(p);
-                proprietarioDAO.removerAnimal(animal.getAnimalId());
-                
-                LOGGER.info(("Prontuário do Animal 	" + animal.getNome() + " deletado.").toUpperCase());
-                LOGGER.info(("Animal " + animal.getNome() + " removido com sucesso.").toUpperCase());
-    		}
-        	
-        	proprietarioDAO.remover(prop);
-        	LOGGER.info(("Proprietário " + prop.getNome() + " removido com sucesso. ").toUpperCase());
-        	
-        }catch(Exception e){
-            LOGGER.error(e);
-        }
         return modelAndView;
     }
 	

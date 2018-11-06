@@ -36,11 +36,6 @@
                                         	<i class="fa fa-pencil fa-3x" aria-hidden="true"></i>
                                         </button>
                                         
-                                        <button type="button" onclick="location.href='<c:url value="/clientes/remover/${proprietario.pessoaId}"></c:url>'" class="btn btn-danger col-1">
-                                        	<i class="fa fa-trash fa-3x" aria-hidden="true"></i>
-                                        </button>
-                                        
-                                        
 										</div>
                         
                         <!-- Nav tabs -->

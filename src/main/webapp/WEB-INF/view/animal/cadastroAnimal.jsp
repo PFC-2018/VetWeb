@@ -92,9 +92,7 @@
 
                                         <div class="form-group">
                                             <label for="pelagem">Pelagem:</label>
-                                            <form:select class="form-control input-default col-sm-3" path="pelagem" items="${pelagens}" id="pelagens">
-                                            	<option>${pelagens}</option>
-                                            </form:select>
+                                            <form:select class="form-control input-default col-sm-3" path="pelagem" items="${pelagens}" id="pelagens"></form:select>
                                         </div>   
 
                                         <div class="form-group">

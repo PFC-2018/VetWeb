@@ -41,9 +41,6 @@
                      <i class="fa fa-edit fa-3x" aria-hidden="true"></i>
                      </button>
                      
-                     <button type="button" onclick="location.href='<c:url value="/animais/remover/${animal.animalId}"></c:url>'" class="btn btn-danger col-1">
-                     	<i class="fa fa-trash fa-3x" aria-hidden="true"></i>
-                     </button>
                   </div>
                   
                   <!-- Nav tabs -->

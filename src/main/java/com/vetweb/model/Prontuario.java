@@ -16,6 +16,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 
@@ -31,6 +34,7 @@ public class Prontuario implements Serializable {
 	
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "prontuario")
     @JsonBackReference
+    @Cascade(CascadeType.DELETE)
     private List<OcorrenciaAtendimento> atendimentos;
     
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "prontuario")

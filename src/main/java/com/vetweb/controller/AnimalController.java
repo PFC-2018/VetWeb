@@ -19,20 +19,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.vetweb.dao.AgendamentoDAO;
 import com.vetweb.dao.AnimalDAO;
-import com.vetweb.dao.ProntuarioDAO;
 import com.vetweb.dao.ProprietarioDAO;
-import com.vetweb.model.Agendamento;
 import com.vetweb.model.Animal;
 import com.vetweb.model.Especie;
-import com.vetweb.model.OcorrenciaAtendimento;
-import com.vetweb.model.OcorrenciaExame;
-import com.vetweb.model.OcorrenciaPatologia;
-import com.vetweb.model.OcorrenciaVacina;
 import com.vetweb.model.Patologia;
 import com.vetweb.model.Pelagem;
-import com.vetweb.model.Prontuario;
 import com.vetweb.model.Raca;
 import com.vetweb.service.FileService;
 
@@ -47,12 +39,6 @@ public class AnimalController {
     
     @Autowired
     private ProprietarioDAO proprietarioDAO;
-    
-    @Autowired
-    private ProntuarioDAO prontuarioDAO;
-    
-    @Autowired
-    private AgendamentoDAO agendamentoDAO;
     
     @Autowired @Qualifier("amazon")
     private FileService arquivoService;
@@ -90,62 +76,6 @@ public class AnimalController {
         }
         LOGGER.info(("Animal " + animal + " sendo encaminhado para criação do prontuário.").toUpperCase());
         ModelAndView modelAndView = new ModelAndView("forward:/prontuario/gerarProntuario?animalId=" + animal.getAnimalId());
-        return modelAndView;
-    }
-    
-    @RequestMapping(value = "/remover/{animalId}")
-    public ModelAndView remover(@PathVariable("animalId") long animalId) {
-        ModelAndView modelAndView = new ModelAndView("redirect:/clientes/listar");
-        modelDML = "Animal";
-        try {
-            LOGGER.info(("Eliminando prontuário do animal " + animalDAO.buscarPorId(animalId).getNome()).toUpperCase());
-            
-            Prontuario p = prontuarioDAO.buscarProntuarioPorAnimal(animalId);
-            List<OcorrenciaAtendimento> atendimentos = p.getAtendimentos();
-            List<OcorrenciaVacina> vacinas = p.getVacinas();
-            List<OcorrenciaExame> exames = p.getExames();
-            List<OcorrenciaPatologia> patologias = p.getPatologias();
-            
-            //Removendo Agendamentos e Atendimentos do animal
-            for (OcorrenciaAtendimento ocorrenciaAtendimento : atendimentos) {
-            	prontuarioDAO.removerAtendimento(ocorrenciaAtendimento);
-            	
-            	List<Agendamento> agendamentos = ocorrenciaAtendimento.getAgendamentos();
-            	for (Agendamento ag : agendamentos) {
-            		agendamentoDAO.remover(ag);
-				}
-            	
-			}
-            for (OcorrenciaVacina ocorrenciaVacina : vacinas) {
-            	prontuarioDAO.removerOcorrenciaVacina(ocorrenciaVacina);
-            	
-            	List<Agendamento> agendamentos = ocorrenciaVacina.getAgendamentos();
-            	for (Agendamento ag : agendamentos) {
-            		agendamentoDAO.remover(ag);
-				}
-			}
-            for (OcorrenciaExame ocorrenciaExame : exames) {
-            	prontuarioDAO.removerOcorrenciaExame(ocorrenciaExame);
-            	
-            	List<Agendamento> agendamentos = ocorrenciaExame.getAgendamentos();
-            	for (Agendamento ag : agendamentos) {
-            		agendamentoDAO.remover(ag);
-				}
-			}
-            for (OcorrenciaPatologia ocorrenciaPatologia : patologias) {
-            	prontuarioDAO.removerOcorrenciaPatologia(ocorrenciaPatologia);
-            	
-            	List<Agendamento> agendamentos = ocorrenciaPatologia.getAgendamentos();
-            	for (Agendamento ag : agendamentos) {
-            		agendamentoDAO.remover(ag);
-				}
-			}
-            
-            prontuarioDAO.remover(p);
-            proprietarioDAO.removerAnimal(animalId);
-        } catch (Exception e) {
-            LOGGER.error(("Erro na remoção do animal " + animalId + ". ").toUpperCase(), e);
-        }
         return modelAndView;
     }
     

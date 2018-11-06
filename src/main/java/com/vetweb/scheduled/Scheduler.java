@@ -1,6 +1,7 @@
 package com.vetweb.scheduled;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -11,15 +12,11 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.vetweb.dao.AnimalDAO;
 import com.vetweb.dao.AtendimentoDAO;
 import com.vetweb.dao.ProntuarioDAO;
 import com.vetweb.dao.ProprietarioDAO;
-import com.vetweb.model.Animal;
 import com.vetweb.model.OcorrenciaAtendimento;
-import com.vetweb.model.OcorrenciaVacina;
 import com.vetweb.model.Pessoa;
-import com.vetweb.model.Prontuario;
 import com.vetweb.model.Proprietario;
 import com.vetweb.service.EmailService;
 
@@ -30,9 +27,6 @@ public class Scheduler {
 	
 	@Autowired
 	private ProprietarioDAO proprietarioDAO;
-	
-	@Autowired
-	private AnimalDAO animalDAO;
 	
 	@Autowired
 	private AtendimentoDAO atendimentoDAO;
@@ -47,7 +41,6 @@ public class Scheduler {
 	
 	private static final long MINUTO = 60000;
 	
-	private static final long HORA = 3600000;
 	
     @Scheduled(fixedDelay = MINUTO/4)
     public void verificarClientesEmDebitoDesativar() {
@@ -77,13 +70,24 @@ public class Scheduler {
     @Scheduled(fixedDelay = MINUTO)
     public void verificacaoRetornoAtendimento() {
     	LOGGER.info("EXECUTANDO JOB - VERIFICANDO RETORNO DE ATENDIMENTO");
-    	atendimentoDAO
+    	List<Proprietario> p = new ArrayList<>();
+    	
+    	proprietarioDAO
+    		.listarTodos()
+    		.stream()
+    		.filter(prop -> prop.isAceitaNotificacoes())
+    		.filter(prop -> p.add(prop));
+    	
+    	for (Proprietario proprietario : p) {
+    		atendimentoDAO
     		.listarTodos()
     		.stream()
     		.filter(ate -> 
     			LocalDate.of(ate.getData().getYear(), ate.getData().getMonthValue(), ate.getData().getDayOfMonth())
     			.isEqual(LocalDate.now()))
     		.forEach(ate -> this.notificaRetornoAtendimento(ate));
+		}
+    	
     	LOGGER.info("FIM DO JOB - VERIFICANDO RETORNO DE ATENDIMENTO");
     }
     
