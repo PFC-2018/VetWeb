@@ -2,6 +2,7 @@ package com.vetweb.service;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.vetweb.dao.ProprietarioDAO;
+import com.vetweb.model.Animal;
 import com.vetweb.model.ClienteDevedoresVO;
 import com.vetweb.model.Proprietario;
 import com.vetweb.model.report.Report;
@@ -78,7 +80,6 @@ public class JasperService {
 	public void gerarRelatorioComObjeto(Report report, OutputStream outputStream) throws IOException {
 		List<ClienteDevedoresVO> clientesDevedores = verificacaoClientesEmDebito();
 		
-		
 		// Gerar relatório
 		try {
 			Connection connection = getConnection();
@@ -106,15 +107,23 @@ public class JasperService {
 	}
 
 	public List<ClienteDevedoresVO> verificacaoClientesEmDebito() {
-		Double ttlAtendimentos = 0.0;
 		List<ClienteDevedoresVO> cVOList = new ArrayList<ClienteDevedoresVO>();
 		List<Proprietario> proprietariosComDebito = proprietarioDAO.buscarClientesEmDebito();
 		proprietariosComDebito.stream()
 				.peek(prop -> LOGGER.info("JasperService - Clientes Devedores " + prop.getNome()))		
 				.forEach(prop -> { 
 						ClienteDevedoresVO cVO = new ClienteDevedoresVO(); 
+						List<Animal> animais = prop.getAnimais();
 						cVO.setNome(prop.getNome());
+						cVO.setContato(prop.getContato().getCelular());
+						cVO.setObservacoes(prop.getObservacoes());
 						
+						//Adicionando animais
+						for (Animal a : animais) {
+							animais.add(a);
+						}
+						cVO.setAnimais(animais);
+						cVO.setTotalPendente(proprietarioDAO.buscarValorPendenteDoCliente(prop));
 						cVOList.add(cVO); 
 					});	
 
