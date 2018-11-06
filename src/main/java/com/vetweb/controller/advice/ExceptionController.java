@@ -45,7 +45,7 @@ public class ExceptionController {
 	        		break;
 	        	}
 	        	case "Animal": {
-	        		modelAndView = new ModelAndView("animal/animais");
+	        		modelAndView = new ModelAndView("clientes/listar");
 	        		modelAndView.addObject("animais", animalDAO.listarTodos());
 	        		break;
 	        	}

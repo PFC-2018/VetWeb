@@ -1,5 +1,3 @@
-//@author renan.rodrigues@metasix.com.br
-
 package com.vetweb.model.pojo;
 
 import org.springframework.beans.factory.annotation.Autowired;

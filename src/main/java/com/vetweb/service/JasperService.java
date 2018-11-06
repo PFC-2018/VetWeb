@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.apache.log4j.Logger;
@@ -18,13 +17,10 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.vetweb.dao.AtendimentoDAO;
-import com.vetweb.dao.ProntuarioDAO;
 import com.vetweb.dao.ProprietarioDAO;
 import com.vetweb.model.ClienteDevedoresVO;
 import com.vetweb.model.Proprietario;
 import com.vetweb.model.report.Report;
-import com.vetweb.scheduled.Scheduler;
 
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRExporter;
@@ -40,12 +36,6 @@ import net.sf.jasperreports.engine.export.JRPdfExporter;
 public class JasperService {
 	@Autowired
 	private ProprietarioDAO proprietarioDAO;
-
-	@Autowired
-	private AtendimentoDAO atendimentoDAO;
-
-	@Autowired
-	private ProntuarioDAO prontuarioDAO;
 
 	private static final Logger LOGGER = Logger.getLogger(JasperService.class);
 

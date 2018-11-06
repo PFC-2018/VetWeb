@@ -1,7 +1,6 @@
 package com.vetweb.jms;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 import javax.jms.ConnectionFactory;
 import javax.jms.JMSException;
 import javax.jms.ObjectMessage;
