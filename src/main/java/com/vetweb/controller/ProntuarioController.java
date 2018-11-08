@@ -326,7 +326,8 @@ public class ProntuarioController {
     	Prontuario prontuario = prontuarioDAO.buscarPorId(prontuarioId);
     	ModelAndView modelAndView = new ModelAndView("redirect:/prontuario/prontuarioDoAnimal/" + prontuario.getAnimal().getAnimalId());
 		modelAndView.addObject("prontuario", prontuario);
-    	prontuarioDAO.removerAtendimento(atendimentoDAO.buscarPorId(atendimentoId));
+		removeScheduled(atendimentoId);
+        prontuarioDAO.removerAtendimento(atendimentoDAO.buscarPorId(atendimentoId));
     	adicionarListasAoProntuario(modelAndView);
     	return modelAndView;
     }
@@ -340,6 +341,7 @@ public class ProntuarioController {
     	Prontuario prontuario = prontuarioDAO.buscarPorId(prontuarioId);
     	ModelAndView modelAndView = new ModelAndView("redirect:/prontuario/prontuarioDoAnimal/" + prontuario.getAnimal().getAnimalId());
 		modelAndView.addObject("prontuario", prontuario);
+		removeScheduled(vacinaId);
     	prontuarioDAO.removerOcorrenciaVacina(prontuarioDAO.buscarOcorrenciaVacina(vacinaId));
     	adicionarListasAoProntuario(modelAndView);
     	return modelAndView;
@@ -353,7 +355,7 @@ public class ProntuarioController {
     	Prontuario prontuario = prontuarioDAO.buscarPorId(prontuarioId);
     	ModelAndView modelAndView = new ModelAndView("redirect:/prontuario/prontuarioDoAnimal/" + prontuario.getAnimal().getAnimalId());
 		modelAndView.addObject("prontuario", prontuario);
-    	prontuarioDAO.removerOcorrenciaPatologia(prontuarioDAO.buscarOcorrenciaPatologia(patologiaId));
+		prontuarioDAO.removerOcorrenciaPatologia(prontuarioDAO.buscarOcorrenciaPatologia(patologiaId));
     	adicionarListasAoProntuario(modelAndView);
 		return modelAndView;
     }
@@ -366,6 +368,7 @@ public class ProntuarioController {
     	Prontuario prontuario = prontuarioDAO.buscarPorId(prontuarioId);
     	ModelAndView modelAndView = new ModelAndView("redirect:/prontuario/prontuarioDoAnimal/" + prontuario.getAnimal().getAnimalId());
     	modelAndView.addObject("prontuario", prontuario);
+    	removeScheduled(exameId);
     	prontuarioDAO.removerOcorrenciaExame(prontuarioDAO.buscarOcorrenciaExame(exameId));
     	adicionarListasAoProntuario(modelAndView);
     	return modelAndView;
@@ -386,5 +389,11 @@ public class ProntuarioController {
     			.map(exame -> exame.getDescricao()).collect(Collectors.toList()));
     	viewProntuario.addAllObjects(listasProntuario);
     }
+    
+    private void removeScheduled(Long ocorrenciaDeletarId) {
+		Agendamento agendamentoOcorrencia = agendamentoDAO.buscarPorIdOcorrencia(ocorrenciaDeletarId);
+		if (agendamentoOcorrencia != null)
+			agendamentoDAO.remover(agendamentoOcorrencia);
+	}
     
 }
