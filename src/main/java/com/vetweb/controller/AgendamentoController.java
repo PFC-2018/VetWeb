@@ -128,7 +128,7 @@ public class AgendamentoController {
 		prontuarioDAO
 			.buscarTodasOcorrenciasVacina()
 			.stream()
-			.filter(ocorrenciaVacina -> ocorrenciaVacina.getData().isBefore(LocalDateTime.now()))
+			.filter(ocorrenciaVacina -> !isScheduled(ocorrenciaVacina.getOcorrenciaId()))
 			.filter(ocorrenciaVacina -> aplicarFiltroDeData(dataInicialFiltro, dataFinalFiltro, ocorrenciaVacina))
 			.filter(ocorrenciaVacina -> {
 				return possuiAgendamentoVigente(ocorrenciaVacina);
@@ -146,7 +146,7 @@ public class AgendamentoController {
 		atendimentoDAO
 			.listarTodos()
 			.stream()
-			.filter(atendimento -> atendimento.getData().isBefore(LocalDateTime.now()))
+			.filter(atendimento -> !isScheduled(atendimento.getOcorrenciaId()))
 			.filter(atendimento -> aplicarFiltroDeData(dataInicialFiltro, dataFinalFiltro, atendimento))
 			.filter(atendimento -> {
 				return possuiAgendamentoVigente(atendimento);
@@ -164,7 +164,7 @@ public class AgendamentoController {
 		prontuarioDAO
 			.buscarTodasOcorrenciasExame()
 			.stream()
-			.filter(ocorrenciaExame -> ocorrenciaExame.getData().isBefore(LocalDateTime.now()))
+			.filter(ocorrenciaExame -> !isScheduled(ocorrenciaExame.getOcorrenciaId()))
 			.filter(ocorrenciaExame -> aplicarFiltroDeData(dataInicialFiltro, dataFinalFiltro, ocorrenciaExame))
 			.filter(ocorrenciaExame -> {
 				return possuiAgendamentoVigente(ocorrenciaExame);
@@ -230,5 +230,9 @@ public class AgendamentoController {
 		ModelAndView modelAndView = new ModelAndView("redirect:/prontuario/prontuarioDoAnimal/" + prontuario.getAnimal().getAnimalId());
 		return modelAndView;
 	}
+	
+	private boolean isScheduled(Long ocorrenciaId) {
+		return agendamentoDAO.buscarPorIdOcorrencia(ocorrenciaId) != null;
+	}	
 
 }
