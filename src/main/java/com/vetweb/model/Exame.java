@@ -3,6 +3,7 @@ package com.vetweb.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.Duration;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,7 +11,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "tbl_exame")
@@ -39,7 +43,13 @@ public class Exame implements Serializable {
 	private BigDecimal preco;
 	
 	private Duration duracao;
-
+	
+	
+	@OneToMany(mappedBy = "exame")
+	@JsonBackReference
+	private List<OcorrenciaExame> exames;	
+	
+	
     public Exame() {
 	}
     
