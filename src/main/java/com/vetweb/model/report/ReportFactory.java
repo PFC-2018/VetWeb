@@ -52,11 +52,10 @@ public class ReportFactory {
 		if (type == ReportType.Clientes_por_ano) {
 			report = new ReportClientesPorAno();
 		}
-		
-		if (type == ReportType.clientes_devedores) {
-			report = new ReportClientesDevedores();
+		if (type == ReportType.Inadimplentes) {
+			report = new ReportInadimplentes();
 		}
 		return report;
-	}
+}
 
 }
