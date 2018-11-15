@@ -20,10 +20,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.vetweb.dao.ProprietarioDAO;
-import com.vetweb.model.Animal;
-import com.vetweb.model.ClienteDevedoresVO;
-import com.vetweb.model.Proprietario;
-import com.vetweb.model.report.Inadimplente;
+import com.vetweb.model.report.ClientesDevedoresVO;
 import com.vetweb.model.report.Report;
 import com.vetweb.model.report.ReportType;
 
@@ -41,8 +38,6 @@ import net.sf.jasperreports.engine.export.JRPdfExporter;
 public class JasperService {
 	@Autowired
 	private ProprietarioDAO proprietarioDAO;
-
-	private static final Logger LOGGER = Logger.getLogger(JasperService.class);
 
 	public Connection getConnection() {
 		try {
@@ -68,7 +63,7 @@ public class JasperService {
 			JasperCompileManager.compileReportToFile(reportLocation);
 			JasperPrint jasperPrint = null;
 			if (report.getType() == ReportType.Inadimplentes) {
-				List<Inadimplente> inadimplentes = getInadimplentes();
+				List<ClientesDevedoresVO> inadimplentes = getInadimplentes();
 				jasperPrint = JasperFillManager.fillReport(new ClassPathResource(reportName + ".jasper").getFile().getAbsolutePath(), parameterMap, 
 						new JRBeanCollectionDataSource(inadimplentes));
 			} else {
@@ -86,14 +81,14 @@ public class JasperService {
 		}
 	}
 	
-	private List<Inadimplente> getInadimplentes() {
-		List<Inadimplente> inadimplentes = new ArrayList<>();
+	private List<ClientesDevedoresVO> getInadimplentes() {
+		List<ClientesDevedoresVO> inadimplentes = new ArrayList<>();
 		proprietarioDAO
 			.buscarClientesEmDebito()
 			.stream()
 			.distinct()
 			.forEach(prop -> {
-				Inadimplente inadimplente = new Inadimplente();
+				ClientesDevedoresVO inadimplente = new ClientesDevedoresVO();
 				inadimplente.setNome(prop.getNome());
 				inadimplente.setDebitoTotal(proprietarioDAO.buscarValorPendenteDoCliente(prop).toString());
 				Map<String, BigDecimal> debitosPorTipoOcorrenciaECliente = proprietarioDAO.buscarDebitosPorTipoOcorrenciaECliente(prop);
@@ -111,58 +106,5 @@ public class JasperService {
 		}
 		return stringBuilder.toString();
 	}	
-
-	public void gerarRelatorioComObjeto(Report report, OutputStream outputStream) throws IOException {
-		List<ClienteDevedoresVO> clientesDevedores = verificacaoClientesEmDebito();
-		
-		// Gerar relatório
-		try {
-			Connection connection = getConnection();
-			String reportName = report.getType().name();
-			Map<String, Object> parameterMap = new HashMap<>();
-			if (report.getParameters() != null) {
-				parameterMap = report.getParameters().stream()
-						.collect(Collectors.toMap(param -> param.getKey(), param -> param.getValue()));
-			}
-			String reportLocation = new ClassPathResource(reportName + ".jrxml").getFile().getAbsolutePath();
-			JasperCompileManager.compileReportToFile(reportLocation);
-			JasperPrint jasperPrint = JasperFillManager.fillReport(
-					new ClassPathResource(reportName + ".jasper").getFile().getAbsolutePath(), parameterMap,
-					new JRBeanCollectionDataSource(clientesDevedores));
-			JRExporter jrExporter = new JRPdfExporter();
-			jrExporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
-			jrExporter.setParameter(JRExporterParameter.OUTPUT_STREAM, outputStream);
-			jrExporter.exportReport();
-			connection.close();
-		} catch (JRException e) {
-			throw new RuntimeException(e);
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	public List<ClienteDevedoresVO> verificacaoClientesEmDebito() {
-		List<ClienteDevedoresVO> cVOList = new ArrayList<ClienteDevedoresVO>();
-		List<Proprietario> proprietariosComDebito = proprietarioDAO.buscarClientesEmDebito();
-		proprietariosComDebito.stream()
-				.peek(prop -> LOGGER.info("JasperService - Clientes Devedores " + prop.getNome()))		
-				.forEach(prop -> { 
-						ClienteDevedoresVO cVO = new ClienteDevedoresVO(); 
-						List<Animal> animais = prop.getAnimais();
-						cVO.setNome(prop.getNome());
-						cVO.setContato(prop.getContato().getCelular());
-						cVO.setObservacoes(prop.getObservacoes());
-						
-						//Adicionando animais
-						for (Animal a : animais) {
-							animais.add(a);
-						}
-						cVO.setAnimais(animais);
-						cVO.setTotalPendente(proprietarioDAO.buscarValorPendenteDoCliente(prop));
-						cVOList.add(cVO); 
-					});	
-
-		return cVOList;
-	}
 	
 }

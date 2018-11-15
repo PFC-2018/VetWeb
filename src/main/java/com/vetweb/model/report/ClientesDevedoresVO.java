@@ -1,6 +1,6 @@
 package com.vetweb.model.report;
 
-public class Inadimplente {
+public class ClientesDevedoresVO {
 	
 	private String nome;
 	

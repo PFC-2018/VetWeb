@@ -68,10 +68,7 @@
                                              <option value="Clientes_por_ano">
                                                 <spring:message code="clientesPorAno" />
                                              </option>
-                                             <option value="clientes_devedores">
-                                                <spring:message code="clientesDevedores" />
-                                             </option>
-                                             <option value="Inadimplentes"><spring:message code="inadimplentes"	/></option>
+                                             <option value="Inadimplentes"><spring:message code="clientesDevedores"	/></option>
                                           </select>
                                        </td>
                                     </tr>

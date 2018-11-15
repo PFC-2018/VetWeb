@@ -56,12 +56,7 @@ public class RelatorioController {
 		}
 		response.setContentType("application/pdf");
 		
-		if (reportType.equals(ReportType.clientes_devedores)) {
-			jasperService.gerarRelatorioComObjeto(ReportFactory.createReport(reportType, parameters), response.getOutputStream());
-		}else {
-			jasperService.gerarRelatorio(ReportFactory.createReport(reportType, parameters), response.getOutputStream());
-		}
-		
+		jasperService.gerarRelatorio(ReportFactory.createReport(reportType, parameters), response.getOutputStream());
 	}
 	
 	@GetMapping("/{tipoRelatorio}")
