@@ -71,6 +71,7 @@
                                              <option value="clientes_devedores">
                                                 <spring:message code="clientesDevedores" />
                                              </option>
+                                             <option value="Inadimplentes"><spring:message code="inadimplentes"	/></option>
                                           </select>
                                        </td>
                                     </tr>

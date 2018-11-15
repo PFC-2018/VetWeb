@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 import org.apache.log4j.Logger;
@@ -22,7 +23,9 @@ import com.vetweb.dao.ProprietarioDAO;
 import com.vetweb.model.Animal;
 import com.vetweb.model.ClienteDevedoresVO;
 import com.vetweb.model.Proprietario;
+import com.vetweb.model.report.Inadimplente;
 import com.vetweb.model.report.Report;
+import com.vetweb.model.report.ReportType;
 
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRExporter;
@@ -56,15 +59,21 @@ public class JasperService {
 			String reportName = report.getType().name();
 			Map<String, Object> parameterMap = new HashMap<>();
 			if (report.getParameters() != null) {
-				parameterMap = report.getParameters().stream()
+				parameterMap = report
+						.getParameters()
+						.stream()
 						.collect(Collectors.toMap(param -> param.getKey(), param -> param.getValue()));
 			}
 			String reportLocation = new ClassPathResource(reportName + ".jrxml").getFile().getAbsolutePath();
 			JasperCompileManager.compileReportToFile(reportLocation);
-			JasperPrint jasperPrint = JasperFillManager.fillReport(
-					new ClassPathResource(reportName + ".jasper").getFile().getAbsolutePath(), parameterMap,
-					connection);
-			;
+			JasperPrint jasperPrint = null;
+			if (report.getType() == ReportType.Inadimplentes) {
+				List<Inadimplente> inadimplentes = getInadimplentes();
+				jasperPrint = JasperFillManager.fillReport(new ClassPathResource(reportName + ".jasper").getFile().getAbsolutePath(), parameterMap, 
+						new JRBeanCollectionDataSource(inadimplentes));
+			} else {
+				jasperPrint = JasperFillManager.fillReport(new ClassPathResource(reportName + ".jasper").getFile().getAbsolutePath(), parameterMap, connection);
+			}
 			JRExporter jrExporter = new JRPdfExporter();
 			jrExporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
 			jrExporter.setParameter(JRExporterParameter.OUTPUT_STREAM, outputStream);
@@ -76,6 +85,32 @@ public class JasperService {
 			throw new RuntimeException(e);
 		}
 	}
+	
+	private List<Inadimplente> getInadimplentes() {
+		List<Inadimplente> inadimplentes = new ArrayList<>();
+		proprietarioDAO
+			.buscarClientesEmDebito()
+			.stream()
+			.distinct()
+			.forEach(prop -> {
+				Inadimplente inadimplente = new Inadimplente();
+				inadimplente.setNome(prop.getNome());
+				inadimplente.setDebitoTotal(proprietarioDAO.buscarValorPendenteDoCliente(prop).toString());
+				Map<String, BigDecimal> debitosPorTipoOcorrenciaECliente = proprietarioDAO.buscarDebitosPorTipoOcorrenciaECliente(prop);
+				String debitosText = mapToText(debitosPorTipoOcorrenciaECliente);
+				inadimplente.setValoresPorTipoOcorrencia(debitosText);
+				inadimplentes.add(inadimplente);
+			});
+		return inadimplentes;
+	}
+
+	private String mapToText(Map<String, BigDecimal> debitosPorTipoOcorrenciaECliente) {
+		StringBuilder stringBuilder = new StringBuilder();
+		for (Entry<String, BigDecimal> debito : debitosPorTipoOcorrenciaECliente.entrySet()) {
+			stringBuilder.append(debito.getKey() + "=" + debito.getValue() + "\n");
+		}
+		return stringBuilder.toString();
+	}	
 
 	public void gerarRelatorioComObjeto(Report report, OutputStream outputStream) throws IOException {
 		List<ClienteDevedoresVO> clientesDevedores = verificacaoClientesEmDebito();
@@ -129,5 +164,5 @@ public class JasperService {
 
 		return cVOList;
 	}
-
+	
 }

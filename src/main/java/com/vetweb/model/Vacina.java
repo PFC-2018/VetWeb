@@ -1,13 +1,14 @@
 package com.vetweb.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
-import java.io.Serializable;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -15,6 +16,14 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "tbl_vacina")
+@NamedQuery(name = "consultaValorPendenteEmVacinas",
+query="SELECT SUM (vacina.preco) FROM Vacina vacina "
+    	+ "JOIN vacina.ocorrenciasVacina ocorrenciaVacina "
+    	+ "JOIN ocorrenciaVacina.prontuario prontuario "
+    	+ "JOIN prontuario.animal animal "
+    	+ "JOIN animal.proprietario cliente "
+    	+ "WHERE cliente.pessoaId = :codigoCliente "
+    	+ "AND ocorrenciaVacina.pago = false")
 public class Vacina implements Serializable {
 
 	private static final long serialVersionUID = 1L;

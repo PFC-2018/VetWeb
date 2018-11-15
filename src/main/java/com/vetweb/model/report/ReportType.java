@@ -5,5 +5,6 @@ public enum ReportType {
 	Ocorrencia,
 	Clientes_por_ano,
 	clientes_devedores,
+	Inadimplentes
 
 }

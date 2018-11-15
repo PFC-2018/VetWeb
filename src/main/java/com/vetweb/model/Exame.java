@@ -9,10 +9,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "tbl_exame")
+@NamedQuery(name = "consultaValorPendenteEmExames", query = "SELECT SUM (exame.preco) FROM Exame exame "
+		+ "JOIN exame.exames ex "
+		+ "JOIN ex.prontuario pront "
+		+ "JOIN pront.animal animal "
+		+ "JOIN animal.proprietario prop "
+		+ "WHERE prop.pessoaId = :codigoCliente "
+		+ "AND ex.pago = false")
 public class Exame implements Serializable {
 	
 	private static final long serialVersionUID = 1L;

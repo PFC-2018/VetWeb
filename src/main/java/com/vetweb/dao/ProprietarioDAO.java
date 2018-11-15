@@ -2,8 +2,10 @@ package com.vetweb.dao;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -254,5 +256,28 @@ public class ProprietarioDAO implements IDAO<Proprietario> {
 		}
 		return clientesInativosAdimplentes;
 	}
+	
+	public Map<String, BigDecimal> buscarDebitosPorTipoOcorrenciaECliente(Proprietario proprietario) {
+		Map<String, BigDecimal> valoresPorTipoOcorrencia = new HashMap<>();
+		BigDecimal custoAtendimentos = new BigDecimal(0);
+		BigDecimal custoExames = new BigDecimal(0);
+		BigDecimal custoVacinas = new BigDecimal(0);
+		custoAtendimentos = Optional.ofNullable(entityManager
+				.createNamedQuery("consultaValorPendenteEmAtendimentos", BigDecimal.class)
+				.setParameter("codigoCliente", proprietario.getPessoaId())
+				.getSingleResult()).orElse(new BigDecimal(0));
+		custoExames =  Optional.ofNullable(entityManager
+				.createNamedQuery("consultaValorPendenteEmExames", BigDecimal.class)
+				.setParameter("codigoCliente", proprietario.getPessoaId())
+				.getSingleResult()).orElse(new BigDecimal(0));	
+		custoVacinas = Optional.ofNullable(entityManager
+    			.createNamedQuery("consultaValorPendenteEmVacinas", BigDecimal.class)
+    			.setParameter("codigoCliente", proprietario.getPessoaId())
+    			.getSingleResult()).orElse(new BigDecimal(0));
+    	valoresPorTipoOcorrencia.put(TipoOcorrenciaProntuario.ATENDIMENTO.name(), custoAtendimentos);
+    	valoresPorTipoOcorrencia.put(TipoOcorrenciaProntuario.EXAME.name(), custoExames);
+    	valoresPorTipoOcorrencia.put(TipoOcorrenciaProntuario.VACINA.name(), custoVacinas);
+		return valoresPorTipoOcorrencia;
+	}		
 	
 }

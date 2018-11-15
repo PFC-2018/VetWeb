@@ -121,6 +121,10 @@ public class AgendamentoController {
 				events.add(event);
 			});
 	}
+	
+	private boolean isScheduled(Long ocorrenciaId) {
+		return agendamentoDAO.buscarPorIdOcorrencia(ocorrenciaId) != null;
+	}
 
 	private void addEvents(LocalDate dataInicialFiltro, LocalDate dataFinalFiltro,
 			List<EventFullCalendar> events) {
@@ -215,24 +219,24 @@ public class AgendamentoController {
 			@RequestParam("dataHoraFinal") String dataEHoraFinal) {
 		Animal animal = animalDAO.buscarPorId(Long.parseLong(animalSelecionado));
 		Prontuario prontuario = animal.getProntuario();
+		ModelAndView modelAndView = new ModelAndView("redirect:/prontuario/prontuarioDoAnimal/" + prontuario.getAnimal().getAnimalId());
 		LocalDateTime dataHoraInicio = LocalDateTime.parse(dataEHoraInicial, DateTimeFormatter.ISO_DATE_TIME);
 		LocalDateTime dataHoraFim = LocalDateTime.parse(dataEHoraFinal, DateTimeFormatter.ISO_DATE_TIME);
 		TipoOcorrenciaProntuario tipoOcorrencia = TipoOcorrenciaProntuario.valueOf(tipoDeOcorrencia);
 		Agendamento agendamento = new Agendamento();
 		String opcaoDescritivo = tipoOcorrencia == VACINA? vacinaSelecionada : tipoOcorrencia == ATENDIMENTO? 
 				atendimentoSelecionado : tipoOcorrencia == EXAME? exameSelecionado : null;
-		OcorrenciaProntuario ocorrenciaProntuario = ocorrenciaFactory.criarOcorrencia(opcaoDescritivo, dataHoraInicio, tipoOcorrencia, prontuario);
-		agendamento.setOcorrencia(ocorrenciaProntuario);
-		agendamento.setDataHoraInicial(dataHoraInicio);
-		agendamento.setDataHoraFinal(dataHoraFim);
-		agendamento.setTipo(tipoOcorrencia);
-		agendamentoDAO.salvar(agendamento);
-		ModelAndView modelAndView = new ModelAndView("redirect:/prontuario/prontuarioDoAnimal/" + prontuario.getAnimal().getAnimalId());
+		try {
+			OcorrenciaProntuario ocorrenciaProntuario = ocorrenciaFactory.criarOcorrencia(opcaoDescritivo, dataHoraInicio, tipoOcorrencia, prontuario);
+			agendamento.setOcorrencia(ocorrenciaProntuario);
+			agendamento.setDataHoraInicial(dataHoraInicio);
+			agendamento.setDataHoraFinal(dataHoraFim);
+			agendamento.setTipo(tipoOcorrencia);
+			agendamentoDAO.salvar(agendamento);
+		} catch (Exception exception) {
+			modelAndView = new ModelAndView("redirect:/clientes/financeiro/" + animal.getProprietario().getPessoaId());
+		}
 		return modelAndView;
 	}
-	
-	private boolean isScheduled(Long ocorrenciaId) {
-		return agendamentoDAO.buscarPorIdOcorrencia(ocorrenciaId) != null;
-	}	
 
 }
