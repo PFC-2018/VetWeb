@@ -80,6 +80,18 @@
                                                                                             <div class="row">
                                                                                                 <div class="col-md-9 col-xs-12">
                                                                                                     <p><b>Descrição:</b> ${elementoHistorico.descricao}</p>
+                                                                                                	<!-- INICIO AGENDAMENTO -->
+	                                                                                                <h6><b>AGENDAMENTOS:</b></h6>
+	                                                                                                <c:forEach items="${elementoHistorico.agendamentos}" var="ag">
+	                                                                                                	<!-- Hora Inicial formatada -->
+	                                                                                                	<fmt:parseDate value="${ag.dataHoraInicial}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTimeInicial" type="both"/>
+	                                                                                                	<b>Data Inicial:</b> <fmt:formatDate pattern="dd/MM/yyyy HH:mm" value="${parsedDateTimeInicial}"/></br>
+	                                                                                                	
+	                                                                                                	<!-- Hora Final formatada -->
+	                                                                                                	<fmt:parseDate value="${ag.dataHoraFinal}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTimeFinal" type="both"/>
+	                                                                                                	<b>Data Final:</b> <fmt:formatDate pattern="dd/MM/yyyy HH:mm" value="${parsedDateTimeFinal}"/>
+	                                                                                                </c:forEach>
+                                                                                                	<!-- FIM AGENDAMENTO -->
                                                                                                 </div>
                                                                                                 </br>
                                                                                                 <div class="col-md-9 col-xs-12">
@@ -108,6 +120,18 @@
                                                                                             <div class="row">
                                                                                                 <div class="col-md-9 col-xs-12">
                                                                                                     <p><b>Descrição:</b> ${elementoHistorico.descricao}</p>
+                                                                                                    <!-- INICIO AGENDAMENTO -->
+	                                                                                                <h6><b>AGENDAMENTOS:</b></h6>
+	                                                                                                <c:forEach items="${elementoHistorico.agendamentos}" var="ag">
+	                                                                                                	<!-- Hora Inicial formatada -->
+	                                                                                                	<fmt:parseDate value="${ag.dataHoraInicial}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTimeInicial" type="both"/>
+	                                                                                                	<b>Data Inicial:</b> <fmt:formatDate pattern="dd/MM/yyyy HH:mm" value="${parsedDateTimeInicial}"/></br>
+	                                                                                                	
+	                                                                                                	<!-- Hora Final formatada -->
+	                                                                                                	<fmt:parseDate value="${ag.dataHoraFinal}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTimeFinal" type="both"/>
+	                                                                                                	<b>Data Final:</b> <fmt:formatDate pattern="dd/MM/yyyy HH:mm" value="${parsedDateTimeFinal}"/>
+	                                                                                                </c:forEach>
+                                                                                                	<!-- FIM AGENDAMENTO -->
                                                                                                 </div>
                                                                                                 </br>
                                                                                                 <div class="col-md-9 col-xs-12">
@@ -136,6 +160,18 @@
                                                                                             <div class="row">
                                                                                                 <div class="col-md-9 col-xs-12">
                                                                                                     <p><b>Descrição:</b> ${elementoHistorico.descricao}</p>
+                                                                                                    <!-- INICIO AGENDAMENTO -->
+	                                                                                                <h6><b>AGENDAMENTOS:</b></h6>
+	                                                                                                <c:forEach items="${elementoHistorico.agendamentos}" var="ag">
+	                                                                                                	<!-- Hora Inicial formatada -->
+	                                                                                                	<fmt:parseDate value="${ag.dataHoraInicial}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTimeInicial" type="both"/>
+	                                                                                                	<b>Data Inicial:</b> <fmt:formatDate pattern="dd/MM/yyyy HH:mm" value="${parsedDateTimeInicial}"/></br>
+	                                                                                                	
+	                                                                                                	<!-- Hora Final formatada -->
+	                                                                                                	<fmt:parseDate value="${ag.dataHoraFinal}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTimeFinal" type="both"/>
+	                                                                                                	<b>Data Final:</b> <fmt:formatDate pattern="dd/MM/yyyy HH:mm" value="${parsedDateTimeFinal}"/>
+	                                                                                                </c:forEach>
+                                                                                                	<!-- FIM AGENDAMENTO -->
                                                                                                 </div>
                                                                                                 </br>
                                                                                                 <div class="col-md-9 col-xs-12">
@@ -164,6 +200,18 @@
                                                                                             <div class="row">
                                                                                                 <div class="col-md-9 col-xs-12">
                                                                                                     <p><b>Descrição:</b> ${elementoHistorico.descricao}</p>
+                                                                                                    <!-- INICIO AGENDAMENTO -->
+	                                                                                                <h6><b>AGENDAMENTOS:</b></h6>
+	                                                                                                <c:forEach items="${elementoHistorico.agendamentos}" var="ag">
+	                                                                                                	<!-- Hora Inicial formatada -->
+	                                                                                                	<fmt:parseDate value="${ag.dataHoraInicial}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTimeInicial" type="both"/>
+	                                                                                                	<b>Data Inicial:</b> <fmt:formatDate pattern="dd/MM/yyyy HH:mm" value="${parsedDateTimeInicial}"/></br>
+	                                                                                                	
+	                                                                                                	<!-- Hora Final formatada -->
+	                                                                                                	<fmt:parseDate value="${ag.dataHoraFinal}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTimeFinal" type="both"/>
+	                                                                                                	<b>Data Final:</b> <fmt:formatDate pattern="dd/MM/yyyy HH:mm" value="${parsedDateTimeFinal}"/>
+	                                                                                                </c:forEach>
+                                                                                                	<!-- FIM AGENDAMENTO -->
                                                                                                 </div>
                                                                                                 </br>
                                                                                                 <div class="col-md-9 col-xs-12">
