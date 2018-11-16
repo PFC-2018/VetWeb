@@ -1,6 +1,8 @@
 package com.vetweb.scheduled;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -76,7 +78,7 @@ public class Scheduler {
     		.listarTodos()
     		.stream()
     		.filter(prop -> prop.isAceitaNotificacoes())
-    		.filter(prop -> p.add(prop));
+    		.forEach(prop -> p.add(prop));
     	
     	for (Proprietario proprietario : p) {
     		atendimentoDAO
@@ -86,19 +88,27 @@ public class Scheduler {
     			LocalDate.of(ate.getData().getYear(), ate.getData().getMonthValue(), ate.getData().getDayOfMonth())
     			.isEqual(LocalDate.now()))
     		.forEach(ate -> this.notificaRetornoAtendimento(ate));
-    		LOGGER.info("O proprietário "+proprietario.getNome()+" está habilitado para receber e-mail.");
 		}
-    	
     	LOGGER.info("FIM DO JOB - VERIFICANDO RETORNO DE ATENDIMENTO");
     }
     
     @SuppressWarnings("static-access")
 	private void notificaRetornoAtendimento(OcorrenciaAtendimento atendimento) {
     	Pessoa pessoaDestinatario = prontuarioDAO.buscarProntuarioDoAtendimento(atendimento).getAnimal().getProprietario();
+    	LocalDateTime dataAtend = atendimento.getData();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        String dataAtendimento = dataAtend.format(formatter);
+         
+    	LOGGER.info("ENVIANDO E-MAIL PARA O PROPRIETÁRIO: "+ pessoaDestinatario);
+    	
+    	//Mensagem do e-mail
     	StringBuilder mensagemRetorno = new StringBuilder();
-    	mensagemRetorno.append("O RETORNO DO ATENDIMENTO "
-    				+ atendimento.getTipoDeAtendimento().getNome() + " FEITO EM " + atendimento.getData() + " E HOJE. FAVOR COMPARECER A CLINICA. ");
-    	emailService.enviar(pessoaDestinatario, mensagemRetorno.toString(), "RETORNO DE ATENDIMENTO");
+    	mensagemRetorno.append("Olá Sr(a) "+pessoaDestinatario+", tudo bom? "
+    			+ "Nós da clínica VetWeb gostariamos de avisar que o retorno do seu atendimento "
+    			+ atendimento.getTipoDeAtendimento().getNome()+" realizado em " +dataAtendimento+
+    				" está marcado para data de HOJE. Por gentileza comparecer na clínica ou telefonar para reagendar seu atendimento.");
+    	emailService.enviar(pessoaDestinatario, mensagemRetorno.toString(), "Retorno do Atendimento - "+atendimento.getTipoDeAtendimento().getNome()+" - Vetweb");
+    	LOGGER.info("E-MAIL ENVIADO COM SUCESSO");
     }
     
 }

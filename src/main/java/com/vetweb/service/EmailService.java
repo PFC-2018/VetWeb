@@ -17,9 +17,9 @@ public class EmailService {
 			Email email = new SimpleEmail();
 			email.setHostName("smtp.gmail.com");
 			email.setSmtpPort(465);
-			email.setAuthenticator(new DefaultAuthenticator("springbootalura@gmail.com", "springboot"));
+			email.setAuthenticator(new DefaultAuthenticator("tecnologiaamr@gmail.com", "amr@2018"));
 			email.setSSLOnConnect(true);
-			email.setFrom("springbootalura@gmail.com");
+			email.setFrom("tecnologiaamr@gmail.com");
 			email.setSubject(subject);
 			email.setMsg(msg);
 			email.addTo(destinatario.getContato().getEmail());
