@@ -176,8 +176,6 @@ public class ProprietarioDAO implements IDAO<Proprietario> {
     }
 
 	public List<Proprietario> buscarClientesEmDebito(TipoOcorrenciaProntuario... tipoOcorrenciaProntuario) {
-		LocalDateTime dataApos30 = LocalDateTime.now().minusDays(30);
-		
 		StringBuilder query = new StringBuilder("SELECT p FROM Proprietario p "
 			+ "JOIN p.animais a "
 			+ "JOIN a.prontuario pr ");
@@ -200,27 +198,26 @@ public class ProprietarioDAO implements IDAO<Proprietario> {
 			if (tipoOcorrenciaProntuario.length > 0) {
 				for (TipoOcorrenciaProntuario tipoOcorrencia : tipoOcorrenciaProntuario) {
 					if (tipoOcorrencia == TipoOcorrenciaProntuario.VACINA) {
-						query.append("v.pago = false AND v.data < :data30 ");
+						query.append("v.pago = false ");
 					}
 					if (tipoOcorrencia == TipoOcorrenciaProntuario.ATENDIMENTO) {
 						if (query.toString().contains("v.pago")) {
 							query.append("OR ");
 						}
-						query.append("a.pago = false AND a.data < :data30 ");
+						query.append("a.pago = false ");
 					}
 					if (tipoOcorrencia == TipoOcorrenciaProntuario.EXAME) {
 						if (query.toString().contains("e.pago")) {
 							query.append("OR ");
 						}
-						query.append("e.pago = false AND e.data < :data30 ");
+						query.append("e.pago = false ");
 					}
 				}
 			} else {
-				query.append("v.pago = false OR a.pago = false OR e.pago = false AND v.data < :data30 OR a.data < :data30 OR e.data < :data30");
+				query.append("v.pago = false OR a.pago = false OR e.pago = false");
 			}
 		List<Proprietario> clientesComDebito = entityManager
-												.createQuery(query.toString(), Proprietario.class).setParameter("data30", dataApos30)
-												.getResultList();
+												.createQuery(query.toString(), Proprietario.class).getResultList();
 		return clientesComDebito;
 	}
 	
