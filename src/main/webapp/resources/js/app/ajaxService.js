@@ -228,7 +228,7 @@ var ajaxService = {
 				var listaAnimais = $('#slcAnimal');
 				listaAnimais.empty();
 				if (data.length === 0) {
-					alert('O CLIENTE NÃO TEM ANIMAIS CADASTRADOS. ');
+					console.log('O CLIENTE NÃO TEM ANIMAIS CADASTRADOS. ');
 					listaAnimais.css('display', 'none');
 				} else {
 					$.each(data, function (i, animal) {
@@ -239,7 +239,7 @@ var ajaxService = {
 				}
 			},
 			error: function (jqXHR, textStatus, errorThrown) {
-				alert('ERRO AO CARREGAR LISTA DE ANIMAIS PARA O CLIENTE. ');
+				console.log('ERRO AO CARREGAR LISTA DE ANIMAIS PARA O CLIENTE. ');
 			}
 		});
 		

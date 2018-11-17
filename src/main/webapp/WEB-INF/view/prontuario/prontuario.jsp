@@ -53,6 +53,17 @@
                                                         <button type="button" data-toggle="modal" data-target="#modalExame" class="btn btn-primary col-2">
                                                             <i class="fa fa-stethoscope fa-5x" aria-hidden="true"></i>
                                                         </button>
+														<c:choose>
+														    <c:when test="${agendaOcupada!=''}">
+							                                    <div class="sufee-alert alert with-close alert-danger alert-dismissible fade show">
+							                                        <span class="badge badge-pill badge-danger">Agenda Ocupada</span>
+							                                        ${agendaOcupada}
+							                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							                                            <span aria-hidden="true">&times;</span>
+							                                        </button>
+							                                    </div>
+														    </c:when>
+														</c:choose>
                                                     </div>
 												</div>
 

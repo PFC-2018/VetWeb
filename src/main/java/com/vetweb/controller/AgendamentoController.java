@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.vetweb.dao.AgendamentoDAO;
 import com.vetweb.dao.AnimalDAO;
@@ -37,6 +38,7 @@ import com.vetweb.model.Prontuario;
 import com.vetweb.model.Proprietario;
 import com.vetweb.model.TipoDeAtendimento;
 import com.vetweb.model.Vacina;
+import com.vetweb.model.error.DebitoOcorrenciaException;
 import com.vetweb.model.pojo.EventFullCalendar;
 import com.vetweb.model.pojo.OcorrenciaProntuario;
 import com.vetweb.model.pojo.TipoOcorrenciaProntuario;
@@ -208,6 +210,12 @@ public class AgendamentoController {
 		return modelAndView;
 	}
 	
+	private void verificaSePossuiAgenda(OcorrenciaProntuario ocorrenciaProntuario) {
+		if (agendamentoDAO.possuiAgendaPara(ocorrenciaProntuario.getData(), ocorrenciaProntuario.getData().plusHours(1))) {
+			throw new RuntimeException("AGENDA OCUPADA, REMARQUE A OCORRÊNCIA OU SELECIONE OUTRO HORÁRIO.");
+		}
+	}	
+	
 	@PostMapping("/ocorrencia")
 	public ModelAndView adicionarOcorrencia(@RequestParam("slcProprietarios") String codigoCliente, 
 			@RequestParam("slcAnimal") String animalSelecionado, 
@@ -216,7 +224,8 @@ public class AgendamentoController {
 			@RequestParam(value = "slcAtendimento", required = false) String atendimentoSelecionado, 
 			@RequestParam(value = "slcExame", required = false) String exameSelecionado, 
 			@RequestParam("dataHoraInicial") String dataEHoraInicial, 
-			@RequestParam("dataHoraFinal") String dataEHoraFinal) {
+			@RequestParam("dataHoraFinal") String dataEHoraFinal, 
+			RedirectAttributes redirectAttributes) {
 		Animal animal = animalDAO.buscarPorId(Long.parseLong(animalSelecionado));
 		Prontuario prontuario = animal.getProntuario();
 		ModelAndView modelAndView = new ModelAndView("redirect:/prontuario/prontuarioDoAnimal/" + prontuario.getAnimal().getAnimalId());
@@ -228,12 +237,18 @@ public class AgendamentoController {
 				atendimentoSelecionado : tipoOcorrencia == EXAME? exameSelecionado : null;
 		try {
 			OcorrenciaProntuario ocorrenciaProntuario = ocorrenciaFactory.criarOcorrencia(opcaoDescritivo, dataHoraInicio, tipoOcorrencia, prontuario);
+	        try {
+	        	verificaSePossuiAgenda(ocorrenciaProntuario);
+	        } catch (RuntimeException runtimeException) {
+	        	redirectAttributes.addFlashAttribute("agendaOcupada"
+	        			, "DATA/HORÁRIO SELECIONADOS ESTÃO OCUPADOS POR OUTRA OCORRÊNCIA, REMARQUE OU SELECIONE UM OUTRO MOMENTO.");
+	        };				
 			agendamento.setOcorrencia(ocorrenciaProntuario);
 			agendamento.setDataHoraInicial(dataHoraInicio);
 			agendamento.setDataHoraFinal(dataHoraFim);
 			agendamento.setTipo(tipoOcorrencia);
 			agendamentoDAO.salvar(agendamento);
-		} catch (Exception exception) {
+		} catch (DebitoOcorrenciaException exception) {
 			modelAndView = new ModelAndView("redirect:/clientes/financeiro/" + animal.getProprietario().getPessoaId());
 		}
 		return modelAndView;

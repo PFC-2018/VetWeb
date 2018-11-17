@@ -14,6 +14,7 @@ import com.vetweb.model.Prontuario;
 import com.vetweb.model.OcorrenciaPatologia;
 import com.vetweb.model.OcorrenciaVacina;
 import com.vetweb.model.Vacina;
+import com.vetweb.model.pojo.OcorrenciaProntuario;
 
 @Repository
 public class ProntuarioDAO implements IDAO<Prontuario>{
@@ -171,6 +172,10 @@ public class ProntuarioDAO implements IDAO<Prontuario>{
 				.createQuery("SELECT p FROM Prontuario p WHERE :at MEMBER OF p.atendimentos", Prontuario.class)
 				.setParameter("at", atendimento)
 				.getSingleResult();
+	}
+
+	public void removerOcorrencia(OcorrenciaProntuario ocorrenciaProntuario) {
+		entityManager.remove(ocorrenciaProntuario);
 	}
     
 }

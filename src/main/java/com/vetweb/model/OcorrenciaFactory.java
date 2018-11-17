@@ -68,6 +68,7 @@ public class OcorrenciaFactory {
 				ocorrenciaProntuario = new OcorrenciaAtendimento(tipoDeAtendimento, tipoDeAtendimento.getModeloAtendimento());
 				OcorrenciaAtendimento ocorrenciaAtendimento = (OcorrenciaAtendimento)ocorrenciaProntuario;
 				ocorrenciaAtendimento.setProntuario(prontuario);
+				ocorrenciaUtils.autorizaOcorrenciaPorDebito(ocorrenciaProntuario.getTipo(), ocorrenciaProntuario.getProntuario().getAnimal().getProprietario());
 				daoProntuario.salvarAtendimento(ocorrenciaAtendimento);
 				prontuario.getAtendimentos().add(ocorrenciaAtendimento);
 				break;
@@ -77,6 +78,7 @@ public class OcorrenciaFactory {
 				ocorrenciaProntuario = new OcorrenciaPatologia(patologia);
 				OcorrenciaPatologia ocorrenciaPatologia = (OcorrenciaPatologia) ocorrenciaProntuario;
 				ocorrenciaPatologia.setProntuario(prontuario);
+				ocorrenciaUtils.autorizaOcorrenciaPorDebito(ocorrenciaProntuario.getTipo(), ocorrenciaProntuario.getProntuario().getAnimal().getProprietario());
 				daoProntuario.salvarOcorrenciaPatologia(ocorrenciaPatologia);
 				prontuario.getPatologias().add(ocorrenciaPatologia);
 				break;
@@ -86,6 +88,7 @@ public class OcorrenciaFactory {
 				ocorrenciaProntuario = new OcorrenciaVacina(vacina);
 				OcorrenciaVacina ocorrenciaVacina = (OcorrenciaVacina)ocorrenciaProntuario;
 				ocorrenciaVacina.setProntuario(prontuario);
+				ocorrenciaUtils.autorizaOcorrenciaPorDebito(ocorrenciaProntuario.getTipo(), ocorrenciaProntuario.getProntuario().getAnimal().getProprietario());
 				daoProntuario.salvarOcorrenciaVacina(ocorrenciaVacina);
 				prontuario.getVacinas().add(ocorrenciaVacina);
 				break;
@@ -95,6 +98,7 @@ public class OcorrenciaFactory {
 				ocorrenciaProntuario = new OcorrenciaExame(exame);
 				OcorrenciaExame ocorrenciaExame = (OcorrenciaExame)ocorrenciaProntuario;
 				ocorrenciaExame.setProntuario(prontuario);
+				ocorrenciaUtils.autorizaOcorrenciaPorDebito(ocorrenciaProntuario.getTipo(), ocorrenciaProntuario.getProntuario().getAnimal().getProprietario());
 				daoProntuario.salvarOcorrenciaExame(ocorrenciaExame);
 				prontuario.getExames().add(ocorrenciaExame);
 				break;
@@ -102,8 +106,6 @@ public class OcorrenciaFactory {
 		}
 		ocorrenciaProntuario.setData(dataHoraInicio);
 		ocorrenciaProntuario.setTipo(tipoOcorrencia);
-		Proprietario proprietario = ocorrenciaProntuario.getProntuario().getAnimal().getProprietario();
-		ocorrenciaUtils.autorizaOcorrenciaPorDebito(ocorrenciaProntuario.getTipo(), proprietario);
 		daoProntuario.salvar(prontuario);
 		return ocorrenciaProntuario;
 	}

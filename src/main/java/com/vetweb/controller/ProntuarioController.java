@@ -181,7 +181,8 @@ public class ProntuarioController {
     @Cacheable(cacheNames = "prontuario")
     @RequestMapping(value = "/prontuarioDoAnimal/{animalId}", method = RequestMethod.GET)
     public ModelAndView prontuarioDoAnimal(@PathVariable("animalId") final Long animalId, @ModelAttribute("atendimento") OcorrenciaAtendimento atendimento,
-    		@ModelAttribute("prontuarioPatologia") Patologia patologia, @ModelAttribute("prontuarioVacina") Vacina vacina) {
+    		@ModelAttribute("prontuarioPatologia") Patologia patologia, @ModelAttribute("prontuarioVacina") Vacina vacina,
+    		@ModelAttribute("agendaOcupada") String agendaOcupada) {
         ModelAndView modelAndView = new ModelAndView("prontuario/prontuario");
         Prontuario prontuario = prontuarioDAO.buscarProntuarioPorAnimal(animalId);
 		modelAndView.addObject("prontuario", prontuario);
@@ -196,6 +197,7 @@ public class ProntuarioController {
 		modelAndView.addObject("historico", elementosHistorico);
     	Proprietario proprietario = prontuario.getAnimal().getProprietario();
     	addDebitosClientePagina(modelAndView, proprietario);
+    	if (agendaOcupada != null) modelAndView.addObject("agendaOcupada", agendaOcupada);
         return modelAndView;
     }
 
@@ -230,7 +232,13 @@ public class ProntuarioController {
     	atendimento.setProntuario(prontuario);
         prontuarioDAO.salvarAtendimento(atendimento);
         notificaCliente(atendimento);
-        agendarOcorrencia(atendimento);
+        try {
+        	agendarOcorrencia(atendimento);
+        } catch (RuntimeException runtimeException) {
+        	prontuarioDAO.removerAtendimento(atendimento);
+        	redirectAttributes.addFlashAttribute("agendaOcupada"
+        			, "DATA/HORÁRIO SELECIONADOS ESTÃO OCUPADOS POR OUTRA OCORRÊNCIA, REMARQUE OU SELECIONE UM OUTRO MOMENTO.");
+        }
 		return modelAndView;
     }
 
@@ -277,20 +285,30 @@ public class ProntuarioController {
     	ocorrenciaExame.setTipo(TipoOcorrenciaProntuario.EXAME);
     	Exame exame = exameDAO.buscarPorDescricao(exameDescricao);
 		ocorrenciaExame.setExame(exame);
-		agendarOcorrencia(ocorrenciaExame);
+        try {
+        	agendarOcorrencia(ocorrenciaExame);
+        } catch (RuntimeException runtimeException) {
+        	prontuarioDAO.removerOcorrenciaExame(ocorrenciaExame);
+        	redirectAttributes.addFlashAttribute("agendaOcupada"
+        			, "DATA/HORÁRIO SELECIONADOS ESTÃO OCUPADOS POR OUTRA OCORRÊNCIA, REMARQUE OU SELECIONE UM OUTRO MOMENTO.");
+        };
 		prontuarioDAO.salvarOcorrenciaExame(ocorrenciaExame);
 		notificaCliente(ocorrenciaExame);
 		return modelAndView;
     }
 
 	private void agendarOcorrencia(OcorrenciaProntuario ocorrenciaProntuario) {
-		if (ocorrenciaProntuario.getData().isAfter(LocalDateTime.now())) {
-			Agendamento agendamento = new Agendamento();
-			agendamento.setOcorrencia(ocorrenciaProntuario);
-			agendamento.setTipo(TipoOcorrenciaProntuario.EXAME);
-			agendamento.setDataHoraInicial(ocorrenciaProntuario.getData());
-			agendamento.setDataHoraFinal(ocorrenciaProntuario.getData().plusHours(1));
-			agendamentoDAO.salvar(agendamento);
+		if (agendamentoDAO.possuiAgendaPara(ocorrenciaProntuario.getData(), ocorrenciaProntuario.getData().plusHours(1))) {
+			throw new RuntimeException("AGENDA OCUPADA, REMARQUE A OCORRÊNCIA OU SELECIONE OUTRO HORÁRIO.");
+		} else {
+			if (ocorrenciaProntuario.getData().isAfter(LocalDateTime.now())) {
+				Agendamento agendamento = new Agendamento();
+				agendamento.setOcorrencia(ocorrenciaProntuario);
+				agendamento.setTipo(TipoOcorrenciaProntuario.EXAME);
+				agendamento.setDataHoraInicial(ocorrenciaProntuario.getData());
+				agendamento.setDataHoraFinal(ocorrenciaProntuario.getData().plusHours(1));
+				agendamentoDAO.salvar(agendamento);
+			}
 		}
 	}
     
@@ -313,7 +331,13 @@ public class ProntuarioController {
 		prontuarioVacina.setProntuario(prontuario);
 		prontuarioVacina.setData(LocalDateTime.parse(inclusaoVacina, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm")));
     	prontuarioDAO.salvarOcorrenciaVacina(prontuarioVacina);
-    	agendarOcorrencia(prontuarioVacina);
+        try {
+        	agendarOcorrencia(prontuarioVacina);
+        } catch (RuntimeException runtimeException) {
+        	prontuarioDAO.removerOcorrenciaVacina(prontuarioVacina);
+        	redirectAttributes.addFlashAttribute("agendaOcupada"
+        			, "DATA/HORÁRIO SELECIONADOS ESTÃO OCUPADOS POR OUTRA OCORRÊNCIA, REMARQUE OU SELECIONE UM OUTRO MOMENTO.");
+        };
     	notificaCliente(prontuarioVacina);
 		return modelAndView;
     }

@@ -7,7 +7,6 @@
 
     <jsp:attribute name="jsFooter">
         <script src="<c:url value="/resources/js/fullcalendar/lib/moment.min.js"></c:url>" type="text/javascript"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
         <script src="<c:url value="/resources/js/fullcalendar/fullcalendar.js"></c:url>" type="text/javascript"></script>
         <script src="<c:url value="/resources/js/fullcalendar/pt-br.js"></c:url>" type="text/javascript"></script>
         <script>
@@ -21,7 +20,6 @@
 	        var remarcacaoType = null;
         
 	        $(document).ready(function() {
-        		$('#dataRemarcacao').datetimepicker();
 	        	ajaxService.buscarAnimaisPorCliente();
 	    		  $('#calendar').fullCalendar({
 	    			height: 750,
@@ -52,13 +50,10 @@
 				      		try {
 			   				 	ajaxService.remarcarOcorrencia(event.id, event.type, moment(event.start._i).format('YYYY-MM-DDTHH:mm'), moment(event.end._i).format('YYYY-MM-DDTHH:mm'));
 				      		} catch(e) {
-				      			 if (confirm('JÁ EXISTE OCORRÊNCIA NA DATA/INTERVALO SELECIONADO. DESEJA REMARCAR A OCORRÊNCIA SOBRESCRITA OU CANCELAR A OPERAÇÃO?')) {
-				      				remarcacao = event.id;
-				      				remarcacaoType = event.type;
-				      				remarcacaoInicio = moment(event.start._i).format('YYYY-MM-DDTHH:mm');
-				      				remarcacaoFim = moment(event.end._i).format('YYYY-MM-DDTHH:mm');
-				      				$('#modalReagendar').modal('show');
-				      			 }
+				      			revertFunc();
+				      			swal("AGENDA OCUPADA", 
+				      					"A DATA/HORA SELECIONADA ESTÁ OCUPADA POR OUTRO AGENDAMENTO, FAVOR REMARCA-LO NO CALENDÁRIO OU SELECIONAR OUTRO MOMENTO",
+				      					"error");
 				      		}
 				      	}
 					},

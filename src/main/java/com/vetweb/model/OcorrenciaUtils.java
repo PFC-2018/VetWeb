@@ -12,7 +12,7 @@ public class OcorrenciaUtils {
 	
 	@Autowired
 	private ProprietarioDAO proprietarioDAO;
-
+	
 	public void autorizaOcorrenciaPorDebito(TipoOcorrenciaProntuario tipoOcorrenciaProntuario, Proprietario proprietario) {
 		if (proprietario.isAtivo()) {
 			return;
