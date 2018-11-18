@@ -38,7 +38,6 @@ import com.vetweb.model.Prontuario;
 import com.vetweb.model.Proprietario;
 import com.vetweb.model.TipoDeAtendimento;
 import com.vetweb.model.Vacina;
-import com.vetweb.model.error.DebitoOcorrenciaException;
 import com.vetweb.model.pojo.EventFullCalendar;
 import com.vetweb.model.pojo.OcorrenciaProntuario;
 import com.vetweb.model.pojo.TipoOcorrenciaProntuario;
@@ -210,11 +209,11 @@ public class AgendamentoController {
 		return modelAndView;
 	}
 	
-	private void verificaSePossuiAgenda(OcorrenciaProntuario ocorrenciaProntuario) {
-		if (agendamentoDAO.possuiAgendaPara(ocorrenciaProntuario.getData(), ocorrenciaProntuario.getData().plusHours(1))) {
+	private void verificaSePossuiAgenda(LocalDateTime dataHoraInicial, LocalDateTime dataHoraFinal) {
+		if (agendamentoDAO.possuiAgendaPara(dataHoraInicial, dataHoraFinal)) {
 			throw new RuntimeException("AGENDA OCUPADA, REMARQUE A OCORRÊNCIA OU SELECIONE OUTRO HORÁRIO.");
 		}
-	}	
+	}		
 	
 	@PostMapping("/ocorrencia")
 	public ModelAndView adicionarOcorrencia(@RequestParam("slcProprietarios") String codigoCliente, 
@@ -224,31 +223,32 @@ public class AgendamentoController {
 			@RequestParam(value = "slcAtendimento", required = false) String atendimentoSelecionado, 
 			@RequestParam(value = "slcExame", required = false) String exameSelecionado, 
 			@RequestParam("dataHoraInicial") String dataEHoraInicial, 
-			@RequestParam("dataHoraFinal") String dataEHoraFinal, 
+			@RequestParam("dataHoraFinal") String dataEHoraFinal,
 			RedirectAttributes redirectAttributes) {
 		Animal animal = animalDAO.buscarPorId(Long.parseLong(animalSelecionado));
 		Prontuario prontuario = animal.getProntuario();
 		ModelAndView modelAndView = new ModelAndView("redirect:/prontuario/prontuarioDoAnimal/" + prontuario.getAnimal().getAnimalId());
 		LocalDateTime dataHoraInicio = LocalDateTime.parse(dataEHoraInicial, DateTimeFormatter.ISO_DATE_TIME);
 		LocalDateTime dataHoraFim = LocalDateTime.parse(dataEHoraFinal, DateTimeFormatter.ISO_DATE_TIME);
+		try {
+			verificaSePossuiAgenda(dataHoraInicio, dataHoraFim);
+		} catch (RuntimeException exception) {
+        	redirectAttributes.addFlashAttribute("agendaOcupada"
+        			, "DATA/HORÁRIO SELECIONADOS ESTÃO OCUPADOS POR OUTRA OCORRÊNCIA, REMARQUE OU SELECIONE UM OUTRO MOMENTO.");
+        	return modelAndView;
+		}
 		TipoOcorrenciaProntuario tipoOcorrencia = TipoOcorrenciaProntuario.valueOf(tipoDeOcorrencia);
 		Agendamento agendamento = new Agendamento();
 		String opcaoDescritivo = tipoOcorrencia == VACINA? vacinaSelecionada : tipoOcorrencia == ATENDIMENTO? 
 				atendimentoSelecionado : tipoOcorrencia == EXAME? exameSelecionado : null;
 		try {
 			OcorrenciaProntuario ocorrenciaProntuario = ocorrenciaFactory.criarOcorrencia(opcaoDescritivo, dataHoraInicio, tipoOcorrencia, prontuario);
-	        try {
-	        	verificaSePossuiAgenda(ocorrenciaProntuario);
-	        } catch (RuntimeException runtimeException) {
-	        	redirectAttributes.addFlashAttribute("agendaOcupada"
-	        			, "DATA/HORÁRIO SELECIONADOS ESTÃO OCUPADOS POR OUTRA OCORRÊNCIA, REMARQUE OU SELECIONE UM OUTRO MOMENTO.");
-	        };				
 			agendamento.setOcorrencia(ocorrenciaProntuario);
 			agendamento.setDataHoraInicial(dataHoraInicio);
 			agendamento.setDataHoraFinal(dataHoraFim);
 			agendamento.setTipo(tipoOcorrencia);
 			agendamentoDAO.salvar(agendamento);
-		} catch (DebitoOcorrenciaException exception) {
+		} catch (Exception exception) {
 			modelAndView = new ModelAndView("redirect:/clientes/financeiro/" + animal.getProprietario().getPessoaId());
 		}
 		return modelAndView;
