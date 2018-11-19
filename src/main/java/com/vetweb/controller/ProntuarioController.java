@@ -186,13 +186,25 @@ public class ProntuarioController {
         ModelAndView modelAndView = new ModelAndView("prontuario/prontuario");
         Prontuario prontuario = prontuarioDAO.buscarProntuarioPorAnimal(animalId);
 		modelAndView.addObject("prontuario", prontuario);
-		modelAndView.addObject("tiposDeAtendimento", atendimentoDAO.buscarTiposDeAtendimento());
-		modelAndView.addObject("vacinas", prontuarioDAO.buscarVacinas().stream()
-	    		.map(vac -> vac.getNome()).collect(Collectors.toList()));
-		modelAndView.addObject("patologias", animalDAO.buscarPatologias().stream()
-	    		.map(pat -> pat.getNome()).collect(Collectors.toList()));
-		modelAndView.addObject("exames", exameDAO.listarTodos().stream()
-    			.map(exame -> exame.getDescricao()).collect(Collectors.toList()));
+		modelAndView.addObject("tiposDeAtendimento", atendimentoDAO.buscarTiposDeAtendimento()
+				.stream()
+				.filter(tipoAt -> tipoAt.isStatus())
+				.collect(Collectors.toList()));
+		modelAndView.addObject("vacinas", prontuarioDAO.buscarVacinas()
+				.stream()
+				.filter(vac -> vac.isStatus())
+	    		.map(vac -> vac.getNome())
+	    		.collect(Collectors.toList()));
+		modelAndView.addObject("patologias", animalDAO.buscarPatologias()
+				.stream()
+				.filter(pat -> pat.isAtivo())
+	    		.map(pat -> pat.getNome())
+	    		.collect(Collectors.toList()));
+		modelAndView.addObject("exames", exameDAO.listarTodos()
+				.stream()
+				.filter(ex -> ex.isAtivo())
+    			.map(exame -> exame.getDescricao())
+    			.collect(Collectors.toList()));
 		List<OcorrenciaProntuario> elementosHistorico = adicionaHistoricoAoProntuario(prontuario);
 		modelAndView.addObject("historico", elementosHistorico);
     	Proprietario proprietario = prontuario.getAnimal().getProprietario();

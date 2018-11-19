@@ -52,6 +52,7 @@
 								<form:radiobutton path="ativo" id="ativo" value="false" />
 								Não
 							</div>
+							
 							<div class="form-group">
 								<label for="descricao">Descrição:</label>
 								<form:input class="form-control input-default col-sm-4"

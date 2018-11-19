@@ -44,6 +44,7 @@ public class Exame implements Serializable {
 	
 	private Duration duracao;
 	
+	private boolean ativo;
 	
 	@OneToMany(mappedBy = "exame")
 	@JsonBackReference
@@ -105,6 +106,14 @@ public class Exame implements Serializable {
 
 	public void setDuracao(Duration duracao) {
 		this.duracao = duracao;
+	}
+
+	public boolean isAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
 	}
     
 }

@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -80,11 +81,11 @@ public class AgendamentoController {
 	private void addDependenciasParaNovoEvento(ModelAndView modelAndView) {
 		List<Proprietario> clientesParaSelecionar = proprietarioDAO.listarTodos();
 		modelAndView.addObject("todosOsClientes", clientesParaSelecionar);
-		List<TipoDeAtendimento> tiposDeAtendimentoDisponiveis = atendimentoDAO.buscarTiposDeAtendimento();
+		List<TipoDeAtendimento> tiposDeAtendimentoDisponiveis = atendimentoDAO.buscarTiposDeAtendimento().stream().filter(ta -> ta.isStatus()).collect(Collectors.toList());
 		modelAndView.addObject("tiposDeAtendimento", tiposDeAtendimentoDisponiveis);
-		List<Vacina> vacinasDisponiveis = prontuarioDAO.buscarVacinas();
+		List<Vacina> vacinasDisponiveis = prontuarioDAO.buscarVacinas().stream().filter(vac -> vac.isStatus()).collect(Collectors.toList());
 		modelAndView.addObject("todasAsVacinas", vacinasDisponiveis);
-		List<Exame> examesDisponiveis = exameDAO.listarTodos();
+		List<Exame> examesDisponiveis = exameDAO.listarTodos().stream().filter(ex -> ex.isAtivo()).collect(Collectors.toList());
 		modelAndView.addObject("exames", examesDisponiveis);
 	}
 	

@@ -69,6 +69,14 @@
 		                        <td><form:textarea class="form-control input-default col-sm-4" cols="3" rows="15" path="encerramento" id="encerramento"></form:textarea></td>
 		                    </tr>                    
 		                    </div>
+		                    
+							<div class="form-group">
+								<label for="ativo">Ativo:</label>
+								<form:radiobutton path="ativo" id="ativo" value="true" />
+								Sim
+								<form:radiobutton path="ativo" id="ativo" value="false" />
+								Não
+							</div>
                            
                            
                            <div class="form-group">

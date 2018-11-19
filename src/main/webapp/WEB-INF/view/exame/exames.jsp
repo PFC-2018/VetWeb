@@ -72,6 +72,7 @@
 				                    <th><spring:message code="encerramento"></spring:message></th>
 				                    <th><spring:message code="custo"></spring:message></th>
 				                    <th><spring:message code="duracao"></spring:message></th>
+				                    <th>Status</th>
                               </tr>
                            </thead>
                            <tbody>
@@ -99,6 +100,12 @@
                                     <td>
                                        ${exame.duracao}
                                     </td>
+			                        <c:if test="${exame.ativo == true}">
+										<td>Ativo</td>
+									</c:if>
+									<c:if test="${exame.ativo == false}">
+										<td>Inativo</td>
+									</c:if>                                    
                                  </tr>
                               </c:forEach>
                            </tbody>
