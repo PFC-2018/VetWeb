@@ -355,10 +355,8 @@ public class ProntuarioController {
     }
 
     @RequestMapping(value = "/remover/{prontuarioId}/{ocorrenciaId}", method = RequestMethod.GET)
-    public ModelAndView remover(@PathVariable("prontuarioId")Long prontuarioId, @PathVariable("ocorrenciaId")Long ocorrenciaId,
-    		@ModelAttribute("atendimento") OcorrenciaAtendimento atendimento,
-    		@ModelAttribute("prontuarioPatologia") Patologia patologia,
-    		@ModelAttribute("prontuarioVacina") Vacina vacina) {
+    public ModelAndView remover(@PathVariable("prontuarioId")Long prontuarioId, 
+    		@PathVariable("ocorrenciaId")Long ocorrenciaId) {
     	Prontuario prontuario = prontuarioDAO.buscarPorId(prontuarioId);
     	ModelAndView modelAndView = new ModelAndView("redirect:/prontuario/prontuarioDoAnimal/" + prontuario.getAnimal().getAnimalId());
 		modelAndView.addObject("prontuario", prontuario);
