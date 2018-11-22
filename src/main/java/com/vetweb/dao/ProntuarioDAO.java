@@ -45,6 +45,11 @@ public class ProntuarioDAO implements IDAO<Prontuario>{
         return entityManager
         		.find(Prontuario.class, id);
     }
+    
+    public OcorrenciaProntuario buscarPorIdOcorrencia(long idOcorrencia) {
+    	return entityManager
+    			.find(OcorrenciaProntuario.class, idOcorrencia);
+    }
 
     @Override
     public void remover(Prontuario prontuario) {
