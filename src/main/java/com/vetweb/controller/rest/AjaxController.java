@@ -93,26 +93,29 @@ public class AjaxController {
     	return prontuarioVacina;
     }
     
-    @RequestMapping(value = "/atualizaStatusPagoAtendimento/{atendimentoId}", method = RequestMethod.GET)
-    public boolean atualizaStatusPagamento(@PathVariable("atendimentoId") final Long atendimentoId) {
-    	OcorrenciaAtendimento atendimento = atendimentoDAO.buscarPorId(atendimentoId);
-    	atendimento.setPago(!atendimento.isPago());
-    	atendimentoDAO.salvar(atendimento);
-    	return atendimento.isPago();
-    }
-    
-    @RequestMapping(value = "/atualizaStatusPagoVacina/{prontuarioVacinaId}", method = RequestMethod.GET)
-    public boolean atualizaStatusPagamentoVacina(@PathVariable("prontuarioVacinaId") final Long prontuarioVacinaId) {
-    	OcorrenciaVacina vacina = prontuarioDAO.buscarOcorrenciaVacina(prontuarioVacinaId);
-    	vacina.setPago(!vacina.isPago());
-    	return vacina.isPago();    	
-    }
-    
-    @RequestMapping(value = "/atualizaStatusPagoExame/{exameId}", method = RequestMethod.GET)
-    public boolean atualizaStatusPagoExame(@PathVariable("exameId") final Long exameId) {
-    	OcorrenciaExame ocorrenciaExame = prontuarioDAO.buscarOcorrenciaExame(exameId);
-    	ocorrenciaExame.setPago(!ocorrenciaExame.isPago());
-    	return ocorrenciaExame.isPago();
+    @SuppressWarnings("incomplete-switch")
+	@RequestMapping(value = "/atualizar-status-pagamento/{tipo}/{ocorrenciaId}", method = RequestMethod.GET)
+    public boolean atualizaStatusPagamento(@PathVariable("tipo")String tipoOcorrencia, @PathVariable("ocorrenciaId") final Long ocorrenciaId) {
+    	OcorrenciaProntuario ocorrenciaProntuario = ocorrenciaFactory.getOcorrencia(tipoOcorrencia, ocorrenciaId);
+    	TipoOcorrenciaProntuario tipo = TipoOcorrenciaProntuario.valueOf(tipoOcorrencia);
+    	switch (tipo) {
+		case ATENDIMENTO:
+			OcorrenciaAtendimento atendimento = (OcorrenciaAtendimento)ocorrenciaProntuario;
+			atendimento.setPago(!atendimento.isPago());
+			atendimentoDAO.salvar(atendimento);
+			return atendimento.isPago();
+		case EXAME:
+			OcorrenciaExame exame = (OcorrenciaExame)ocorrenciaProntuario;
+			exame.setPago(!exame.isPago());
+			prontuarioDAO.salvarOcorrenciaExame(exame);
+			return exame.isPago();
+		case VACINA:
+			OcorrenciaVacina vacina = (OcorrenciaVacina)ocorrenciaProntuario;
+			vacina.setPago(!vacina.isPago());
+			prontuarioDAO.salvarOcorrenciaVacina(vacina);
+			return vacina.isPago();
+		}
+    	return false;
     }
     
     @RequestMapping(value = "/racasPorEspecie/{especie}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)

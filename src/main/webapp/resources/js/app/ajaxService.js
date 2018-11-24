@@ -127,49 +127,17 @@ var ajaxService = {
 		
 	},
 	
-	alterarStatusPagamentoAtendimento: function(atendimentoId) {
+	alterarStatusPagamentoOcorrencia: function(tipo, idOcorrencia) {
 		
 		$.ajax({
 		    type: 'GET',
-		    url: '/vetweb/ajax/prontuario/atualizaStatusPagoAtendimento/' + atendimentoId,
+		    url: '/vetweb/ajax/prontuario/atualizar-status-pagamento/' + tipo + '/' + idOcorrencia,
 		    contentType: 'text/html',
 		    success: function (data, textStatus, jqXHR) {
-		    	alert('STATUS DE PAGAMENTO DO ATENDIMENTO ALTERADO.	');
+		    	alert('STATUS DE PAGAMENTO ALTERADO.	');
 		    },
 		    error: function (jqXHR, textStatus, errorThrown) {
-		    	alert('ERRO AO ALTERAR O STATUS DE PAGAMENTO DO ATENDIMENTO.	');
-		    }
-		});
-		
-	},
-	
-	alterarStatusPagamentoExame: function(exameId) {
-		
-		$.ajax({
-			type: 'GET',
-			url: '/vetweb/ajax/prontuario/atualizaStatusPagoExame/' + exameId,
-			contentType: 'text/html',
-			success: function (data, textStatus, jqXHR) {
-				alert('STATUS DE PAGAMENTO DO EXAME ALTERADO.	');
-			},
-			error: function (jqXHR, textStatus, errorThrown) {
-				alert('ERRO AO ALTERAR O STATUS DE PAGAMENTO DO EXAME.	');
-			}
-		});
-		
-	},
-	
-	alterarStatusPagamentoVacina: function(prontuarioVacinaId) {
-		
-		$.ajax({
-		    type: 'GET',
-		    url: '/vetweb/ajax/prontuario/atualizaStatusPagoVacina/' + prontuarioVacinaId,
-		    contentType: 'text/html',
-		    success: function (data, textStatus, jqXHR) {
-		    	alert('STATUS DE PAGAMENTO DA VACINA ALTERADO.	');
-		    },
-		    error: function (jqXHR, textStatus, errorThrown) {
-		    	alert('ERRO AO ALTERAR O STATUS DE PAGAMENTO DA VACINA.	');
+		    	alert('ERRO AO ALTERAR O STATUS DE PAGAMENTO.	');
 		    }
 		});
 		

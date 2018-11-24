@@ -91,7 +91,7 @@
                                           <input
                                           type="checkbox" class="flagPago"
                                           ${atendimento.pago? 'checked' : ''}
-                                          onclick="ajaxService.alterarStatusPagamentoAtendimento(${atendimento.ocorrenciaId})" />
+                                          onclick="ajaxService.alterarStatusPagamentoOcorrencia('${atendimento.tipo}',${atendimento.ocorrenciaId})" />
                                        </td>
                                        <td>
                                           ${atendimento.data}
@@ -126,7 +126,7 @@
                                        <input
                                        type="checkbox" class="flagPago"
                                        ${vacina.pago? 'checked' : ''}
-                                       onclick="ajaxService.alterarStatusPagamentoVacina(${vacina.ocorrenciaId})" />
+                                       onclick="ajaxService.alterarStatusPagamentoOcorrencia('${vacina.tipo}',${vacina.ocorrenciaId})" />
                                     </td>
                                  </tr>
                               </c:forEach>
@@ -156,7 +156,7 @@
                                     <td>
                                        <input type="checkbox" class="flagPago" 
                                        ${exame.pago? 'checked' : ''} 
-                                       onclick="ajaxService.alterarStatusPagamentoExame(${exame.ocorrenciaId})"	/>
+                                       onclick="ajaxService.alterarStatusPagamentoOcorrencia('${exame.tipo}',${exame.ocorrenciaId})"	/>
                                     </td>
                                  </tr>
                               </c:forEach>
