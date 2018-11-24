@@ -36,7 +36,9 @@
 						                   
 		                   <select id="slcProprietarios" name="slcProprietarios">
 		                   		<c:forEach items="${proprietarios}" var="prop">
-		                   			<option value="${prop.pessoaId}">${prop}</option>
+			                   		<c:when test="${prop.ativo == true}">
+	                         			<option value="${prop.pessoaId}">${prop}</option>
+	                                </c:when>
 		                   		</c:forEach>
 		                   </select>
 		                   
