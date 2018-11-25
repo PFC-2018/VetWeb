@@ -289,6 +289,10 @@
 						<li><a class="has-default"
 							href="<c:url value="/relatorios"></c:url>" aria-expanded="false"><i
 								class="fa fa-bar-chart"></i><span class="hide-menu">Relatórios</span></a></li>
+								
+						<li><a class="has-default"
+							href="/vetweb-auth/index.xhtml" aria-expanded="false"><i
+								class="fa fa-lock"></i><span class="hide-menu">Usuários e Permissões</span></a></li>
 
 						<li class="nav-label">Cadastros</li>
 						<li><a class="has-arrow" href="#" aria-expanded="false"><i
