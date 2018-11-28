@@ -36,13 +36,13 @@
 						                   
 		                   <select id="slcProprietarios" name="slcProprietarios">
 		                   		<c:forEach items="${proprietarios}" var="prop">
-			                   		<c:when test="${prop.ativo == true}">
+		                   			<c:if test="${prop.ativo == true}">
 	                         			<option value="${prop.pessoaId}">${prop}</option>
-	                                </c:when>
+	                                </c:if> 
 		                   		</c:forEach>
 		                   </select>
 		                   
-		                   <br	/>
+		                   <br/>
 		                
 						<label id="lblAnimal" for="slcAnimal"><spring:message code="nomeAnimal"/></label>   
 		                   <select id="slcAnimal" style="display: none;" name="slcAnimal"></select><br>
