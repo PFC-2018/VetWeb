@@ -290,10 +290,6 @@
 							href="<c:url value="/relatorios"></c:url>" aria-expanded="false"><i
 								class="fa fa-bar-chart"></i><span class="hide-menu">Relatórios</span></a></li>
 								
-						<li><a class="has-default"
-							href="/vetweb-auth/index.xhtml" aria-expanded="false"><i
-								class="fa fa-lock"></i><span class="hide-menu">Usuários e Permissões</span></a></li>
-
 						<li class="nav-label">Cadastros</li>
 						<li><a class="has-arrow" href="#" aria-expanded="false"><i
 								class="fa fa-folder-open"></i><span class="hide-menu">Cadastros<span
@@ -312,13 +308,19 @@
 
 
 						<li class="nav-label">Extras</li>
-						<li><a class="has-default"
-							href="<c:url value="${urlClinica}"></c:url>"
-							aria-expanded="false"><i class="fa fa-institution"></i><span
-								class="hide-menu">Clínica</span></a>
-						<li><a class="has-default"
-							href="<c:url value="/logout"></c:url>" aria-expanded="false"><i
-								class="fa fa-power-off"></i><span class="hide-menu">Sair</span></a></li>
+						<li>
+						<a class="has-default" href="<c:url value="${urlClinica}"></c:url>" aria-expanded="false">
+							<i class="fa fa-institution"></i>
+							<span class="hide-menu">Clínica</span></a>
+						<li>
+							<a class="has-default" href="/vetweb-auth/index.xhtml" aria-expanded="false">
+							<i class="fa fa-lock"></i><span class="hide-menu">Usuários e Permissões</span></a>
+						</li>
+						
+						<li>
+							<a class="has-default" href="<c:url value="/logout"></c:url>" aria-expanded="false">
+							<i class="fa fa-power-off"></i><span class="hide-menu">Sair</span></a>
+						</li>
 					</ul>
 				</nav>
 				<!-- FIM Sidebar navigation - MENU-->
@@ -331,8 +333,7 @@
 		<jsp:doBody></jsp:doBody>
 		<!-- FIM CORPO DA PÁGINA  -->
 		<!-- INICIO RODAPE -->
-		<footer class="footer">&copy; 2018 - Desenvolvido pela AMR
-			Tecnologia.</footer>
+		<footer class="footer">&copy; 2018 - Desenvolvido pela AMR Tecnologia.</footer>
 		<!-- FIM RODAPE -->
 	</div>
 
