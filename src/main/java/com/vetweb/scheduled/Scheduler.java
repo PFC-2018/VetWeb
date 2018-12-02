@@ -86,6 +86,7 @@ public class Scheduler {
     		.stream()
     		.filter(ate -> 
     			LocalDate.of(ate.getData().getYear(), ate.getData().getMonthValue(), ate.getData().getDayOfMonth())
+    			.plus(ate.getTipoDeAtendimento().getFrequencia())
     			.isEqual(LocalDate.now()))
     		.forEach(ate -> this.notificaRetornoAtendimento(ate));
 		}

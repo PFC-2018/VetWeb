@@ -39,13 +39,13 @@ LEFT JOIN tbl_exame_event exame ON ocorrencia.ocorrenciaid = exame.ocorrenciaid
 LEFT JOIN tbl_patologia_event patologia ON ocorrencia.ocorrenciaid = patologia.ocorrenciaid
 LEFT JOIN tbl_atendimento atendimento ON ocorrencia.ocorrenciaid = atendimento.ocorrenciaid
 LEFT JOIN tbl_vacina_event vacina ON ocorrencia.ocorrenciaid = vacina.ocorrenciaid
-WHERE prontuario.prontuarioid = atendimento.prontuarioid
+WHERE (prontuario.prontuarioid = atendimento.prontuarioid
 OR prontuario.prontuarioid = exame.prontuarioid
 OR prontuario.prontuarioid = patologia.prontuarioid
-OR prontuario.prontuarioid = vacina.prontuarioid
+OR prontuario.prontuarioid = vacina.prontuarioid)
 AND prontuario.animalid = animal.animalid
 AND cliente.pessoaid = pessoa.pessoaid
-AND ocorrencia.data BETWEEN $P{Data_Ini} AND $P{Data_Fim};]]>
+AND cliente.pessoaid = animal.proprietarioid]]>
 	</queryString>
 	<field name="codigo_prontuario" class="java.lang.Long"/>
 	<field name="nome_cliente" class="java.lang.String"/>
