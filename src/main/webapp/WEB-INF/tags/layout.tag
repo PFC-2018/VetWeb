@@ -310,7 +310,7 @@
 							<i class="fa fa-institution"></i>
 							<span class="hide-menu"><spring:message code="clinica" /></span></a>
 						<li>
-							<a class="has-default" href="/vetweb-auth/index.xhtml" aria-expanded="false">
+							<a class="has-default" href="/vetweb-auth/index.xhtml" target="_blank" aria-expanded="false">
 							<i class="fa fa-lock"></i><span class="hide-menu"><spring:message code="usuariosPermissoes" /></span></a>
 						</li>
 						
