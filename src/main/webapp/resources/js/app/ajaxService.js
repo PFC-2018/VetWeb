@@ -171,8 +171,9 @@ var ajaxService = {
                 if (data.length === 0) {
                     $('#racas').find('option').remove().end();
                 } else {
+                	$('#racas').find('option').remove().end();
                     $.each(data, function (i, raca) {
-                        $('#racas').find('option').remove().end().append('<option>' + raca.descricao + '</option>').val(raca.descricao);
+                        $('#racas').append('<option>' + raca.descricao + '</option>').val(raca.descricao);
                     });
                 }
             },
