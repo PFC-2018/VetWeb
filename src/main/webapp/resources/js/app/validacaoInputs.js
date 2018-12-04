@@ -10,14 +10,14 @@ function verificarCPF(c){
         d1 += c.charAt(i)*(10-i);
     }
     if (d1 == 0){
-        alert("CPF Invalido! Digite novamente por gentileza.")
+    	swal("CPF Invalido!", "CPF Invalido! Digite novamente por gentileza.", "error");
         v = true;
         return false;
     }
     d1 = 11 - (d1 % 11);
     if (d1 > 9) d1 = 0;
     if (dv.charAt(0) != d1){
-        alert("CPF Invalido! Digite novamente por gentileza.")
+    	swal("CPF Invalido!", "CPF Invalido! Digite novamente por gentileza.", "error");
         v = true;
         return false;
     }
@@ -29,11 +29,11 @@ function verificarCPF(c){
     d1 = 11 - (d1 % 11);
     if (d1 > 9) d1 = 0;
     if (dv.charAt(1) != d1){
-        alert("CPF Invalido! Digite novamente por gentileza.")
+    	swal("CPF Invalido!", "CPF Invalido! Digite novamente por gentileza.", "error");
         v = true;
         return false;
     }
     if (!v) {
-        alert(c + "nCPF Invalido! Digite novamente por gentileza.")
+    	swal("CPF Invalido!", c + "nCPF Invalido! Digite novamente por gentileza.", "error");
     }
 }

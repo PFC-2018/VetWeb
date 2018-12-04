@@ -25,6 +25,16 @@
 			<groupExpression><![CDATA[$F{qtd}]]></groupExpression>
 		</group>
 	</subDataset>
+	<subDataset name="debito_por_tipo_ocorrencia" uuid="9bfc9af0-4063-45cc-9bd1-9965dc0f9288">
+		<queryString language="SQL">
+			<![CDATA[select count(*), op.tipo from tbl_ocorrencia op where op.pago = false group by op.tipo;]]>
+		</queryString>
+		<field name="count" class="java.lang.Long"/>
+		<field name="tipo" class="java.lang.String"/>
+		<group name="tipo">
+			<groupExpression><![CDATA[$F{tipo}]]></groupExpression>
+		</group>
+	</subDataset>
 	<parameter name="Data_Ini" class="java.util.Date">
 		<defaultValueExpression><![CDATA[new java.util.Date("08/27/2018")]]></defaultValueExpression>
 	</parameter>
@@ -153,7 +163,7 @@ AND cliente.pessoaid = animal.proprietarioid]]>
 		<band height="104">
 			<pieChart>
 				<chart>
-					<reportElement x="0" y="0" width="555" height="104" uuid="eaaac020-e68f-402b-a636-441ffc5c32d3"/>
+					<reportElement x="0" y="0" width="276" height="104" uuid="eaaac020-e68f-402b-a636-441ffc5c32d3"/>
 					<chartTitle/>
 					<chartSubtitle/>
 					<chartLegend/>
@@ -170,6 +180,25 @@ AND cliente.pessoaid = animal.proprietarioid]]>
 					<itemLabel/>
 				</piePlot>
 			</pieChart>
+			<pie3DChart>
+				<chart>
+					<reportElement x="276" y="0" width="279" height="104" uuid="b6462a76-a4bb-4a5e-829b-febb16c2f82c"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<pieDataset>
+					<dataset>
+						<datasetRun subDataset="debito_por_tipo_ocorrencia" uuid="5e1cc83e-b502-4c4b-9977-1a5ba1af505b"/>
+					</dataset>
+					<keyExpression><![CDATA[$F{tipo}$F{tipo}$F{tipo}.toUpperCase()]]></keyExpression>
+					<valueExpression><![CDATA[$F{count}]]></valueExpression>
+				</pieDataset>
+				<pie3DPlot>
+					<plot/>
+					<itemLabel/>
+				</pie3DPlot>
+			</pie3DChart>
 		</band>
 	</summary>
 </jasperReport>
