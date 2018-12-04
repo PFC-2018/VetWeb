@@ -27,7 +27,12 @@
 	</subDataset>
 	<subDataset name="debito_por_tipo_ocorrencia" uuid="9bfc9af0-4063-45cc-9bd1-9965dc0f9288">
 		<queryString>
-			<![CDATA[select count(*), op.tipo from tbl_ocorrencia op where op.pago = false group by op.tipo]]>
+			<![CDATA[select count(*), op.tipo from tbl_ocorrencia op
+where op.pago = false AND
+(op.tipo = 'VACINA' or
+op.tipo = 'ATENDIMENTO' or
+op.tipo = 'EXAME')
+group by op.tipo]]>
 		</queryString>
 		<field name="count" class="java.lang.Long"/>
 		<field name="tipo" class="java.lang.String"/>
