@@ -236,7 +236,7 @@
 										</div>
 									</li>
 									<li><a class="nav-link text-center"
-										href="javascript:void(0);"> <strong><spring:message code="todasNotificacoes" /></strong> <i class="fa fa-angle-right"></i>
+										href="javascript:void(0);"> <spring:message code="todasNotificacoes" /></strong> <i class="fa fa-angle-right"></i>
 									</a></li>
 								</ul>
 							</div></li>
@@ -250,9 +250,9 @@
 								alt="user" class="profile-pic" /></a>
 							<div class="dropdown-menu dropdown-menu-right animated zoomIn">
 								<ul class="dropdown-user">
-									<li><a href="#"><i class="ti-user"></i><strong><spring:message code="perfil" /> </a></li>
-									<li><a href="#"><i class="ti-settings"></i><strong><spring:message code="configuracoes" /></a></li>
-									<li><a href="<c:url value="/logout"></c:url>" /><i class="fa fa-power-off"></i><strong><spring:message code="sair" /></a></li>
+									<li><a href="#"><i class="ti-user"></i><spring:message code="perfil" /> </a></li>
+									<li><a href="#"><i class="ti-settings"></i><spring:message code="configuracoes" /></a></li>
+									<li><a href="<c:url value="/logout"></c:url>" /><i class="fa fa-power-off"></i><spring:message code="sair" /></a></li>
 								</ul>
 							</div></li>
 						<!-- FIM Perfil- Foto/Menu -->
@@ -273,13 +273,13 @@
 						<li class="nav-label">Home</li>
 						<li><a class="has-default" href="<c:url value="/"></c:url>"
 							aria-expanded="false"><i class="fa fa-home"></i><span
-								class="hide-menu"><strong><spring:message code="PainelDeControle" /></a></li>
+								class="hide-menu"><spring:message code="PainelDeControle" /></a></li>
 
 						<li class="nav-label">Apps</li>
 						<li><a class="has-default"
 							href="<c:url value="/clientes/listar"></c:url>"
 							aria-expanded="false"><i class="fa fa-user-circle-o"></i><span
-								class="hide-menu"><strong><spring:message code="clientes" /></span></a></li>
+								class="hide-menu"><spring:message code="clientes" /></span></a></li>
 						<li><a class="has-default"
 							href="<c:url value="/agendamento"></c:url>" aria-expanded="false"><i
 								class="fa fa-calendar"></i><span class="hide-menu"><spring:message code="agendamento" /></span></a></li>
@@ -310,7 +310,7 @@
 							<i class="fa fa-institution"></i>
 							<span class="hide-menu"><spring:message code="clinica" /></span></a>
 						<li>
-							<a class="has-default" href="/vetweb-auth/index.xhtml" aria-expanded="false">
+							<a class="has-default" href="/vetweb-auth/index.xhtml" target="_blanck" aria-expanded="false">
 							<i class="fa fa-lock"></i><span class="hide-menu"><spring:message code="usuariosPermissoes" /></span></a>
 						</li>
 						
