@@ -5,7 +5,9 @@
 <vetweb:layout title="Cadastro de Cliente">
     <jsp:attribute name="jsHead">
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/ajaxService.js"></script>
+         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/validacaoInputs.js"></script>
     </jsp:attribute>
+    
     <jsp:attribute name="mascaras">   
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/mascaras.js"></script>
     </jsp:attribute>
@@ -60,7 +62,7 @@
 
                                         <div class="form-group">
                                         	<label for="cpf">CPF:</label>
-                                        <form:input class="form-control input-default col-sm-4" path="cpf" id="cpf"></form:input>
+                                        <form:input class="form-control input-default col-sm-4" path="cpf" id="cpf" onblur="return verificarCPF(this.value)"></form:input>
                                         <form:errors path="cpf" cssClass="errors"></form:errors>
                                         </div>    
 
@@ -104,7 +106,7 @@
 
                                         <div class="form-group">
                                             <label for="endereco.cep">Cep:</label>
-                                        <form:input class="form-control input-default col-sm-3" path="endereco.cep" id="cep" onblur="ajaxService.carregaEnderecoPeloCEP()"></form:input>
+                                        <form:input class="form-control input-default col-sm-3" path="endereco.cep" id="cep" onblur="ajaxService.carregarEnderecoPeloCEP()"></form:input>
                                         <form:errors path="endereco.cep" cssClass="errors"></form:errors>
                                         </div>
 
