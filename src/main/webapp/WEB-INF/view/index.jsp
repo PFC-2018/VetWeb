@@ -1,5 +1,6 @@
 <%@ taglib prefix="vetweb" tagdir="/WEB-INF/tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %><!--    Importação JSTL -->
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <vetweb:layout title="Painel de Controle">
    <jsp:attribute name="jsFooter">
       <script
@@ -33,7 +34,7 @@
          <!-- INICIO MENU DE CONSULTA DE NAVEGAÇÃO -->
          <div class="row page-titles">
             <div class="col-md-5 align-self-center">
-               <h3 class="text-primary">Painel de Controle</h3>
+               <h3 class="text-primary"><spring:message code="PainelDeControle" /></h3>
             </div>
             <div class="col-md-7 align-self-center">
                <ol class="breadcrumb">
@@ -54,7 +55,7 @@
                         </div>
                         <div class="media-body media-text-right">
                            <h2>${quantidadeClientes}</h2>
-                           <p class="m-b-0">Total de Clientes</p>
+                           <p class="m-b-0"><spring:message code="TotalDeClientes" /></p>
                         </div>
                      </div>
                   </div>
@@ -67,7 +68,7 @@
                         </div>
                         <div class="media-body media-text-right">
                            <h2>${quantidadeAnimais}</h2>
-                           <p class="m-b-0">Total de Animais</p>
+                           <p class="m-b-0"><spring:message code="TotalDeAnimais" /></p>
                         </div>
                      </div>
                   </div>
@@ -80,7 +81,7 @@
                         </div>
                         <div class="media-body media-text-right">
                            <h2>R$ ${totalPendente}</h2>
-                           <p class="m-b-0">Total de crédito pendente</p>
+                           <p class="m-b-0"><spring:message code="TotalDeCreditoPendente" /></p>
                         </div>
                      </div>
                   </div>
@@ -93,7 +94,7 @@
                         </div>
                         <div class="media-body media-text-right">
                            <h2>${clientesDevedores} </h2>
-                           <p class="m-b-0">Clientes Devedores</p>
+                           <p class="m-b-0"><spring:message code="ClientesDevedores" /></p>
                         </div>
                      </div>
                   </div>
@@ -110,7 +111,7 @@
                         </div>
                         <div class="media-body media-text-right">
                            <h2>${quantidadeAnimais/quantidadeClientes}</h2>
-                           <p class="m-b-0">Média de Animais por Cliente</p>
+                           <p class="m-b-0"><spring:message code="MediaDeAnimaisPorCliente" /></p>
                         </div>
                      </div>
                   </div>
@@ -118,10 +119,10 @@
                <div class="col-md-3">
                   <div class="card">
                      <div class="card-title">
-                        <h4>Barras Analíticas</h4>
+                        <h4><spring:message code="BarrasAnaliticas" /></h4>
                      </div>
                      <div class="card-body browser">
-                        <p class="f-w-600">Clientes Devedores<span class="pull-right">${clientesDevedores*100/quantidadeClientes}%</span></p>
+                        <p class="f-w-600"><spring:message code="ClientesDevedores" /><span class="pull-right">${clientesDevedores*100/quantidadeClientes}%</span></p>
                         <div class="progress ">
                            <div role="progressbar" style="width: ${clientesDevedores*100/quantidadeClientes}%; height:8px;" class="progress-bar bg-danger wow animated progress-animated"> <span class="sr-only"></span> </div>
                         </div>
@@ -131,7 +132,7 @@
                <div class="col-3">
                   <div class="card">
                      <div class="card-body browser">
-                        <a class="weatherwidget-io" href="https://forecast7.com/pt/n23d55n46d63/sao-paulo/" data-label_1="São Paulo" data-label_2="Tempo" data-theme="pure" >São Paulo Tempo</a>
+                        <a class="weatherwidget-io" href="https://forecast7.com/pt/n23d55n46d63/sao-paulo/" data-label_1="São Paulo" data-label_2="Tempo" data-theme="pure" ><spring:message code="SaoPauloTempo" /></a>
                         <script>
                            !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
                         </script>	
