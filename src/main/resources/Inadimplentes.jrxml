@@ -14,6 +14,16 @@ group by o.tipo]]>
 		<field name="total" class="java.math.BigDecimal"/>
 		<field name="tipo" class="java.lang.String"/>
 	</subDataset>
+	<subDataset name="debitos_por_tipo" uuid="c9647956-3b46-4388-a2d2-f4a23be6bac5">
+		<queryString>
+			<![CDATA[select count(*), op.tipo from tbl_ocorrencia op where op.pago = false group by op.tipo]]>
+		</queryString>
+		<field name="count" class="java.lang.Long"/>
+		<field name="tipo" class="java.lang.String"/>
+		<group name="tipo">
+			<groupExpression><![CDATA[$F{tipo}]]></groupExpression>
+		</group>
+	</subDataset>
 	<field name="nome" class="java.lang.String"/>
 	<field name="debitoTotal" class="java.lang.String"/>
 	<field name="valoresPorTipoOcorrencia" class="java.lang.String"/>

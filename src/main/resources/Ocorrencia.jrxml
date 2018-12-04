@@ -4,7 +4,7 @@
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<subDataset name="relatorio_tipos" uuid="5dc2e2c8-f122-40a2-9492-7d8aaf519e94">
-		<queryString language="SQL">
+		<queryString>
 			<![CDATA[select tipo from tbl_ocorrencia group by tipo]]>
 		</queryString>
 		<field name="tipo" class="java.lang.String"/>
@@ -13,7 +13,7 @@
 		</group>
 	</subDataset>
 	<subDataset name="relatorio_por_tipo" uuid="30a1bf74-3780-4733-8923-4e0c711573b6">
-		<queryString language="SQL">
+		<queryString>
 			<![CDATA[select count(*) qtd, tipo from tbl_ocorrencia group by tipo]]>
 		</queryString>
 		<field name="qtd" class="java.lang.Long"/>
@@ -26,8 +26,8 @@
 		</group>
 	</subDataset>
 	<subDataset name="debito_por_tipo_ocorrencia" uuid="9bfc9af0-4063-45cc-9bd1-9965dc0f9288">
-		<queryString language="SQL">
-			<![CDATA[select count(*), op.tipo from tbl_ocorrencia op where op.pago = false group by op.tipo;]]>
+		<queryString>
+			<![CDATA[select count(*), op.tipo from tbl_ocorrencia op where op.pago = false group by op.tipo]]>
 		</queryString>
 		<field name="count" class="java.lang.Long"/>
 		<field name="tipo" class="java.lang.String"/>
@@ -43,7 +43,7 @@
 	</parameter>
 	<queryString>
 		<![CDATA[SELECT prontuario.prontuarioid codigo_prontuario, pessoa.nome nome_cliente, animal.nome nome_animal, ocorrencia.tipo tipo_ocorrencia, ocorrencia.data data_ocorrencia,
-exame.pago exame_pago, atendimento.pago atendimento_pago, vacina.pago vacina_pago
+ocorrencia.pago pago
 FROM tbl_prontuario prontuario, tbl_animal animal, tbl_cliente cliente, tbl_pessoa pessoa, tbl_ocorrencia ocorrencia
 LEFT JOIN tbl_exame_event exame ON ocorrencia.ocorrenciaid = exame.ocorrenciaid
 LEFT JOIN tbl_patologia_event patologia ON ocorrencia.ocorrenciaid = patologia.ocorrenciaid
@@ -55,16 +55,15 @@ OR prontuario.prontuarioid = patologia.prontuarioid
 OR prontuario.prontuarioid = vacina.prontuarioid)
 AND prontuario.animalid = animal.animalid
 AND cliente.pessoaid = pessoa.pessoaid
-AND cliente.pessoaid = animal.proprietarioid]]>
+AND cliente.pessoaid = animal.proprietarioid
+AND ocorrencia.data BETWEEN $P{Data_Ini} AND $P{Data_Fim};]]>
 	</queryString>
 	<field name="codigo_prontuario" class="java.lang.Long"/>
 	<field name="nome_cliente" class="java.lang.String"/>
 	<field name="nome_animal" class="java.lang.String"/>
 	<field name="tipo_ocorrencia" class="java.lang.String"/>
 	<field name="data_ocorrencia" class="java.sql.Timestamp"/>
-	<field name="exame_pago" class="java.lang.Boolean"/>
-	<field name="atendimento_pago" class="java.lang.Boolean"/>
-	<field name="vacina_pago" class="java.lang.Boolean"/>
+	<field name="pago" class="java.lang.Boolean"/>
 	<background>
 		<band/>
 	</background>
@@ -163,7 +162,7 @@ AND cliente.pessoaid = animal.proprietarioid]]>
 		<band height="104">
 			<pieChart>
 				<chart>
-					<reportElement x="0" y="0" width="276" height="104" uuid="eaaac020-e68f-402b-a636-441ffc5c32d3"/>
+					<reportElement x="0" y="15" width="276" height="89" uuid="eaaac020-e68f-402b-a636-441ffc5c32d3"/>
 					<chartTitle/>
 					<chartSubtitle/>
 					<chartLegend/>
@@ -182,23 +181,38 @@ AND cliente.pessoaid = animal.proprietarioid]]>
 			</pieChart>
 			<pie3DChart>
 				<chart>
-					<reportElement x="276" y="0" width="279" height="104" uuid="b6462a76-a4bb-4a5e-829b-febb16c2f82c"/>
+					<reportElement x="276" y="15" width="279" height="89" uuid="b972495e-217e-43b0-a48d-776ea3a94fde"/>
 					<chartTitle/>
 					<chartSubtitle/>
 					<chartLegend/>
 				</chart>
 				<pieDataset>
 					<dataset>
-						<datasetRun subDataset="debito_por_tipo_ocorrencia" uuid="5e1cc83e-b502-4c4b-9977-1a5ba1af505b"/>
+						<datasetRun subDataset="debito_por_tipo_ocorrencia" uuid="9317b4d2-880c-4093-8d22-0ad6d849c6fe"/>
 					</dataset>
-					<keyExpression><![CDATA[$F{tipo}$F{tipo}$F{tipo}.toUpperCase()]]></keyExpression>
+					<keyExpression><![CDATA[$F{tipo}.toUpperCase()]]></keyExpression>
 					<valueExpression><![CDATA[$F{count}]]></valueExpression>
+					<labelExpression><![CDATA[$F{tipo}.toUpperCase()]]></labelExpression>
 				</pieDataset>
 				<pie3DPlot>
 					<plot/>
 					<itemLabel/>
 				</pie3DPlot>
 			</pie3DChart>
+			<staticText>
+				<reportElement x="276" y="0" width="279" height="15" uuid="9f3ce136-8452-4e20-b07e-a11c69aebade"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Débitos por tipo de ocorrência]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="276" height="15" uuid="7c71be06-dc12-4ece-9bfb-323c69196313"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Consultas atendidas por tipo de ocorrência]]></text>
+			</staticText>
 		</band>
 	</summary>
 </jasperReport>

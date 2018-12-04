@@ -5,7 +5,7 @@
 <vetweb:layout title="Cadastro de Cliente">
     <jsp:attribute name="jsHead">
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/ajaxService.js"></script>
-         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/validacaoInputs.js"></script>
+<%--          <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/validacaoInputs.js"></script> --%>
     </jsp:attribute>
     
     <jsp:attribute name="mascaras">   
