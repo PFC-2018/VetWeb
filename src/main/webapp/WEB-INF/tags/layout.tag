@@ -6,6 +6,7 @@
 <%@ attribute name="jsFooter" fragment="true"%><!--   Informa que pode receber fragmento de página. No caso usado p/ script-->
 <%@ attribute name="mascaras" fragment="true"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%><!--    Importação JSTL -->
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -112,7 +113,7 @@
 							<div class="dropdown-menu animated zoomIn">
 								<ul class="mega-dropdown-menu row">
 									<li class="col-lg-3  m-b-30">
-										<h4 class="m-b-20">ENTRE EM CONTATO CONOSCO</h4> <!-- Contact -->
+										<h4 class="m-b-20"><spring:message code="EntreEmContato" /></h4> <!-- Contact -->
 										<form>
 											<div class="form-group">
 												<input type="text" class="form-control"
@@ -126,28 +127,28 @@
 												<textarea class="form-control" id="exampleTextarea" rows="3"
 													placeholder="Mensagem"></textarea>
 											</div>
-											<button type="submit" class="btn btn-info">Enviar</button>
+											<button type="submit" class="btn btn-info"><spring:message code="enviar" /></button>
 										</form>
 									</li>
 									<li class="col-lg-3 col-xlg-3 m-b-30">
 										<h4 class="m-b-20">VETWEB</h4>
-										<h6 class="m-b-20">A solução que a sua empresa precisa</h6> <!-- List style -->
+										<h6 class="m-b-20"><spring:message code="solucao" /></h6> <!-- List style -->
 										<ul class="list-style-none">
 											<li><a href="javascript:void(0)"><i
-													class="fa fa-check text-success"></i> Rápida</a></li>
+													class="fa fa-check text-success"></i> <spring:message code="rapida" /></a></li>
 											<li><a href="javascript:void(0)"><i
-													class="fa fa-check text-success"></i> Assertiva</a></li>
+													class="fa fa-check text-success"></i> <spring:message code="assertiva" /></a></li>
 											<li><a href="javascript:void(0)"><i
-													class="fa fa-check text-success"></i> Relatórios</a></li>
+													class="fa fa-check text-success"></i> <spring:message code="relatorios" /></a></li>
 											<li><a href="javascript:void(0)"><i
-													class="fa fa-check text-success"></i> Segurança</a></li>
+													class="fa fa-check text-success"></i> <spring:message code="seguranca" /></a></li>
 											<li><a href="javascript:void(0)"><i
-													class="fa fa-check text-success"></i> Credibilidade</a></li>
+													class="fa fa-check text-success"></i> <spring:message code="credibilidade" /></a></li>
 										</ul>
 									</li>
 									<li class="col-lg-3 col-xlg-3 m-b-30">
-										<h4 class="m-b-20">SOBRE NÓS</h4>
-										<h6 class="m-b-20">Saiba um pouco mais da nossa histório</h6>
+										<h4 class="m-b-20"><spring:message code="sobreNos" /></h4>
+										<h6 class="m-b-20"><spring:message code="sobrehistoria" /></h6>
 										<!-- List style -->
 										<ul class="list-style-none">
 											<li><a href="javascript:void(0)"><i
@@ -204,7 +205,7 @@
 								class="dropdown-menu dropdown-menu-right mailbox animated zoomIn">
 								<ul>
 									<li>
-										<div class="drop-title">Notificações</div>
+										<div class="drop-title"><spring:message code="notificacoes" /></div>
 									</li>
 									<li>
 										<div class="message-center">
@@ -214,8 +215,8 @@
 													<i class="fa fa-link"></i>
 												</div>
 												<div class="mail-contnet">
-													<h5>Animal Morto</h5>
-													<span class="mail-desc">Alerta teste do Animal!</span> <span
+													<h5><spring:message code="animalMorto" /></h5>
+													<span class="mail-desc"><spring:message code="alertaTesteDoAnimal" /></span> <span
 														class="time">09:30</span>
 												</div>
 											</a>
@@ -226,8 +227,8 @@
 													<i class="fa fa-link"></i>
 												</div>
 												<div class="mail-contnet">
-													<h5>Animal Vivo</h5>
-													<span class="mail-desc">Alerta teste do Animal!</span> <span
+													<h5><spring:message code="animalVivo" /></h5>
+													<span class="mail-desc"><spring:message code="alertaTesteDoAnimal" /></span> <span
 														class="time">13:00</span>
 												</div>
 											</a>
@@ -235,8 +236,7 @@
 										</div>
 									</li>
 									<li><a class="nav-link text-center"
-										href="javascript:void(0);"> <strong>Todas as
-												Notificações</strong> <i class="fa fa-angle-right"></i>
+										href="javascript:void(0);"> <strong><spring:message code="todasNotificacoes" /></strong> <i class="fa fa-angle-right"></i>
 									</a></li>
 								</ul>
 							</div></li>
@@ -250,11 +250,9 @@
 								alt="user" class="profile-pic" /></a>
 							<div class="dropdown-menu dropdown-menu-right animated zoomIn">
 								<ul class="dropdown-user">
-									<li><a href="#"><i class="ti-user"></i> Perfil</a></li>
-									<li><a href="#"><i class="ti-settings"></i>
-											Configurações</a></li>
-									<li><a href="<c:url value="/logout"></c:url>" /><i
-										class="fa fa-power-off"></i> Sair</a></li>
+									<li><a href="#"><i class="ti-user"></i><strong><spring:message code="perfil" /> </a></li>
+									<li><a href="#"><i class="ti-settings"></i><strong><spring:message code="configuracoes" /></a></li>
+									<li><a href="<c:url value="/logout"></c:url>" /><i class="fa fa-power-off"></i><strong><spring:message code="sair" /></a></li>
 								</ul>
 							</div></li>
 						<!-- FIM Perfil- Foto/Menu -->
@@ -275,35 +273,34 @@
 						<li class="nav-label">Home</li>
 						<li><a class="has-default" href="<c:url value="/"></c:url>"
 							aria-expanded="false"><i class="fa fa-home"></i><span
-								class="hide-menu">Painel de Controle</a></li>
+								class="hide-menu"><strong><spring:message code="PainelDeControle" /></a></li>
 
 						<li class="nav-label">Apps</li>
 						<li><a class="has-default"
 							href="<c:url value="/clientes/listar"></c:url>"
 							aria-expanded="false"><i class="fa fa-user-circle-o"></i><span
-								class="hide-menu">Clientes</span></a></li>
+								class="hide-menu"><strong><spring:message code="clientes" /></span></a></li>
 						<li><a class="has-default"
 							href="<c:url value="/agendamento"></c:url>" aria-expanded="false"><i
-								class="fa fa-calendar"></i><span class="hide-menu">Agendamento</span></a></li>
+								class="fa fa-calendar"></i><span class="hide-menu"><spring:message code="agendamento" /></span></a></li>
 
 						<li><a class="has-default"
 							href="<c:url value="/relatorios"></c:url>" aria-expanded="false"><i
-								class="fa fa-bar-chart"></i><span class="hide-menu">Relatórios</span></a></li>
+								class="fa fa-bar-chart"></i><span class="hide-menu"><spring:message code="relatorios" /></span></a></li>
 								
-						<li class="nav-label">Cadastros</li>
+						<li class="nav-label"><spring:message code="cadastros" /></li>
 						<li><a class="has-arrow" href="#" aria-expanded="false"><i
-								class="fa fa-folder-open"></i><span class="hide-menu">Cadastros<span
+								class="fa fa-folder-open"></i><span class="hide-menu"><spring:message code="cadastros" /><span
 									class="label label-rouded label-light-info pull-right">7</span></span></a>
 							<ul aria-expanded="false" class="collapse">
-								<li><a href="<c:url value="/animais/especies"></c:url>">Espécies</a></li>
-								<li><a href="<c:url value="/animais/racas"></c:url>">Raças</a></li>
-								<li><a href="<c:url value="/animais/pelagens"></c:url>">Pelagens</a></li>
-								<li><a href="<c:url value="/animais/patologias"></c:url>">Patologias</a></li>
+								<li><a href="<c:url value="/animais/especies"></c:url>"><spring:message code="especies" /></a></li>
+								<li><a href="<c:url value="/animais/racas"></c:url>"><spring:message code="racas" /></a></li>
+								<li><a href="<c:url value="/animais/pelagens"></c:url>"><spring:message code="pelagens" /></a></li>
+								<li><a href="<c:url value="/animais/patologias"></c:url>"><spring:message code="patologias" /></a></li>
 								<li><a
-									href="<c:url value="/prontuario/tiposDeAtendimento"></c:url>">Tipos
-										de Atendimento</a></li>
-								<li><a href="<c:url value="/prontuario/vacinas"></c:url>">Vacinas</a></li>
-								<li><a href="<c:url value="/exames"></c:url>">Exames</a></li>
+									href="<c:url value="/prontuario/tiposDeAtendimento"></c:url>"><spring:message code="tiposDeAtendimento" /></a></li>
+								<li><a href="<c:url value="/prontuario/vacinas"></c:url>"><spring:message code="vacinas" /></a></li>
+								<li><a href="<c:url value="/exames"></c:url>"><spring:message code="exames" /></a></li>
 							</ul></li>
 
 
@@ -311,15 +308,15 @@
 						<li>
 						<a class="has-default" href="<c:url value="${urlClinica}"></c:url>" aria-expanded="false">
 							<i class="fa fa-institution"></i>
-							<span class="hide-menu">Clínica</span></a>
+							<span class="hide-menu"><spring:message code="clinica" /></span></a>
 						<li>
 							<a class="has-default" href="/vetweb-auth/index.xhtml" aria-expanded="false">
-							<i class="fa fa-lock"></i><span class="hide-menu">Usuários e Permissões</span></a>
+							<i class="fa fa-lock"></i><span class="hide-menu"><spring:message code="usuariosPermissoes" /></span></a>
 						</li>
 						
 						<li>
 							<a class="has-default" href="<c:url value="/logout"></c:url>" aria-expanded="false">
-							<i class="fa fa-power-off"></i><span class="hide-menu">Sair</span></a>
+							<i class="fa fa-power-off"></i><span class="hide-menu"><spring:message code="sair" /></span></a>
 						</li>
 					</ul>
 				</nav>
