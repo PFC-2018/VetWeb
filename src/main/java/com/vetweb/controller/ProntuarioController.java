@@ -242,15 +242,15 @@ public class ProntuarioController {
     	ModelAndView modelAndView = new ModelAndView("redirect:prontuarioDoAnimal/" + prontuario.getAnimal().getAnimalId());
     	atendimento.setTipo(TipoOcorrenciaProntuario.ATENDIMENTO);
     	atendimento.setProntuario(prontuario);
-        prontuarioDAO.salvarAtendimento(atendimento);
-        notificaCliente(atendimento);
         try {
         	agendarOcorrencia(atendimento);
+        	prontuarioDAO.salvarAtendimento(atendimento);
         } catch (RuntimeException runtimeException) {
         	prontuarioDAO.removerAtendimento(atendimento);
         	redirectAttributes.addFlashAttribute("agendaOcupada"
         			, "DATA/HORÁRIO SELECIONADOS ESTÃO OCUPADOS POR OUTRA OCORRÊNCIA, REMARQUE OU SELECIONE UM OUTRO MOMENTO.");
         }
+        notificaCliente(atendimento);
 		return modelAndView;
     }
 
@@ -299,12 +299,12 @@ public class ProntuarioController {
 		ocorrenciaExame.setExame(exame);
         try {
         	agendarOcorrencia(ocorrenciaExame);
+        	prontuarioDAO.salvarOcorrenciaExame(ocorrenciaExame);
         } catch (RuntimeException runtimeException) {
         	prontuarioDAO.removerOcorrenciaExame(ocorrenciaExame);
         	redirectAttributes.addFlashAttribute("agendaOcupada"
         			, "DATA/HORÁRIO SELECIONADOS ESTÃO OCUPADOS POR OUTRA OCORRÊNCIA, REMARQUE OU SELECIONE UM OUTRO MOMENTO.");
         };
-		prontuarioDAO.salvarOcorrenciaExame(ocorrenciaExame);
 		notificaCliente(ocorrenciaExame);
 		return modelAndView;
     }
@@ -316,7 +316,7 @@ public class ProntuarioController {
 			if (ocorrenciaProntuario.getData().isAfter(LocalDateTime.now())) {
 				Agendamento agendamento = new Agendamento();
 				agendamento.setOcorrencia(ocorrenciaProntuario);
-				agendamento.setTipo(TipoOcorrenciaProntuario.EXAME);
+				agendamento.setTipo(ocorrenciaProntuario.getTipo());
 				agendamento.setDataHoraInicial(ocorrenciaProntuario.getData());
 				agendamento.setDataHoraFinal(ocorrenciaProntuario.getData().plusHours(1));
 				agendamentoDAO.salvar(agendamento);
@@ -342,9 +342,9 @@ public class ProntuarioController {
 		prontuarioVacina.setVacina(vacina);
 		prontuarioVacina.setProntuario(prontuario);
 		prontuarioVacina.setData(LocalDateTime.parse(inclusaoVacina, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm")));
-    	prontuarioDAO.salvarOcorrenciaVacina(prontuarioVacina);
         try {
         	agendarOcorrencia(prontuarioVacina);
+        	prontuarioDAO.salvarOcorrenciaVacina(prontuarioVacina);
         } catch (RuntimeException runtimeException) {
         	prontuarioDAO.removerOcorrenciaVacina(prontuarioVacina);
         	redirectAttributes.addFlashAttribute("agendaOcupada"
