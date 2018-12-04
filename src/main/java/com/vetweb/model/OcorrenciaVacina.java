@@ -28,8 +28,6 @@ public class OcorrenciaVacina extends OcorrenciaProntuario implements Serializab
 	@JoinColumn(name="vacinaId", referencedColumnName = "vacinaId")
 	private Vacina vacina;
 	
-	private boolean pago;
-	
 	public OcorrenciaVacina() {
 	}
 	
@@ -52,14 +50,6 @@ public class OcorrenciaVacina extends OcorrenciaProntuario implements Serializab
 
 	public void setVacina(Vacina vacina) {
 		this.vacina = vacina;
-	}
-
-	public boolean isPago() {
-		return pago;
-	}
-
-	public void setPago(boolean pago) {
-		this.pago = pago;
 	}
 	
 	@Override

@@ -31,8 +31,6 @@ public class OcorrenciaAtendimento extends OcorrenciaProntuario implements Seria
     @JoinColumn(name = "prontuarioId", referencedColumnName = "prontuarioId")
     private Prontuario prontuario;
     
-    public boolean pago;
-    
     public OcorrenciaAtendimento() {
     }
     
@@ -57,14 +55,6 @@ public class OcorrenciaAtendimento extends OcorrenciaProntuario implements Seria
         this.preenchimentoModeloAtendimento = preenchimentoModeloAtendimento;
     }
     
-	public boolean isPago() {
-		return pago;
-	}
-
-	public void setPago(boolean pago) {
-		this.pago = pago;
-	}
-	
 	@Override
     public Prontuario getProntuario() {
 		return prontuario;

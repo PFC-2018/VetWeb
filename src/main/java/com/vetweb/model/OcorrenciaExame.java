@@ -28,8 +28,6 @@ public class OcorrenciaExame extends OcorrenciaProntuario implements Serializabl
     @JoinColumn(name = "prontuarioId", referencedColumnName = "prontuarioId")
     private Prontuario prontuario;
     
-    public boolean pago;
-    
     public OcorrenciaExame() {
 	}
 
@@ -43,14 +41,6 @@ public class OcorrenciaExame extends OcorrenciaProntuario implements Serializabl
 
 	public void setExame(Exame exame) {
 		this.exame = exame;
-	}
-
-	public boolean isPago() {
-		return pago;
-	}
-
-	public void setPago(boolean pago) {
-		this.pago = pago;
 	}
 
 	public void setProntuario(Prontuario prontuario) {

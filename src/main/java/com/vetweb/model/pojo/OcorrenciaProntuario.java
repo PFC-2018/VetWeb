@@ -37,6 +37,8 @@ public abstract class OcorrenciaProntuario implements Serializable	{
 	@Enumerated(EnumType.STRING)
 	private TipoOcorrenciaProntuario tipo;
 	
+	private boolean pago;
+	
 	private LocalDateTime data;
 	
 	public Long getOcorrenciaId() {
@@ -45,6 +47,14 @@ public abstract class OcorrenciaProntuario implements Serializable	{
 
 	public void setOcorrenciaId(Long ocorrenciaId) {
 		this.ocorrenciaId = ocorrenciaId;
+	}
+
+	public boolean isPago() {
+		return pago;
+	}
+
+	public void setPago(boolean pago) {
+		this.pago = pago;
 	}
 
 	public abstract String getDescricao();
