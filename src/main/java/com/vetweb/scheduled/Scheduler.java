@@ -3,7 +3,6 @@ package com.vetweb.scheduled;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -53,7 +52,16 @@ public class Scheduler {
     		.filter(prop -> prop.isAtivo())
     		.filter(prop -> prop.getAnimais().size() > 0)
     		.peek(prop -> LOGGER.info("INATIVANDO CLIENTE " + prop.getNome()))
-    		.forEach(prop ->  {prop.setAtivo(false); proprietarioDAO.salvar(prop);});
+    		.forEach(prop ->  {
+    			prop.setAtivo(false); 
+    			proprietarioDAO.salvar(prop);
+    			StringBuilder mensagemRetorno = new StringBuilder();
+		    	//Mensagem do e-mail
+		    	mensagemRetorno.append("Olá Sr(a) "+prop.getNome()+", tudo bom? "
+		    			+ "Nós da clínica VetWeb gostariamos de avisar você possui pendências em nossa clínica, portanto seu usuário está temporariamente BLOQUEADO,"
+		    			+ " por gentileza comparecer a nossa clínica.");
+		    	emailService.enviar(prop, mensagemRetorno.toString(), "Usuário Bloqueado - Vetweb");
+    		});
     	LOGGER.info("FIM DO JOB - VERIFICANDO CLIENTES DEVEDORES - DESATIVACAO");
     }
     
@@ -64,7 +72,15 @@ public class Scheduler {
     	proprietariosInativosAdimplentes
     		.stream()
     		.peek(prop -> LOGGER.info("REATIVANDO CLIENTE " + prop.getNome()))
-    		.forEach(prop -> {prop.setAtivo(true); proprietarioDAO.salvar(prop); });
+    		.forEach(prop -> {
+    			prop.setAtivo(true); 
+    			proprietarioDAO.salvar(prop); 
+    			StringBuilder mensagemRetorno = new StringBuilder();
+		    	//Mensagem do e-mail
+		    	mensagemRetorno.append("Olá Sr(a) "+prop.getNome()+", tudo bom? "
+		    			+ "Nós da clínica VetWeb gostariamos de avisar você que o seu usuário foi ATIVADO com sucesso!");
+		    	emailService.enviar(prop, mensagemRetorno.toString(), "Usuário Ativado - Vetweb");
+    		});
     	LOGGER.info("FIM DO JOB - VERIFICANDO CLIENTES DEVEDORES - ATIVACAO");
     }
     
@@ -72,15 +88,7 @@ public class Scheduler {
     @Scheduled(fixedDelay = MINUTO)
     public void verificacaoRetornoAtendimento() {
     	LOGGER.info("EXECUTANDO JOB - VERIFICANDO RETORNO DE ATENDIMENTO");
-    	List<Proprietario> p = new ArrayList<>();
     	
-    	proprietarioDAO
-    		.listarTodos()
-    		.stream()
-    		.filter(prop -> prop.isAceitaNotificacoes())
-    		.forEach(prop -> p.add(prop));
-    	
-    	for (Proprietario proprietario : p) {
     		atendimentoDAO
     		.listarTodos()
     		.stream()
@@ -89,7 +97,6 @@ public class Scheduler {
     			.plus(ate.getTipoDeAtendimento().getFrequencia())
     			.isEqual(LocalDate.now()))
     		.forEach(ate -> this.notificaRetornoAtendimento(ate));
-		}
     	LOGGER.info("FIM DO JOB - VERIFICANDO RETORNO DE ATENDIMENTO");
     }
     
